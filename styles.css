@@ -526,14 +526,22 @@ body {
 
 .dropdown {
     width: 100%;
-    padding: 12px 16px;
+    padding: 12px 16px 12px 16px;
+    padding-right: 40px;
     border: 1px solid rgba(0,0,0,0.3);
     border-radius: 16px;
     margin-bottom: 16px;
     background: white;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
     font-weight: 600;
     font-size: 14px;
     color: rgba(0,0,0,0.75);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .business-metrics {
