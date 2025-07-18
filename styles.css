@@ -56,9 +56,10 @@ body {
     color: rgba(255,255,255,0.7);
     text-decoration: none;
     padding: 14px 8px;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     line-height: 28px;
+    letter-spacing: 0.5px;
     position: relative;
     transition: color 0.3s ease;
 }
@@ -101,6 +102,7 @@ body {
 .search-header {
     background: #004182;
     padding: 11px 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
     box-shadow: 0 1px 0 rgba(0,0,0,0.25);
 }
 
@@ -156,8 +158,9 @@ body {
     border: 1px solid rgba(0,0,0,0.6);
     border-radius: 16px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
+    letter-spacing: 0.5px;
     color: rgba(0,0,0,0.6);
     white-space: nowrap;
 }
@@ -170,8 +173,9 @@ body {
 
 .search-link {
     color: white;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
+    letter-spacing: 0.5px;
     cursor: pointer;
 }
 
@@ -284,12 +288,13 @@ body {
     padding: 17px 18px;
     background: #fbfbfb;
     border: none;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
+    letter-spacing: 0.5px;
     color: rgba(0,0,0,0.6);
     cursor: pointer;
     position: relative;
-    border-bottom: 4px solid rgba(0,0,0,0.6);
+    border-top: 4px solid rgba(0,0,0,0.6);
     border-left: 1px solid rgba(0,0,0,0.15);
 }
 
@@ -300,7 +305,7 @@ body {
 .tab.active {
     background: white;
     color: #0073b1;
-    border-bottom: 4px solid #0073b1;
+    border-top: 4px solid #0073b1;
     border-left: 1px solid rgba(0,0,0,0.15);
 }
 
@@ -347,8 +352,9 @@ body {
     border: 1px solid rgba(0,0,0,0.6);
     border-radius: 20px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
+    letter-spacing: 0.5px;
     color: rgba(0,0,0,0.6);
 }
 
@@ -487,7 +493,7 @@ body {
 
 .sidebar-card .card-header h3 {
     font-family: 'SF Pro Display', sans-serif;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 20px;
     color: rgba(0,0,0,0.9);
     line-height: 28px;
@@ -521,7 +527,7 @@ body {
 }
 
 .card-content {
-    padding: 24px;
+    padding: 24px 24px 12px 24px;
 }
 
 .dropdown {
@@ -536,8 +542,9 @@ body {
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 14px;
+    letter-spacing: 0.5px;
     color: rgba(0,0,0,0.75);
     appearance: none;
     -webkit-appearance: none;
@@ -548,7 +555,7 @@ body {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-bottom: 1px solid #e5e7eb;
     padding-bottom: 20px;
 }
@@ -593,7 +600,7 @@ body {
 .persona-item {
     display: flex;
     gap: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     padding: 16px;
     background: #f9fafb;
     border-radius: 8px;
@@ -640,7 +647,7 @@ body {
 }
 
 .highlight {
-    color: #0a66c2;
+    color: #0073b1;
     font-weight: 600;
 }
 
@@ -681,7 +688,7 @@ body {
     padding: 16px;
     background: white;
     border-radius: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     border: 1px solid rgba(0,0,0,0.15);
 }
 
@@ -735,13 +742,16 @@ body {
 
 .btn-secondary {
     background: transparent;
-    color: #0a66c2;
+    color: #0073b1;
     border: none;
     padding: 12px 24px;
     border-radius: 24px;
     cursor: pointer;
     font-weight: 600;
     font-size: 16px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
     transition: background-color 0.3s ease;
 }
 
@@ -859,7 +869,7 @@ body {
 .help-greeting {
     padding: 20px 24px 0 24px;
     background: transparent;
-    margin: 4pt 0;
+    margin: 4pt 0 0 0;
 }
 
 .help-greeting p {
@@ -867,7 +877,7 @@ body {
     font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;
     font-size: 16px;
-    line-height: 1.25;
+    line-height: 1.4;
     margin: 0;
 }
 
