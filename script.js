@@ -935,44 +935,73 @@ function generateAIResponse(userMessage, chatContainer) {
     
     // Create unique IDs for this response
     const responseId = 'followup-response-' + Date.now();
+    const thinkingId = responseId + '-thinking';
     const contentId = responseId + '-content';
     const feedbackId = responseId + '-feedback';
     
-    // Create AI response container with typing animation structure
-    const aiResponseContainer = document.createElement('div');
-    aiResponseContainer.className = 'ai-response-container';
-    aiResponseContainer.style.display = 'flex';
-    aiResponseContainer.style.justifyContent = 'flex-start';
-    
-    aiResponseContainer.innerHTML = `
-        <div class="ai-response-message" id="${responseId}">
-            <div class="response-content" id="${contentId}">
-                <span class="typing-cursor"></span>
-            </div>
-            <div class="feedback-buttons" id="${feedbackId}" style="display: none;">
-                <button class="feedback-btn thumbs-up" title="Helpful">
-                    <i class="fas fa-thumbs-up"></i>
-                </button>
-                <button class="feedback-btn thumbs-down" title="Not helpful">
-                    <i class="fas fa-thumbs-down"></i>
-                </button>
+    // First, create and show AI thinking animation
+    const aiThinkingContainer = document.createElement('div');
+    aiThinkingContainer.className = 'ai-thinking-container';
+    aiThinkingContainer.id = thinkingId;
+    aiThinkingContainer.innerHTML = `
+        <div class="ai-thinking">
+            <div class="thinking-dots">
+                <span class="thinking-dot"></span>
+                <span class="thinking-dot"></span>
+                <span class="thinking-dot"></span>
             </div>
         </div>
     `;
     
-    // Add to the end of chat container
-    chatContainer.appendChild(aiResponseContainer);
-    console.log('AI response container added to chat');
+    // Add thinking animation to chat container
+    chatContainer.appendChild(aiThinkingContainer);
+    console.log('AI thinking animation added to chat');
     
-    // Auto-scroll when container is added
+    // Auto-scroll when thinking animation appears
+    scrollChatToBottom();
+    
+    // After 2 seconds, hide thinking and show response with typing animation
     setTimeout(() => {
+        // Remove thinking animation
+        if (aiThinkingContainer.parentNode) {
+            aiThinkingContainer.parentNode.removeChild(aiThinkingContainer);
+        }
+        
+        // Create AI response container with typing animation structure
+        const aiResponseContainer = document.createElement('div');
+        aiResponseContainer.className = 'ai-response-container';
+        aiResponseContainer.style.display = 'flex';
+        aiResponseContainer.style.justifyContent = 'flex-start';
+        
+        aiResponseContainer.innerHTML = `
+            <div class="ai-response-message" id="${responseId}">
+                <div class="response-content" id="${contentId}">
+                    <span class="typing-cursor"></span>
+                </div>
+                <div class="feedback-buttons" id="${feedbackId}" style="display: none;">
+                    <button class="feedback-btn thumbs-up" title="Helpful">
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
+                    <button class="feedback-btn thumbs-down" title="Not helpful">
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Add to the end of chat container
+        chatContainer.appendChild(aiResponseContainer);
+        console.log('AI response container added to chat');
+        
+        // Auto-scroll when response container appears
         scrollChatToBottom();
-    }, 50);
-    
-    // Start typing animation after a short delay
-    setTimeout(() => {
-        startFollowUpTyping(response, contentId, feedbackId);
-    }, 500);
+        
+        // Start typing animation after a short delay
+        setTimeout(() => {
+            startFollowUpTyping(response, contentId, feedbackId);
+        }, 300);
+        
+    }, 2000); // Show thinking for 2 seconds
 }
 
 // Follow-up Response Typing Animation
