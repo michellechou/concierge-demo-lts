@@ -61,7 +61,7 @@ projectiph/
 ### Floating Help Widget
 - Auto-expands after 2 seconds with smooth animation
 - Scales from bottom-right origin for natural feel
-- Maintains 400px width with natural height
+- Maintains 420px width with natural height
 
 ### AI Chat Simulation
 - Realistic typing speed (25ms per character)
