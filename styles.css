@@ -745,7 +745,6 @@ body {
 
 .growth-icon {
     color: #10b981;
-    transform: scaleY(-1);
 }
 
 .decline-icon {
