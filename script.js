@@ -12,8 +12,12 @@ function createFloatingHelpButton() {
     floatingButton.className = 'floating-help-button';
     floatingButton.innerHTML = `
         <div class="floating-button-content">
-            <span class="help-icon">👋</span>
-            <span class="help-text">recommendations</span>
+            <span class="help-icon">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.44262 12.2014C1.29784 11.8243 1.31039 11.4044 1.47751 11.0343C1.64464 10.6641 1.95264 10.374 2.33378 10.2277C2.71491 10.0814 3.13795 10.0909 3.50983 10.2541C3.8817 10.4174 4.17196 10.721 4.31674 11.0982L5.95446 15.3646L6.91251 14.9968L4.18297 7.88613C4.03819 7.50896 4.05074 7.08911 4.21787 6.71896C4.38499 6.34881 4.693 6.05866 5.07413 5.91236C5.45526 5.76606 5.8783 5.77558 6.25018 5.93883C6.62206 6.10208 6.91232 6.40568 7.0571 6.78286L9.42269 12.9454L10.3807 12.5777L7.28727 4.51892C7.14248 4.14175 7.15503 3.7219 7.32216 3.35175C7.48928 2.9816 7.79729 2.69145 8.17842 2.54515C8.55956 2.39885 8.98259 2.40837 9.35447 2.57162C9.72635 2.73487 10.0166 3.03847 10.1614 3.41565L13.2549 11.4744L14.2129 11.1067L11.8473 4.94407C11.7025 4.5669 11.7151 4.14705 11.8822 3.7769C12.0493 3.40674 12.3573 3.1166 12.7385 2.9703C13.1196 2.82399 13.5426 2.83352 13.9145 2.99677C14.2864 3.16002 14.5767 3.46362 14.7214 3.8408L18.1788 12.8476L19.4653 10.4719C19.6216 10.2257 19.8522 10.0344 20.1239 9.92542C20.27 9.86355 20.4267 9.83093 20.5851 9.82944C20.7436 9.82795 20.9005 9.85763 21.0469 9.91675C21.1932 9.97587 21.3261 10.0633 21.4379 10.1739C21.5497 10.2845 21.6381 10.4162 21.698 10.5613C21.8132 10.8363 21.826 11.1436 21.7341 11.4285L19.5892 17.8105C19.2052 18.9564 18.5699 20.0052 17.7294 20.8809C16.8888 21.7567 15.864 22.4375 14.7289 22.8743L14.384 23.0067C12.3513 23.787 10.0951 23.7362 8.11179 22.8655C6.12843 21.9948 4.58039 20.3756 3.80821 18.364L1.44262 12.2014Z" fill="white"/>
+                </svg>
+            </span>
+            <span class="help-text">Recommendations</span>
         </div>
     `;
     
@@ -33,58 +37,70 @@ function createFloatingHelpButton() {
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(10, 102, 194, 0.4);
-            transition: all 0.3s ease;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
             overflow: hidden;
-        }
+            transform-origin: right center;
+                }
         
         .floating-help-button.auto-expanded {
             width: auto;
-            padding: 0 1rem;
+            padding: 0 20px 0 16px;
             border-radius: 30px;
-            transform: scale(1.02);
             box-shadow: 0 6px 20px rgba(10, 102, 194, 0.6);
         }
         
-        .floating-help-button.auto-expanded .help-text {
-            opacity: 1;
-            transform: translateX(0);
-        }
+
         
         .floating-help-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(10, 102, 194, 0.6);
-        }
-        
-        .floating-help-button:hover:not(.auto-expanded) {
-            width: auto;
-            padding: 0 1rem;
-            border-radius: 30px;
         }
         
         .floating-button-content {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
             color: white;
             font-weight: 500;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
         }
         
-        .help-icon {
-            font-size: 1.2rem;
+        .floating-help-button.auto-expanded .floating-button-content {
+            justify-content: flex-start;
+            gap: 8px;
         }
+        
+
+        
+        .help-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .help-icon svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+                }
         
         .help-text {
             white-space: nowrap;
             opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
+            width: 0;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 14px;
+            font-weight: 500;
+            display: none;
         }
         
-        .floating-help-button:hover .help-text {
+        .floating-help-button.auto-expanded .help-text {
+            display: inline;
             opacity: 1;
-            transform: translateX(0);
+            width: auto;
         }
         
         @media (max-width: 768px) {
@@ -250,8 +266,7 @@ if (helpPanel) {
 
 // Add hover effects for interactive elements
 document.addEventListener('DOMContentLoaded', () => {
-    // Create the floating help button
-createFloatingHelpButton();
+    // Floating help button created in window.addEventListener('load') instead
 
 // Add a global test function for debugging
 window.testDetailPage = function() {
@@ -478,7 +493,7 @@ function showGreyMessage() {
             </div>
         `;
         
-        // Ensure the container is left-aligned
+        // Ensure the grey message container is left-aligned
         userMessageContainer.style.display = 'flex';
         userMessageContainer.style.justifyContent = 'flex-start';
         
@@ -648,8 +663,6 @@ function handleFollowUpMessage() {
         // Create new user message element
         const newUserMessage = document.createElement('div');
         newUserMessage.className = 'user-message-container';
-        newUserMessage.style.display = 'flex';
-        newUserMessage.style.justifyContent = 'flex-end'; // Right-align user messages
         newUserMessage.innerHTML = `
             <div class="user-message">
                 <p>${message}</p>
