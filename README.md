@@ -1,4 +1,4 @@
-# LinkedIn Sales Navigator Interface
+# LinkedIn In-Product Help 
 
 A modern, interactive LinkedIn Sales Navigator interface built from Figma designs, featuring an AI-powered help widget with intelligent recommendations.
 
@@ -16,13 +16,21 @@ A modern, interactive LinkedIn Sales Navigator interface built from Figma design
 
 ### 🤖 AI-Powered Help Widget
 - **Smart Auto-Expand**: Floating button expands after 3 seconds to show "recommendations"
-- **Dual Interaction Modes**: 
+- **Multi-Threaded Chat System**: 
   - Link click → Shows specific question with AI response
-  - Chat icon click → Shows grey message for follow-up questions
-- **Realistic AI Simulation**: 
-  - Thinking animation with pulsing dots (2 seconds)
+  - Chat icon click → Shows contextual content card + follow-up chat
+- **Enhanced AI Simulation**: 
+  - AI thinking animation with pulsing dots (2 seconds) for ALL responses
   - Character-by-character typing animation
-- **Professional Chat Interface**: User messages, AI responses, and feedback buttons
+  - Auto-scroll functionality during interactions
+- **Content-Aware Interface**: Each chat shows relevant recommendation card at top
+- **Professional Chat Experience**: User messages, AI responses, and feedback buttons
+
+### ⚙️ Content Management System
+- **JSON Configuration**: Easy content updates via `help-widget-config.json`
+- **No-Code Updates**: Change text, questions, and responses without touching code
+- **Comprehensive Q&A**: Rich AI responses with formatting, bullets, and emojis
+- **Documentation**: Complete setup guide in `HELP-WIDGET-README.md`
 
 ### 🎨 Design Implementation
 - **Figma-to-Code**: Pixel-perfect implementation of provided designs
