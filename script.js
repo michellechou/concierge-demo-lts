@@ -37,7 +37,7 @@ function createFloatingHelpButton() {
             justify-content: center;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(10, 102, 194, 0.4);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s ease;
             z-index: 1000;
             overflow: hidden;
             transform-origin: right center;
@@ -91,7 +91,7 @@ function createFloatingHelpButton() {
             opacity: 0;
             width: 0;
             overflow: hidden;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s ease;
             font-size: 14px;
             font-weight: 500;
             display: none;
@@ -117,10 +117,10 @@ function createFloatingHelpButton() {
     
     document.body.appendChild(floatingButton);
     
-    // Auto-expand after 3 seconds
+    // Auto-expand after 2 seconds
     setTimeout(() => {
         floatingButton.classList.add('auto-expanded');
-    }, 3000);
+    }, 2000);
 }
 
 // Store the natural height of the first page
@@ -475,6 +475,12 @@ function restoreOriginalUserMessage() {
                 <p>How does Sales Assistant work</p>
             </div>
         `;
+        
+        // Restore right alignment for blue user messages
+        userMessageContainer.style.justifyContent = 'flex-end';
+        userMessageContainer.style.setProperty('justify-content', 'flex-end', 'important');
+        userMessageContainer.classList.remove('grey-message-container');
+        
         console.log('Original user message restored');
     }
 }
@@ -496,6 +502,8 @@ function showGreyMessage() {
         // Ensure the grey message container is left-aligned
         userMessageContainer.style.display = 'flex';
         userMessageContainer.style.justifyContent = 'flex-start';
+        userMessageContainer.style.setProperty('justify-content', 'flex-start', 'important');
+        userMessageContainer.classList.add('grey-message-container');
         
         // Add specific styles for the grey message
         const style = document.createElement('style');
