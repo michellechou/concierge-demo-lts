@@ -15,17 +15,17 @@ An interactive LinkedIn interface built from Figma designs, featuring an AI-powe
 - **Responsive Design**: Mobile-friendly layout that adapts to different screen sizes
 
 ### 🤖 AI-Powered Help Widget
-- **Smart Auto-Expand**: Floating button expands after 3 seconds to show "recommendations"
+- **Smart Auto-Expand**: Floating button expands after 2 seconds to show "Recommendations" when recommendations are available
 - **Dual Interaction Modes**: 
-  - Link click → Shows specific question with AI response
-  - Chat icon click → Shows grey message for follow-up questions
+  - Link click → Shows AI response to the specific follow-up question
+  - Chat icon click → Shows grey message inviting user to ask any follow-up questions
 - **Realistic AI Simulation**: 
   - Thinking animation with pulsing dots (2 seconds)
   - Character-by-character typing animation
 - **Professional Chat Interface**: User messages, AI responses, and feedback buttons
 
 ### 🎨 Design Implementation
-- **Figma-to-Code**: Pixel-perfect implementation of provided designs
+- **Figma-to-Code**: Implementation of provided designs
 - **Hand Icon Integration**: Custom hand icon from Figma design
 - **Smooth Animations**: Scale, fade, and slide transitions throughout
 - **Interactive Elements**: Hover effects, button states, and micro-interactions
