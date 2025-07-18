@@ -1,3 +1,22 @@
+// Auto-scroll function for chat messages
+function scrollChatToBottom() {
+    console.log('scrollChatToBottom called');
+    const scrollableContent = document.querySelector('.scrollable-content');
+    console.log('scrollableContent element:', scrollableContent);
+    if (scrollableContent) {
+        console.log('Before scroll - scrollTop:', scrollableContent.scrollTop, 'scrollHeight:', scrollableContent.scrollHeight);
+        // Force scroll to bottom immediately and with a small delay for DOM updates
+        scrollableContent.scrollTop = scrollableContent.scrollHeight;
+        console.log('After immediate scroll - scrollTop:', scrollableContent.scrollTop);
+        setTimeout(() => {
+            scrollableContent.scrollTop = scrollableContent.scrollHeight;
+            console.log('After delayed scroll - scrollTop:', scrollableContent.scrollTop);
+        }, 100);
+    } else {
+        console.log('scrollableContent not found!');
+    }
+}
+
 // DOM Elements
 const helpPanel = document.getElementById('helpPanel');
 const closeHelp = document.getElementById('closeHelp');
@@ -298,6 +317,9 @@ function startAIResponse() {
         assistantResponse.style.display = 'none';
         responseContent.innerHTML = '';
         
+        // Auto-scroll when thinking animation appears
+        scrollChatToBottom();
+        
         // Show thinking for 2 seconds, then start typing response
         setTimeout(() => {
             hideThinkingAndStartTyping();
@@ -316,6 +338,9 @@ function hideThinkingAndStartTyping() {
         // Hide thinking, show response container
         aiThinking.style.display = 'none';
         assistantResponse.style.display = 'flex';
+        
+        // Auto-scroll when response container appears
+        scrollChatToBottom();
         
         // Start typing the response
         typeResponse();
@@ -363,6 +388,11 @@ function typeResponse() {
             // Add cursor and update content
             responseContent.innerHTML = displayHTML + '<span class="typing-cursor"></span>';
             
+            // Auto-scroll during typing to keep up with growing content
+            if (currentIndex % 50 === 0) { // Scroll every 50 characters
+                scrollChatToBottom();
+            }
+            
             currentIndex++;
             setTimeout(typeNextChar, typingSpeed);
         } else {
@@ -375,6 +405,9 @@ function typeResponse() {
                 feedbackButtons.style.display = 'flex';
             }
             
+            // Auto-scroll when typing is complete
+            scrollChatToBottom();
+            
             console.log('Typing animation completed');
         }
     }
@@ -385,9 +418,11 @@ function typeResponse() {
 
 // Page Navigation Functions - Make them global
 window.showDetailPage = function() {
-    console.log('showDetailPage called');
+    console.log('showDetailPage called - Sales Assistant thread');
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const generalChat = document.getElementById('generalChat');
     
     console.log('Main page element:', mainPage);
     console.log('Detail page element:', detailPage);
@@ -395,27 +430,202 @@ window.showDetailPage = function() {
     if (mainPage && detailPage) {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
-        console.log('Page navigation completed - detail page should be visible');
+        
+        // Show Sales Assistant chat thread, hide general chat
+        if (salesAssistantChat) salesAssistantChat.style.display = 'block';
+        if (generalChat) generalChat.style.display = 'none';
+        
+        console.log('Page navigation completed - Sales Assistant chat thread visible');
         
         // Start the AI thinking and response animation
         startAIResponse();
+        
+        // Initialize follow-up input functionality for Sales Assistant thread
+        setTimeout(() => {
+            handleFollowUpMessage('salesAssistantChat');
+        }, 100);
     } else {
         console.log('ERROR: Could not find main page or detail page elements');
     }
 };
 
 window.showDetailPageWithGreyMessage = function() {
-    console.log('showDetailPageWithGreyMessage called');
+    console.log('showDetailPageWithGreyMessage called - General chat thread');
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const generalChat = document.getElementById('generalChat');
     
     if (mainPage && detailPage) {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
-        console.log('Page navigation completed - detail page with grey message should be visible');
         
-        // Show grey message instead of the user question
-        showGreyMessage();
+        // Show general chat thread, hide Sales Assistant chat
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'block';
+        
+        console.log('Page navigation completed - General chat thread visible');
+        
+        // Initialize follow-up input functionality for general chat thread
+        setTimeout(() => {
+            handleFollowUpMessage('generalChat');
+        }, 100);
+    } else {
+        console.log('ERROR: Could not find main page or detail page elements');
+    }
+};
+
+window.showDetailPageForSalesAssistant = function() {
+    console.log('showDetailPageForSalesAssistant called - Sales Assistant chat thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show general chat thread for Sales Assistant, hide Sales Assistant chat
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'block';
+        
+        // Clear previous chat and add Sales Assistant-specific content card
+        generalChat.innerHTML = `
+            <div class="recommendation-card">
+                <h3>Save time with Sales Assistant</h3>
+                <p>Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class="sales-assistant">Sales Assistant</span>.</p>
+                <div class="button-container">
+                    <button class="btn-primary">Try Sales Assistant</button>
+                </div>
+                <div class="recommendation-links">
+                    <div class="link-item-static">
+                        <div class="diamond-icon"></div>
+                        How does Sales Assistant work
+                    </div>
+                    <div class="link-item-static">
+                        <div class="diamond-icon"></div>
+                        Where to see leads from Sales Assistant
+                    </div>
+                </div>
+            </div>
+            <div class="user-message-container grey-message-container">
+                <div class="grey-message">
+                    <p>What follow-up questions about Sales Assistant can I help you with?</p>
+                </div>
+            </div>
+        `;
+        
+        console.log('Page navigation completed - Sales Assistant chat thread visible');
+        
+        // Initialize follow-up input functionality for Sales Assistant chat thread
+        setTimeout(() => {
+            handleFollowUpMessage('generalChat');
+        }, 100);
+    } else {
+        console.log('ERROR: Could not find main page or detail page elements');
+    }
+};
+
+window.showDetailPageForStrategies = function() {
+    console.log('showDetailPageForStrategies called - Sales Strategies chat thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show general chat thread for strategies, hide Sales Assistant chat
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'block';
+        
+        // Clear previous chat and add strategies-specific content card
+        generalChat.innerHTML = `
+            <div class="recommendation-card">
+                <h3>Discover New Sales Strategies</h3>
+                <p>Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.</p>
+                <div class="button-container">
+                    <button class="btn-primary">Reserve a spot</button>
+                </div>
+                <div class="recommendation-links">
+                    <div class="link-item-static">
+                        <div class="diamond-icon"></div>
+                        Who are the speakers
+                    </div>
+                    <div class="link-item-static">
+                        <div class="diamond-icon"></div>
+                        Any other webinars in August
+                    </div>
+                </div>
+            </div>
+            <div class="user-message-container grey-message-container">
+                <div class="grey-message">
+                    <p>Ask me about sales strategies and webinar details!</p>
+                </div>
+            </div>
+        `;
+        
+        console.log('Page navigation completed - Sales Strategies chat thread visible');
+        
+        // Initialize follow-up input functionality for strategies chat thread
+        setTimeout(() => {
+            handleFollowUpMessage('generalChat');
+        }, 100);
+    } else {
+        console.log('ERROR: Could not find main page or detail page elements');
+    }
+};
+
+window.showDetailPageForInnovations = function() {
+    console.log('showDetailPageForInnovations called - Q2 Innovations chat thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show general chat thread for innovations, hide Sales Assistant chat
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'block';
+        
+        // Clear previous chat and add innovations-specific content card
+        generalChat.innerHTML = `
+            <div class="recommendation-card">
+                <h3>Unlock Q2 Innovations</h3>
+                <p>Discover latest features to enhance sales workflow. Save time with Message Assist to draft outreach and gain deeper insights with Account IQ for smarter, strategic decisions.</p>
+                <div class="button-container">
+                    <button class="btn-primary">Explore Q2 updates</button>
+                </div>
+                <div class="recommendation-links">
+                    <div class="link-item-static">
+                        <div class="diamond-icon"></div>
+                        Does Message Assist boost replies
+                    </div>
+                    <div class="link-item-static">
+                        <div class="diamond-icon"></div>
+                        What insights does Account IQ provide
+                    </div>
+                </div>
+            </div>
+            <div class="user-message-container grey-message-container">
+                <div class="grey-message">
+                    <p>Ask me about Q2 features, Message Assist, and Account IQ!</p>
+                </div>
+            </div>
+        `;
+        
+        console.log('Page navigation completed - Q2 Innovations chat thread visible');
+        
+        // Initialize follow-up input functionality for innovations chat thread
+        setTimeout(() => {
+            handleFollowUpMessage('generalChat');
+        }, 100);
     } else {
         console.log('ERROR: Could not find main page or detail page elements');
     }
@@ -485,74 +695,7 @@ function restoreOriginalUserMessage() {
     }
 }
 
-function showGreyMessage() {
-    console.log('Showing grey message');
-    
-    // Find the user message container
-    const userMessageContainer = document.querySelector('.user-message-container');
-    
-    if (userMessageContainer) {
-        // Replace the content with a grey message card
-        userMessageContainer.innerHTML = `
-            <div class="grey-message">
-                <p>Any follow-up questions I can help with?</p>
-            </div>
-        `;
-        
-        // Ensure the grey message container is left-aligned
-        userMessageContainer.style.display = 'flex';
-        userMessageContainer.style.justifyContent = 'flex-start';
-        userMessageContainer.style.setProperty('justify-content', 'flex-start', 'important');
-        userMessageContainer.classList.add('grey-message-container');
-        
-        // Add specific styles for the grey message
-        const style = document.createElement('style');
-        style.textContent = `
-            .grey-message {
-                background: #F5F5F5;
-                border-radius: 16px;
-                padding: 18px 16px;
-                width: fit-content;
-                max-width: calc(100% - 16px);
-                margin-right: 16px;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
-                font-size: 14px;
-                font-weight: 400;
-                line-height: 1.25;
-                color: rgba(0, 0, 0, 0.9);
-                margin: 0 16px 0 0;
-            }
-            
-            .grey-message p {
-                margin: 0;
-                font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
-                font-size: 14px;
-                font-weight: 400;
-                line-height: 1.25;
-                color: rgba(0, 0, 0, 0.9);
-            }
-        `;
-        
-        // Check if style already exists to avoid duplicates
-        if (!document.querySelector('style[data-grey-message]')) {
-            style.setAttribute('data-grey-message', 'true');
-            document.head.appendChild(style);
-        }
-        
-        // Hide AI thinking and response animations
-        const aiThinking = document.getElementById('aiThinking');
-        const assistantResponse = document.getElementById('assistantResponse');
-        
-        if (aiThinking) aiThinking.style.display = 'none';
-        if (assistantResponse) assistantResponse.style.display = 'none';
-        
-        console.log('Grey message displayed');
-    } else {
-        console.log('ERROR: Could not find user message container');
-    }
-}
+
 
 // Initialize handlers when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
@@ -657,16 +800,61 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Follow-up input functionality
-function handleFollowUpMessage() {
+let followUpHandlersAttached = false;
+let currentChatThread = null;
+
+function handleFollowUpMessage(chatThreadId) {
+    console.log('handleFollowUpMessage called for thread:', chatThreadId);
+    currentChatThread = chatThreadId;
+    
     const followUpInput = document.querySelector('.follow-up-input');
     const sendButton = document.querySelector('.send-button');
-    const chatContainer = document.querySelector('.chat-container');
+    const chatContainer = document.getElementById(chatThreadId);
     
-    if (!followUpInput || !sendButton || !chatContainer) return;
+    console.log('Elements found:', {
+        followUpInput: !!followUpInput,
+        sendButton: !!sendButton,
+        chatContainer: !!chatContainer,
+        chatThreadId: chatThreadId
+    });
+    
+    if (!followUpInput || !sendButton || !chatContainer) {
+        console.log('Follow-up elements not found, resetting flag');
+        followUpHandlersAttached = false;
+        return;
+    }
+    
+    // Prevent duplicate event listener attachment only if elements are found
+    if (followUpHandlersAttached) {
+        console.log('Follow-up handlers already attached, skipping');
+        return;
+    }
+    
+    console.log('Attaching event listeners to follow-up input');
+    
+    // Make generateAIResponse globally accessible for testing
+    window.testAIResponse = function() {
+        console.log('Testing AI response...');
+        generateAIResponse("test message", chatContainer);
+    };
     
     function sendMessage() {
+        console.log('sendMessage function called for thread:', currentChatThread);
         const message = followUpInput.value.trim();
-        if (!message) return;
+        console.log('Message value:', message);
+        if (!message) {
+            console.log('Empty message, returning');
+            return;
+        }
+        
+        console.log('Sending message:', message);
+        
+        // Get the current active chat container
+        const activeChatContainer = document.getElementById(currentChatThread);
+        if (!activeChatContainer) {
+            console.error('Active chat container not found:', currentChatThread);
+            return;
+        }
         
         // Create new user message element
         const newUserMessage = document.createElement('div');
@@ -677,37 +865,36 @@ function handleFollowUpMessage() {
             </div>
         `;
         
-        // Insert the new message before the follow-up container
-        const followUpContainer = document.querySelector('.follow-up-container');
-        if (followUpContainer) {
-            chatContainer.insertBefore(newUserMessage, followUpContainer);
-        } else {
-            chatContainer.appendChild(newUserMessage);
-        }
+        // Add to the end of active chat container
+        activeChatContainer.appendChild(newUserMessage);
+        
+        // Auto-scroll when new user message is added
+        console.log('Calling scrollChatToBottom after adding user message');
+        scrollChatToBottom();
         
         // Clear the input
         followUpInput.value = '';
         
         // Generate AI response after a short delay
+        console.log('Setting timeout to generate AI response...');
         setTimeout(() => {
-            generateAIResponse(message, chatContainer);
+            console.log('Timeout executed, calling generateAIResponse');
+            try {
+                generateAIResponse(message, activeChatContainer);
+            } catch (error) {
+                console.error('Error generating AI response:', error);
+            }
         }, 1000);
-        
-        // Scroll to bottom to show new message
-        const detailContent = document.querySelector('.detail-content');
-        if (detailContent) {
-            setTimeout(() => {
-                detailContent.scrollTop = detailContent.scrollHeight;
-            }, 100);
-        }
         
         console.log('New message sent:', message);
     }
     
     // Handle Enter key press
     followUpInput.addEventListener('keydown', function(e) {
+        console.log('Key pressed:', e.key);
         if (e.key === 'Enter') {
             e.preventDefault();
+            console.log('Enter key detected, sending message');
             sendMessage();
         }
     });
@@ -715,133 +902,294 @@ function handleFollowUpMessage() {
     // Handle send button click
     sendButton.addEventListener('click', function(e) {
         e.preventDefault();
+        console.log('Send button clicked');
+        console.log('About to call sendMessage from button click');
         sendMessage();
+        console.log('sendMessage called from button click');
     });
+    
+    // Mark handlers as attached
+    followUpHandlersAttached = true;
+    console.log('Follow-up message handlers attached successfully');
 }
 
-// AI Response Generation
+// AI Response Generation with Typing Animation
 function generateAIResponse(userMessage, chatContainer) {
-    // Create AI response container
+    console.log('generateAIResponse called with message:', userMessage);
+    console.log('chatContainer element:', chatContainer);
+    
+    if (!chatContainer) {
+        console.error('chatContainer is null or undefined');
+        return;
+    }
+    
+    // Generate intelligent response based on user input
+    let response = generateIntelligentResponse(userMessage);
+    console.log('Generated response:', response);
+    
+    // Fallback if response is empty
+    if (!response || response.trim() === '') {
+        console.log('Empty response, using fallback');
+        response = "I'd be happy to help you with that! Could you provide a bit more detail about what you're looking for with Sales Navigator?";
+    }
+    
+    // Create unique IDs for this response
+    const responseId = 'followup-response-' + Date.now();
+    const contentId = responseId + '-content';
+    const feedbackId = responseId + '-feedback';
+    
+    // Create AI response container with typing animation structure
     const aiResponseContainer = document.createElement('div');
     aiResponseContainer.className = 'ai-response-container';
     aiResponseContainer.style.display = 'flex';
-    aiResponseContainer.style.justifyContent = 'flex-start'; // Left-align AI responses
-    
-    // Generate intelligent response based on user input
-    const response = generateIntelligentResponse(userMessage);
+    aiResponseContainer.style.justifyContent = 'flex-start';
     
     aiResponseContainer.innerHTML = `
-        <div class="ai-response-message">
-            <p>${response}</p>
+        <div class="ai-response-message" id="${responseId}">
+            <div class="response-content" id="${contentId}">
+                <span class="typing-cursor"></span>
+            </div>
+            <div class="feedback-buttons" id="${feedbackId}" style="display: none;">
+                <button class="feedback-btn thumbs-up" title="Helpful">
+                    <i class="fas fa-thumbs-up"></i>
+                </button>
+                <button class="feedback-btn thumbs-down" title="Not helpful">
+                    <i class="fas fa-thumbs-down"></i>
+                </button>
+            </div>
         </div>
     `;
     
-    // Insert before follow-up container
-    const followUpContainer = document.querySelector('.follow-up-container');
-    if (followUpContainer) {
-        chatContainer.insertBefore(aiResponseContainer, followUpContainer);
-    } else {
-        chatContainer.appendChild(aiResponseContainer);
-    }
+    // Add to the end of chat container
+    chatContainer.appendChild(aiResponseContainer);
+    console.log('AI response container added to chat');
     
-    // Add styles for AI response message (grey style)
-    if (!document.querySelector('style[data-ai-response]')) {
-        const style = document.createElement('style');
-        style.setAttribute('data-ai-response', 'true');
-        style.textContent = `
-            .ai-response-message {
-                background: #F5F5F5;
-                border-radius: 16px;
-                padding: 18px 16px;
-                width: fit-content;
-                max-width: calc(100% - 16px);
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-                font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
-                font-size: 14px;
-                font-weight: 400;
-                line-height: 1.25;
-                color: rgba(0, 0, 0, 0.9);
-                margin: 0 16px 0 0;
-            }
-            
-            .ai-response-message p {
-                margin: 0;
-                font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
-                font-size: 14px;
-                font-weight: 400;
-                line-height: 1.25;
-                color: rgba(0, 0, 0, 0.9);
-            }
-        `;
-        document.head.appendChild(style);
-    }
+    // Auto-scroll when container is added
+    setTimeout(() => {
+        scrollChatToBottom();
+    }, 50);
     
-    // Scroll to show new response
-    const detailContent = document.querySelector('.detail-content');
-    if (detailContent) {
-        setTimeout(() => {
-            detailContent.scrollTop = detailContent.scrollHeight;
-        }, 200);
-    }
+    // Start typing animation after a short delay
+    setTimeout(() => {
+        startFollowUpTyping(response, contentId, feedbackId);
+    }, 500);
 }
 
-// Intelligent Response Generator
+// Follow-up Response Typing Animation
+function startFollowUpTyping(fullText, contentId, feedbackId) {
+    console.log('Starting follow-up typing animation');
+    const responseContent = document.getElementById(contentId);
+    
+    if (!responseContent) {
+        console.error('Response content element not found:', contentId);
+        return;
+    }
+    
+    let currentIndex = 0;
+    const typingSpeed = 25; // milliseconds per character
+    
+    // Start with empty content and cursor
+    responseContent.innerHTML = '<span class="typing-cursor"></span>';
+    
+    function typeNextChar() {
+        if (currentIndex < fullText.length) {
+            const char = fullText[currentIndex];
+            
+            // Get current text without cursor
+            const currentText = fullText.substring(0, currentIndex + 1);
+            
+            // Add cursor and update content
+            responseContent.innerHTML = currentText + '<span class="typing-cursor"></span>';
+            
+            // Auto-scroll during typing to keep up with growing content
+            if (currentIndex % 50 === 0) { // Scroll every 50 characters
+                scrollChatToBottom();
+            }
+            
+            currentIndex++;
+            setTimeout(typeNextChar, typingSpeed);
+        } else {
+            // Animation complete - remove cursor and set final text
+            responseContent.innerHTML = fullText;
+            
+            // Show feedback buttons after typing is complete
+            const feedbackButtons = document.getElementById(feedbackId);
+            if (feedbackButtons) {
+                feedbackButtons.style.display = 'flex';
+            }
+            
+            // Auto-scroll when typing is complete
+            scrollChatToBottom();
+            
+            console.log('Follow-up typing animation completed');
+        }
+    }
+    
+    // Start typing
+    setTimeout(typeNextChar, 100);
+}
+
+
+
+// Advanced AI Response Generator
 function generateIntelligentResponse(userMessage) {
+    console.log('generateIntelligentResponse called with:', userMessage);
     const message = userMessage.toLowerCase();
     
-    // Sales Navigator specific responses
-    if (message.includes('lead') || message.includes('prospect')) {
-        return "Sales Navigator uses AI to identify high-quality leads based on your saved searches, account preferences, and past engagement patterns. You can refine lead recommendations by providing feedback on suggested prospects.";
+    // Analyze the question type and context
+    const questionType = analyzeQuestionType(message);
+    const keywords = extractKeywords(message);
+    
+    console.log('Question type:', questionType);
+    console.log('Keywords:', keywords);
+    
+    const response = generateContextualResponse(questionType, keywords, message);
+    console.log('Final response from generateContextualResponse:', response);
+    
+    return response;
+}
+
+function analyzeQuestionType(message) {
+    // Question type detection
+    if (message.includes('how') && (message.includes('do') || message.includes('can'))) return 'how-to';
+    if (message.includes('what') && (message.includes('is') || message.includes('are'))) return 'definition';
+    if (message.includes('why') || message.includes('because')) return 'explanation';
+    if (message.includes('when') || message.includes('time')) return 'timing';
+    if (message.includes('where') || message.includes('find')) return 'location';
+    if (message.includes('best') || message.includes('recommend')) return 'recommendation';
+    if (message.includes('help') || message.includes('problem') || message.includes('issue')) return 'troubleshooting';
+    if (message.includes('difference') || message.includes('vs') || message.includes('compare')) return 'comparison';
+    
+    return 'general';
+}
+
+function extractKeywords(message) {
+    const salesNavKeywords = {
+        'leads': ['lead', 'prospect', 'target', 'candidate'],
+        'search': ['search', 'filter', 'find', 'discover', 'locate'],
+        'messaging': ['message', 'inmail', 'outreach', 'contact', 'reach out', 'communicate'],
+        'networking': ['connect', 'network', 'relationship', 'introduction'],
+        'accounts': ['account', 'company', 'organization', 'business'],
+        'sales': ['sell', 'sales', 'deal', 'close', 'revenue', 'pipeline'],
+        'data': ['analytics', 'metrics', 'performance', 'tracking', 'insights'],
+        'features': ['premium', 'subscription', 'features', 'tools'],
+        'integration': ['crm', 'integrate', 'sync', 'export'],
+        'strategy': ['strategy', 'approach', 'plan', 'technique', 'method']
+    };
+    
+    let detectedCategories = [];
+    for (let category in salesNavKeywords) {
+        if (salesNavKeywords[category].some(keyword => message.includes(keyword))) {
+            detectedCategories.push(category);
+        }
     }
     
-    if (message.includes('search') || message.includes('filter')) {
-        return "Use advanced search filters to narrow down prospects by location, industry, company size, seniority level, and more. Boolean search operators (AND, OR, NOT) help create precise queries for better targeting.";
+    return detectedCategories;
+}
+
+function generateContextualResponse(questionType, keywords, originalMessage) {
+    // Generate responses based on question type and detected keywords
+    
+    if (questionType === 'how-to') {
+        return generateHowToResponse(keywords, originalMessage);
+    } else if (questionType === 'definition') {
+        return generateDefinitionResponse(keywords, originalMessage);
+    } else if (questionType === 'recommendation') {
+        return generateRecommendationResponse(keywords, originalMessage);
+    } else if (questionType === 'troubleshooting') {
+        return generateTroubleshootingResponse(keywords, originalMessage);
     }
     
-    if (message.includes('message') || message.includes('outreach') || message.includes('inmail')) {
-        return "Craft personalized messages using insights from prospects' profiles, recent activity, and mutual connections. InMail credits allow you to reach prospects outside your network with higher response rates.";
+    // Default contextual response based on keywords
+    return generateKeywordBasedResponse(keywords, originalMessage);
+}
+
+function generateHowToResponse(keywords, message) {
+    if (keywords.includes('leads')) {
+        if (message.includes('find') || message.includes('get')) {
+            return "To find quality leads in Sales Navigator: 1) Use Lead Builder with specific filters (industry, location, seniority), 2) Apply boolean search with relevant keywords, 3) Leverage saved searches for ongoing lead discovery, 4) Use TeamLink to see warm connections, and 5) Review lead recommendations based on your past activity and saved accounts.";
+        }
+        if (message.includes('qualify') || message.includes('score')) {
+            return "Qualify leads effectively by: 1) Reviewing their recent activity and posts, 2) Checking their company's growth signals, 3) Looking for mutual connections or shared experiences, 4) Analyzing their role and decision-making authority, and 5) Using Sales Navigator's lead scoring indicators to prioritize outreach.";
+        }
     }
     
-    if (message.includes('connect') || message.includes('network')) {
-        return "Look for mutual connections, shared experiences, or common interests to establish rapport. Warm introductions through mutual connections typically have higher success rates than cold outreach.";
+    if (keywords.includes('messaging')) {
+        return "Craft effective messages by: 1) Personalizing with specific details from their profile, 2) Mentioning mutual connections when relevant, 3) Leading with value or insights rather than a sales pitch, 4) Keeping initial messages concise (under 300 characters), and 5) Including a clear, low-pressure call-to-action.";
     }
     
-    if (message.includes('account') || message.includes('company')) {
-        return "Account pages provide comprehensive company insights including recent news, employee changes, and growth indicators. Use this intelligence to time your outreach and tailor your value proposition.";
+    if (keywords.includes('search')) {
+        return "Master Sales Navigator search by: 1) Starting broad then narrowing with filters, 2) Using boolean operators (AND, OR, NOT) for precision, 3) Saving effective searches for regular updates, 4) Combining multiple filter types (geography + industry + seniority), and 5) Regularly refining based on results quality.";
     }
     
-    if (message.includes('save') || message.includes('bookmark')) {
-        return "Save interesting prospects and accounts to organized lists for ongoing relationship building. Set up alerts to stay informed about job changes, company updates, and other relevant activities.";
+    return "I can help you with specific Sales Navigator techniques. Could you provide more details about what you're trying to accomplish?";
+}
+
+function generateDefinitionResponse(keywords, message) {
+    if (keywords.includes('leads')) {
+        return "In Sales Navigator, leads are potential customers or prospects identified through targeted searches. They're individuals who match your ideal customer profile and represent potential sales opportunities. Sales Navigator uses AI to recommend leads based on your saved searches, account preferences, and engagement history.";
     }
     
-    if (message.includes('premium') || message.includes('subscription')) {
-        return "Sales Navigator Premium offers advanced search filters, unlimited people browsing, extended network access, and enhanced CRM integration capabilities to maximize your sales effectiveness.";
+    if (keywords.includes('accounts')) {
+        return "Accounts in Sales Navigator represent companies or organizations you're targeting. They provide comprehensive company insights including employee count, recent news, growth signals, and decision-maker identification. You can save accounts to track changes and receive alerts about important updates.";
     }
     
-    if (message.includes('crm') || message.includes('integration')) {
-        return "Sync Sales Navigator with your CRM to maintain unified prospect data, track engagement history, and ensure your sales activities are properly documented across platforms.";
+    if (keywords.includes('features') && message.includes('premium')) {
+        return "Sales Navigator Premium includes: unlimited people searches, advanced lead and company search filters, InMail messaging credits, real-time sales updates, CRM integration, team collaboration tools, and enhanced visibility into extended networks beyond your 1st-degree connections.";
     }
     
-    if (message.includes('tip') || message.includes('advice') || message.includes('help')) {
-        return "Focus on building genuine relationships rather than immediate sales. Research prospects thoroughly, engage with their content, and provide value in your initial outreach to establish trust and credibility.";
+    return "Sales Navigator is LinkedIn's advanced sales prospecting platform that helps sales professionals find, understand, and engage with prospects and accounts more effectively than standard LinkedIn.";
+}
+
+function generateRecommendationResponse(keywords, message) {
+    if (keywords.includes('strategy')) {
+        return "Best Sales Navigator strategies: 1) Build a systematic prospecting routine with daily search activities, 2) Maintain organized saved searches and account lists, 3) Engage with prospect content before reaching out, 4) Use social selling techniques with valuable insights sharing, 5) Track and measure your outreach performance regularly.";
     }
     
-    if (message.includes('analytics') || message.includes('metrics') || message.includes('performance')) {
-        return "Track your outreach performance through response rates, connection acceptance, and conversion metrics. Use this data to refine your messaging strategy and improve targeting accuracy.";
+    if (keywords.includes('messaging')) {
+        return "Top messaging best practices: 1) Research thoroughly before messaging, 2) Reference specific details from their profile or company, 3) Lead with industry insights or valuable resources, 4) Keep initial messages under 300 characters, 5) Follow up strategically with continued value, and 6) Use InMail for prospects outside your network.";
     }
     
-    // General business/sales responses
-    if (message.includes('strategy') || message.includes('plan')) {
-        return "Develop a systematic approach by defining your ideal customer profile, setting daily activity goals, and consistently following up with prospects. Persistence and personalization are key to sales success.";
+    return "For best results with Sales Navigator, focus on building genuine relationships, providing value in every interaction, and maintaining consistent prospecting activities. What specific area would you like recommendations for?";
+}
+
+function generateTroubleshootingResponse(keywords, message) {
+    if (message.includes('not working') || message.includes('error')) {
+        return "Common Sales Navigator issues and solutions: 1) Clear browser cache and cookies, 2) Try using an incognito/private window, 3) Check your subscription status and permissions, 4) Ensure you're using a supported browser, 5) Contact LinkedIn support if problems persist. What specific issue are you experiencing?";
     }
     
-    if (message.includes('time') || message.includes('efficiency')) {
-        return "Maximize efficiency by batching similar activities, using templates for common scenarios, and leveraging automation tools while maintaining personal touches in your communications.";
+    if (message.includes('slow') || message.includes('loading')) {
+        return "To improve Sales Navigator performance: 1) Close unnecessary browser tabs, 2) Clear cache and browsing data, 3) Disable browser extensions temporarily, 4) Check your internet connection speed, 5) Try using a different browser. Large searches can also take time to load.";
     }
     
-    // Default helpful response
-    return "I'm here to help with Sales Navigator questions, prospecting strategies, and sales best practices. Feel free to ask about specific features, techniques, or challenges you're facing.";
+    return "I'm here to help troubleshoot your Sales Navigator challenges. Could you describe the specific issue you're encountering in more detail?";
+}
+
+function generateKeywordBasedResponse(keywords, message) {
+    // Multi-keyword sophisticated responses
+    if (keywords.includes('leads') && keywords.includes('search')) {
+        return "Effective lead searching combines precise filtering with strategic keyword usage. Start with broad criteria, then layer specific filters like industry, location, and seniority. Use boolean search with relevant job titles and skills. Save successful searches to receive ongoing lead updates automatically.";
+    }
+    
+    if (keywords.includes('messaging') && keywords.includes('networking')) {
+        return "Combine messaging with networking by: 1) Connecting first when possible, 2) Engaging with their content before reaching out, 3) Leveraging mutual connections for warm introductions, 4) Sharing relevant industry insights, and 5) Building relationships gradually rather than rushing to sales conversations.";
+    }
+    
+    if (keywords.includes('data') && keywords.includes('sales')) {
+        return "Leverage Sales Navigator analytics by tracking: message response rates, connection acceptance rates, search result quality, lead conversion metrics, and account engagement levels. Use this data to refine your targeting, messaging, and overall sales approach for better results.";
+    }
+    
+    // Single keyword responses with more context
+    if (keywords.includes('leads')) {
+        return "Lead generation in Sales Navigator works best with a systematic approach: define your ideal customer profile, use precise search filters, engage with prospects' content before outreach, and maintain consistent follow-up sequences. Quality over quantity always wins.";
+    }
+    
+    if (keywords.includes('accounts')) {
+        return "Account-based selling through Sales Navigator: research target companies thoroughly, identify multiple stakeholders, track company news and updates, coordinate team efforts, and build relationships across the organization rather than focusing on single contacts.";
+    }
+    
+    // Default intelligent response
+    return "I understand you're asking about " + (keywords.length > 0 ? keywords.join(' and ') : "Sales Navigator") + ". Could you provide more specific details about your situation or what you're trying to achieve? This will help me give you more targeted advice.";
 }
 
 // Add entrance animations
@@ -852,16 +1200,101 @@ window.addEventListener('load', () => {
     // Initialize follow-up input functionality
     handleFollowUpMessage();
     
-    // Animate cards on load
-    const cards = document.querySelectorAll('.sidebar-card, .highlights-card, .alerts-feed');
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
+    // Add styles for follow-up AI response (grey style)
+    if (!document.querySelector('style[data-ai-response]')) {
+        const style = document.createElement('style');
+        style.setAttribute('data-ai-response', 'true');
+        style.textContent = `
+                         .ai-response-message {
+                 background: #F5F5F5;
+                 border-radius: 16px;
+                 padding: 18px 16px;
+                 width: fit-content;
+                 max-width: calc(100% - 16px);
+                 word-wrap: break-word;
+                 overflow-wrap: break-word;
+                 font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+                 font-size: 14px;
+                 font-weight: 400;
+                 line-height: 1.25;
+                 color: rgba(0, 0, 0, 0.9);
+                 margin: 0 16px 0 0;
+             }
+            
+            .ai-response-message .response-content {
+                margin: 0;
+                font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 1.25;
+                color: rgba(0, 0, 0, 0.9);
+            }
+            
+            .ai-response-message .feedback-buttons {
+                display: flex;
+                gap: 8px;
+                margin-top: 12px;
+                justify-content: flex-end;
+            }
+            
+            .ai-response-message .feedback-btn {
+                background: none;
+                border: 1px solid rgba(0, 0, 0, 0.15);
+                border-radius: 20px;
+                padding: 6px 12px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                color: rgba(0, 0, 0, 0.6);
+                font-size: 14px;
+            }
+            
+                         .ai-response-message .feedback-btn:hover {
+                 background: rgba(0, 0, 0, 0.05);
+                 border-color: rgba(0, 0, 0, 0.25);
+             }
+             
+             .grey-message {
+                 background: #F5F5F5;
+                 border-radius: 16px;
+                 padding: 18px 16px;
+                 width: fit-content;
+                 max-width: calc(100% - 16px);
+                 margin: 0 16px 0 0;
+                 word-wrap: break-word;
+                 overflow-wrap: break-word;
+                 font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+                 font-size: 14px;
+                 font-weight: 400;
+                 line-height: 1.25;
+                 color: rgba(0, 0, 0, 0.9);
+             }
+             
+             .grey-message p {
+                 margin: 0;
+                 font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+                 font-size: 14px;
+                 font-weight: 400;
+                 line-height: 1.25;
+                 color: rgba(0, 0, 0, 0.9);
+             }
+             
+             .grey-message-container {
+                 display: flex !important;
+                 justify-content: flex-start !important;
+             }
+             
+             .user-message-container {
+                 margin-top: 16px;
+             }
+             
+             .user-message-container:first-child {
+                 margin-top: 0;
+             }
+             
+
+         `;
+         document.head.appendChild(style);
+    }
+    
+
 }); 
