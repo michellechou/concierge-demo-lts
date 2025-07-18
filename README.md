@@ -4,7 +4,7 @@ A modern, interactive LinkedIn Sales Navigator interface built from Figma design
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://your-username.github.io/projectiph)
+[View Live Demo](https://michellechou.github.io/projectiph)
 
 ## ✨ Features
 
@@ -70,7 +70,7 @@ projectiph/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/projectiph.git
+   git clone https://github.com/michellechou/projectiph.git
    ```
 
 2. Open `index.html` in your browser:
