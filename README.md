@@ -1,4 +1,4 @@
-z# LinkedIn In-Product Help 
+# LinkedIn In-Product Help 
 
 A modern, interactive LinkedIn Sales Navigator interface built from Figma designs, featuring an AI-powered help widget with intelligent recommendations.
 
