@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SALES NAVIGATOR</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="linkedin-logo">
+                <i class="fab fa-linkedin"></i>
+            </div>
+            <div class="logo">SALES NAVIGATOR</div>
+        </div>
+        <div class="nav-center">
+            <a href="#" class="nav-link active">Home</a>
+            <a href="#" class="nav-link">Accounts</a>
+            <a href="#" class="nav-link">Leads</a>
+            <a href="#" class="nav-link">Smart Links</a>
+            <a href="#" class="nav-link">Messaging</a>
+            <a href="#" class="nav-link">Admin</a>
+        </div>
+        <div class="nav-right">
+            <i class="fas fa-bell nav-icon"></i>
+            <i class="fas fa-question-circle nav-icon"></i>
+            <div class="user-avatar">
+                <img src="https://via.placeholder.com/24x24/0073b1/ffffff?text=U" alt="User" />
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Header -->
+    <div class="search-header">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Search" class="search-input">
+            </div>
+            <div class="search-filters">
+                <button class="filter-btn">Lead filters +</button>
+                <button class="filter-btn">Account filters +</button>
+            </div>
+            <div class="search-actions">
+                <span class="search-link">Saved searches</span>
+                <span class="search-link">Personas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Column - Highlights Card -->
+        <div class="left-column">
+            <div class="highlights-card">
+                <div class="highlights-header">
+                    <i class="fas fa-lightbulb highlights-icon"></i>
+                    <span class="highlights-title">Highlights for you</span>
+                    <i class="fas fa-times close-icon"></i>
+                </div>
+                <div class="highlights-content">
+                    <div class="company-logo">
+                        <img src="https://via.placeholder.com/56x56/10b981/ffffff?text=D" alt="Deloitte" />
+                    </div>
+                    <div class="highlights-text">
+                        <h3>Uncover Deloitte's challenges and more with AI</h3>
+                        <p>Get an AI generated summary of LinkedIn's business challenges, strategic priorities, competitive landscape and more with Account IQ.</p>
+                        <button class="btn-primary">Button Text</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Column - Alerts Feed -->
+        <div class="center-column">
+            <div class="alerts-feed">
+                <div class="alerts-header">
+                    <div class="alerts-tabs">
+                        <button class="tab active">All alerts</button>
+                        <button class="tab">Bookmarked alerts (23)</button>
+                    </div>
+                    <div class="alerts-search">
+                        <input type="text" placeholder="Search for saved account and lead alerts" class="alerts-search-input">
+                        <span class="sort-text">Sorted by: Relevance</span>
+                    </div>
+                    <div class="alerts-filters">
+                        <span class="filter-label">Filter by:</span>
+                        <button class="filter-pill active">Accounts</button>
+                        <button class="filter-pill">Leads</button>
+                        <button class="filter-pill">Shared activity</button>
+                    </div>
+                </div>
+                
+                <div class="alerts-list">
+                    <!-- Alert Item 1 -->
+                    <div class="alert-item">
+                        <div class="alert-logo">
+                            <img src="https://via.placeholder.com/40x40/0073b1/ffffff?text=F" alt="Flexis" />
+                        </div>
+                        <div class="alert-content">
+                            <h4><span class="company-name">Flexis</span> has accelerated growth. There has been increased hiring over the last 3 months. Headcount has grown year over year.</h4>
+                            <p class="alert-meta">Marketing & Advertising · 5001-10000 employees</p>
+                            <span class="alert-time">3 days</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn-view">View</button>
+                            <button class="btn-icon"><i class="far fa-square"></i></button>
+                            <button class="btn-icon"><i class="far fa-comment"></i></button>
+                            <button class="btn-icon"><i class="fas fa-ellipsis-h"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Alert Item 2 -->
+                    <div class="alert-item">
+                        <div class="alert-logo">
+                            <img src="https://via.placeholder.com/40x40/0073b1/ffffff?text=J" alt="John Smith" />
+                        </div>
+                        <div class="alert-content">
+                            <h4><span class="company-name">John Smith</span> was promoted</h4>
+                            <p class="alert-meta">Marketing & Advertising · 5001-10000 employees</p>
+                            <span class="alert-time">3 hours</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn-view">View</button>
+                            <button class="btn-icon"><i class="far fa-square"></i></button>
+                            <button class="btn-icon"><i class="far fa-comment"></i></button>
+                            <button class="btn-icon"><i class="fas fa-ellipsis-h"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Alert Item 3 -->
+                    <div class="alert-item">
+                        <div class="alert-logo">
+                            <img src="https://via.placeholder.com/40x40/0073b1/ffffff?text=H" alt="Hasan Abbasi" />
+                        </div>
+                        <div class="alert-content">
+                            <h4><span class="company-name">Hasan Abbasi</span> shared a post</h4>
+                            <p class="alert-meta">Marketing & Advertising · 5001-10000 employees</p>
+                            <span class="alert-time">3 hours</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn-view">View</button>
+                            <button class="btn-icon"><i class="far fa-square"></i></button>
+                            <button class="btn-icon"><i class="far fa-comment"></i></button>
+                            <button class="btn-icon"><i class="fas fa-ellipsis-h"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Alert Item 4 -->
+                    <div class="alert-item">
+                        <div class="alert-logo">
+                            <div class="company-stack">
+                                <img src="https://via.placeholder.com/32x32/0073b1/ffffff?text=A" alt="Antelith" />
+                                <img src="https://via.placeholder.com/32x32/10b981/ffffff?text=O" alt="Oustia" />
+                            </div>
+                        </div>
+                        <div class="alert-content">
+                            <h4><span class="company-name">Antelith</span> is a new account to consider. <span class="company-name">Oustia</span> employees have been moving here at an increased rate</h4>
+                            <p class="alert-meta">Marketing & Advertising · 5001-10000 employees</p>
+                            <span class="alert-time">3 days</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn-view">View</button>
+                            <button class="btn-icon"><i class="far fa-square"></i></button>
+                            <button class="btn-icon"><i class="far fa-comment"></i></button>
+                            <button class="btn-icon"><i class="fas fa-ellipsis-h"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Alert Item 5 -->
+                    <div class="alert-item">
+                        <div class="alert-logo">
+                            <img src="https://via.placeholder.com/40x40/0073b1/ffffff?text=F" alt="Flexis" />
+                        </div>
+                        <div class="alert-content">
+                            <h4><span class="company-name">Flexis</span> just raised money</h4>
+                            <p class="alert-meta">Marketing & Advertising · 5001-10000 employees</p>
+                            <span class="alert-time">3 days</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn-view">View</button>
+                            <button class="btn-icon"><i class="far fa-square"></i></button>
+                            <button class="btn-icon"><i class="far fa-comment"></i></button>
+                            <button class="btn-icon"><i class="fas fa-ellipsis-h"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Sidebar -->
+        <div class="right-column">
+            <!-- Book of Business -->
+            <div class="sidebar-card">
+                <div class="card-header">
+                    <h3>Book of Business</h3>
+                </div>
+                <div class="card-content">
+                    <p class="card-subtitle">The selected list is set as your Book of business</p>
+                    <select class="dropdown">
+                        <option>My current accounts (0)</option>
+                    </select>
+                    <div class="business-metrics">
+                        <div class="metric-item">
+                            <i class="fas fa-chart-bar metric-icon yellow"></i>
+                            <span>14 Moderate to high buyer intent</span>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-check-circle metric-icon green"></i>
+                            <span>5 Accounts with good fit</span>
+                        </div>
+                        <div class="metric-item">
+                            <i class="fas fa-exclamation-triangle metric-icon red"></i>
+                            <span>1 Accounts at risk</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary">View account list</button>
+                </div>
+            </div>
+
+            <!-- Personas -->
+            <div class="sidebar-card">
+                <div class="card-header">
+                    <h3>Personas</h3>
+                    <i class="fas fa-edit edit-icon"></i>
+                </div>
+                <div class="card-content">
+                    <p class="card-subtitle">Identify leads that match your ideal buyer by defining your personas.</p>
+                    <div class="persona-item">
+                        <div class="persona-info">
+                            <h4>Default persona</h4>
+                            <p>Updated: 4/13/2022</p>
+                            <p><strong>Function:</strong> Sales, Management; <strong>Seniority:</strong> Director, VP, Manager;<br>
+                            <strong>Job title:</strong> Director; <strong>Geography:</strong> San Francisco, Bay Area</p>
+                        </div>
+                        <div class="persona-leads">
+                            <div class="avatar-stack">
+                                <img src="https://via.placeholder.com/24x24/0073b1/ffffff?text=1" alt="">
+                                <img src="https://via.placeholder.com/24x24/10b981/ffffff?text=2" alt="">
+                                <img src="https://via.placeholder.com/24x24/f59e0b/ffffff?text=3" alt="">
+                            </div>
+                            <p><strong class="highlight">145</strong> leads</p>
+                        </div>
+                    </div>
+                    <button class="btn-secondary">Show all 5 personas</button>
+                </div>
+            </div>
+
+            <!-- Priority Accounts -->
+            <div class="sidebar-card">
+                <div class="card-header">
+                    <h3>My priority accounts</h3>
+                    <div class="notification-badge">
+                        <i class="fas fa-circle"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p class="card-subtitle">Key changes in the past 30 days on high priority accounts.</p>
+                    <div class="priority-account">
+                        <div class="account-info">
+                            <img src="https://via.placeholder.com/48x48/0073b1/ffffff?text=E" alt="Energence" class="account-logo">
+                            <div class="account-details">
+                                <h4 class="account-name">Energence</h4>
+                                <p class="account-meta">Computer Software · $16.60 billion in revenue</p>
+                                <p class="account-location">Redmond, Washington, United States</p>
+                            </div>
+                            </div>
+                        <div class="account-metrics">
+                            <div class="metric">
+                                <i class="fas fa-arrow-up growth-icon"></i>
+                                <span class="metric-value">62%</span>
+                                <span class="metric-label">3m headcount growth</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">8k</span>
+                                <span class="metric-label">employee count</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">3</span>
+                                <span class="metric-label">open opportunities</span>
+                            </div>
+                            <div class="metric">
+                                <i class="fas fa-arrow-down decline-icon"></i>
+                                <span class="metric-value">1%</span>
+                                <span class="metric-label">buyer intent</span>
+                            </div>
+                        </div>
+                        <button class="btn-secondary">View Account Map</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Panel -->
+    <div class="help-panel" id="helpPanel">
+        <!-- Main Help Page -->
+        <div class="help-page main-help-page" id="mainHelpPage">
+            <div class="help-header">
+                <h2>Help</h2>
+                <i class="fas fa-times close-help" id="closeHelp"></i>
+            </div>
+        
+        <div class="help-search">
+            <input type="text" placeholder="Ask anything" class="help-search-input">
+        </div>
+        
+        <div class="help-greeting">
+            <p>Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity</p>
+        </div>
+        
+        <div class="recommendations">
+            <!-- Recommendation 1 - Auto Expanded -->
+            <div class="recommendation-item expanded" id="rec1">
+                <div class="recommendation-header" onclick="toggleRecommendation('rec1')">
+                    <h3>Save time with Sales Assistant</h3>
+                    <i class="fas fa-chevron-up expand-icon"></i>
+                </div>
+                <div class="recommendation-content">
+                    <p>Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class="sales-assistant">Sales Assistant</span>.</p>
+                    <div class="button-container">
+                        <button class="btn-primary">Try Sales Assistant</button>
+                        <div class="chat-icon">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                    </div>
+                    <div class="recommendation-links">
+                        <a href="#" class="link-item" onclick="showDetailPage(); return false;">
+                            <div class="diamond-icon"></div>
+                            How does Sales Assistant work
+                        </a>
+                        <a href="#" class="link-item">
+                            <div class="diamond-icon"></div>
+                            Where to see leads from Sales Assistant
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendation 2 - Collapsed -->
+            <div class="recommendation-item" id="rec2">
+                <div class="recommendation-header" onclick="toggleRecommendation('rec2')">
+                    <h3>Discover New Sales Strategies</h3>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="recommendation-content">
+                    <p>Explore proven sales strategies and techniques to improve your performance and close more deals.</p>
+                    <button class="btn-primary">Explore Strategies</button>
+                </div>
+            </div>
+
+            <!-- Recommendation 3 - Collapsed -->
+            <div class="recommendation-item" id="rec3">
+                <div class="recommendation-header" onclick="toggleRecommendation('rec3')">
+                    <h3>Unlock Q2 Innovations</h3>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="recommendation-content">
+                    <p>Get early access to our latest features and innovations designed to supercharge your sales process.</p>
+                    <button class="btn-primary">Learn More</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="help-resources">
+            <h3>Resources</h3>
+            <div class="resource-links">
+                <a href="#" class="resource-link">
+                    <i class="fas fa-question-circle"></i>
+                    Help Center
+                </a>
+                <a href="#" class="resource-link">
+                    <i class="fas fa-graduation-cap"></i>
+                    Learning Center
+                </a>
+                <a href="#" class="resource-link">
+                    <i class="fas fa-users"></i>
+                    Community
+                </a>
+            </div>
+        </div>
+        </div>
+
+        <!-- Sales Assistant Detail Page -->
+        <div class="help-page detail-help-page" id="detailHelpPage" style="display: none;">
+            <div class="help-header">
+                <div class="back-button-container">
+                    <i class="fas fa-arrow-left back-button" id="backButton" onclick="showMainPage()"></i>
+                    <h2>Help</h2>
+                </div>
+                <i class="fas fa-times close-help" id="closeHelpDetail" onclick="closeHelpPanel(); setTimeout(() => showMainPage(), 300);"></i>
+            </div>
+            
+            <div class="detail-content">
+                <!-- Scrollable Content Area -->
+                <div class="scrollable-content">
+                    <!-- Highlighted Question Section -->
+                    <div class="question-section">
+                        <div class="question-card">
+                            <p>Save time with Sales Assistant</p>
+                            <p class="question-description">Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class="sales-assistant-bold">Sales Assistant</span>.</p>
+                            <button class="btn-primary detail-btn">Try Sales Assistant</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Interface -->
+                    <div class="chat-container">
+                        <!-- User Question -->
+                        <div class="user-message-container">
+                            <div class="user-message">
+                                <p>How does Sales Assistant work</p>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Thinking Animation -->
+                        <div class="ai-thinking-container" id="aiThinking">
+                            <div class="ai-thinking">
+                                <div class="thinking-dots">
+                                    <span class="thinking-dot"></span>
+                                    <span class="thinking-dot"></span>
+                                    <span class="thinking-dot"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Assistant Response -->
+                        <div class="assistant-response-container" id="assistantResponse" style="display: none;">
+                            <div class="assistant-response">
+                                <div class="response-content" id="responseContent">
+                                    <!-- Content will be typed in by animation -->
+                                </div>
+                                                            <div class="feedback-buttons" id="feedbackButtons" style="display: none;">
+                                <button class="feedback-btn thumbs-up" title="Helpful">
+                                    <i class="fas fa-thumbs-up"></i>
+                                </button>
+                                <button class="feedback-btn thumbs-down" title="Not helpful">
+                                    <i class="fas fa-thumbs-down"></i>
+                                </button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Follow-up Input - Sticky at Bottom -->
+                <div class="follow-up-container">
+                    <div class="follow-up-input-wrapper">
+                        <input type="text" placeholder="Ask follow-ups" class="follow-up-input">
+                        <button class="send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
