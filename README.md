@@ -87,7 +87,7 @@ projectiph/
    ```
 
 3. Experience the interface:
-   - Wait 3 seconds for auto-expand
+   - Wait 2 seconds for auto-expand
    - Click the help widget to explore
    - Try both interaction modes (link vs chat icon)
 
