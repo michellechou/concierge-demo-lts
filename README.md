@@ -1,4 +1,4 @@
-# LinkedIn In-Product Help 
+z# LinkedIn In-Product Help 
 
 A modern, interactive LinkedIn Sales Navigator interface built from Figma designs, featuring an AI-powered help widget with intelligent recommendations.
 
@@ -15,7 +15,7 @@ A modern, interactive LinkedIn Sales Navigator interface built from Figma design
 - **Responsive Design**: Mobile-friendly layout that adapts to different screen sizes
 
 ### 🤖 AI-Powered Help Widget
-- **Smart Auto-Expand**: Floating button expands after 3 seconds to show "recommendations"
+- **Smart Auto-Expand**: Floating button expands after 2 seconds to show "recommendations"
 - **Multi-Threaded Chat System**: 
   - Link click → Shows specific question with AI response
   - Chat icon click → Shows contextual content card + follow-up chat
@@ -59,7 +59,7 @@ projectiph/
 ## 🎯 Key Implementation Highlights
 
 ### Floating Help Widget
-- Auto-expands after 3 seconds with smooth animation
+- Auto-expands after 2 seconds with smooth animation
 - Scales from bottom-right origin for natural feel
 - Maintains 400px width with natural height
 
