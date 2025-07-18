@@ -1,6 +1,6 @@
-# LinkedIn Sales Navigator Interface
+# In Product Help
 
-A modern, interactive LinkedIn Sales Navigator interface built from Figma designs, featuring an AI-powered help widget with intelligent recommendations.
+An interactive LinkedIn interface built from Figma designs, featuring an AI-powered help widget with intelligent recommendations.
 
 ## 🚀 Live Demo
 
