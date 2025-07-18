@@ -482,18 +482,27 @@ function showGreyMessage() {
         const style = document.createElement('style');
         style.textContent = `
             .grey-message {
-                background-color: #f3f4f6;
-                color: #6b7280;
-                padding: 12px 16px;
-                border-radius: 12px;
-                margin: 0;
+                background: #F5F5F5;
+                border-radius: 16px;
+                padding: 18px 16px;
+                width: 100%;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
                 font-size: 14px;
-                line-height: 1.4;
-                border: 1px solid #e5e7eb;
+                font-weight: 400;
+                line-height: 1.25;
+                color: rgba(0, 0, 0, 0.9);
+                margin: 0;
             }
             
             .grey-message p {
                 margin: 0;
+                font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 1.25;
+                color: rgba(0, 0, 0, 0.9);
             }
         `;
         
