@@ -10,7 +10,7 @@
       "content": {
         "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Sales Assistant</span>.",
         "primaryButton": "Try Sales Assistant",
-        "chatGreeting": "Any follow-up questions I can help with?",
+        "chatGreeting": "What follow-up questions about Sales Assistant can I help you with?",
         "questions": [
           "How does Sales Assistant work",
           "Where to see leads from Sales Assistant"
