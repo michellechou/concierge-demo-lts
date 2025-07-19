@@ -406,6 +406,10 @@ body {
     border-radius: 4px;
 }
 
+.headshot-image {
+    border-radius: 50% !important;
+}
+
 .company-stack {
     position: relative;
     width: 40px;
