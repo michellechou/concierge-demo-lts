@@ -35,9 +35,72 @@ async function loadConfiguration() {
         // Set fallback configuration
         helpWidgetConfig = {
             greeting: { text: "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity" },
-            recommendations: [],
+            recommendations: [
+                {
+                    "id": "rec1",
+                    "title": "Save time with Sales Assistant",
+                    "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Sales Assistant</span>.",
+                    "buttonText": "Try Sales Assistant",
+                    "buttonAction": "trySalesAssistant",
+                    "links": [
+                        {
+                            "text": "How does Sales Assistant work",
+                            "action": "showDetailPage"
+                        },
+                        {
+                            "text": "Where to see leads from Sales Assistant",
+                            "action": "viewLeads"
+                        }
+                    ],
+                    "expanded": true,
+                    "chatFunction": "showDetailPageForSalesAssistant"
+                },
+                {
+                    "id": "rec2", 
+                    "title": "Discover New Sales Strategies",
+                    "description": "Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.",
+                    "buttonText": "Reserve a spot",
+                    "buttonAction": "reserveSpot",
+                    "links": [
+                        {
+                            "text": "Who are the speakers",
+                            "action": "viewSpeakers"
+                        },
+                        {
+                            "text": "Any other webinars in August",
+                            "action": "viewWebinars"
+                        }
+                    ],
+                    "expanded": false,
+                    "chatFunction": "showDetailPageForStrategies"
+                },
+                {
+                    "id": "rec3",
+                    "title": "Unlock Q2 Innovations", 
+                    "description": "Discover latest features to enhance sales workflow. Save time with Message Assist to draft outreach and gain deeper insights with Account IQ for smarter, strategic decisions.",
+                    "buttonText": "Explore Q2 updates",
+                    "buttonAction": "exploreUpdates",
+                    "links": [
+                        {
+                            "text": "Does Message Assist boost replies",
+                            "action": "messageAssistInfo"
+                        },
+                        {
+                            "text": "What insights does Account IQ provide",
+                            "action": "accountIQInfo"
+                        }
+                    ],
+                    "expanded": false,
+                    "chatFunction": "showDetailPageForInnovations"
+                }
+            ],
             resources: { title: "Resources", links: [] },
-            responses: {}
+            responses: {
+                "salesAssistant": {
+                    "question": "How does Sales Assistant work",
+                    "answer": "**Sales Assistant** is an AI-powered feature that streamlines your prospecting workflow in three key ways:\n\n**1. Automated Lead Delivery**\n• Identifies high-potential leads based on your saved searches and personas\n• Delivers fresh leads directly to your inbox weekly\n• Prioritizes leads with recent activity and buying signals\n\n**2. Smart Connection Paths**\n• Analyzes your LinkedIn network to find warm introductions\n• Suggests optimal outreach timing based on prospect activity\n• Identifies mutual connections and shared experiences\n\n**3. Personalized Outreach**\n• Generates customized message templates using prospect insights\n• Incorporates recent news, job changes, and company updates\n• Adapts tone and messaging based on seniority and industry\n\n**Getting Started:**\nTo activate Sales Assistant, go to your Lead Builder and enable the 'Weekly Lead Delivery' option. The AI will start analyzing your preferences and delivering qualified leads within 24 hours.\n\n*Sales Assistant learns from your engagement patterns and continuously improves lead quality over time.*"
+                }
+            }
         };
         return helpWidgetConfig;
     }
@@ -73,9 +136,17 @@ function generateHelpContent() {
 }
 
 function generateRecommendationCards() {
+    console.log('generateRecommendationCards called');
     const recommendationsContainer = document.querySelector('.recommendations');
+    console.log('recommendationsContainer found:', !!recommendationsContainer);
+    console.log('helpWidgetConfig.recommendations:', helpWidgetConfig?.recommendations);
+    
     if (!recommendationsContainer || !helpWidgetConfig.recommendations) {
-        console.error('Recommendations container not found or no recommendations data');
+        console.error('Recommendations container not found or no recommendations data', {
+            container: !!recommendationsContainer,
+            recommendations: !!helpWidgetConfig?.recommendations,
+            recommendationsLength: helpWidgetConfig?.recommendations?.length
+        });
         return;
     }
     
