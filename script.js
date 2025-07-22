@@ -101,6 +101,10 @@ async function loadConfiguration() {
                 "salesAssistant": {
                     "question": "How does Sales Assistant work",
                     "answer": "**Sales Assistant** is an AI-powered feature that streamlines your prospecting workflow in three key ways:\n\n**1. Automated Lead Delivery**\n• Identifies high-potential leads based on your saved searches and personas\n• Delivers fresh leads directly to your inbox weekly\n• Prioritizes leads with recent activity and buying signals\n\n**2. Smart Connection Paths**\n• Analyzes your LinkedIn network to find warm introductions\n• Suggests optimal outreach timing based on prospect activity\n• Identifies mutual connections and shared experiences\n\n**3. Personalized Outreach**\n• Generates customized message templates using prospect insights\n• Incorporates recent news, job changes, and company updates\n• Adapts tone and messaging based on seniority and industry\n\n**Getting Started:**\nTo activate Sales Assistant, go to your Lead Builder and enable the 'Weekly Lead Delivery' option. The AI will start analyzing your preferences and delivering qualified leads within 24 hours.\n\n*Sales Assistant learns from your engagement patterns and continuously improves lead quality over time.*"
+                },
+                "salesAssistantLeads": {
+                    "question": "Where to see leads from Sales Assistant",
+                    "answer": "**Finding Your Sales Assistant Leads**\n\nSales Assistant delivers your personalized leads through multiple locations within Sales Navigator:\n\n**📥 Primary Delivery Methods:**\n• **Weekly Email Digest** - Leads sent directly to your registered email every Monday\n• **Lead Builder Results** - Appears in your saved searches with \"Sales Assistant\" label\n• **Home Dashboard** - Featured in the \"Recommended for You\" section\n\n**🔍 Locating Delivered Leads:**\n• Navigate to **Lead Builder** → **Saved Searches**\n• Look for searches marked with the **⚡ Sales Assistant** icon\n• Click on any saved search to view the latest lead recommendations\n\n**📋 Managing Your Leads:**\n• **Save Leads** - Click the bookmark icon to add to your lead lists\n• **Provide Feedback** - Mark leads as \"Good Fit\" or \"Not a Fit\" to improve future recommendations\n• **Export Options** - Download leads to CSV or sync with your CRM\n\n**⚙️ Customizing Delivery:**\n• Go to **Settings** → **Sales Assistant Preferences**\n• Adjust delivery frequency (Weekly/Bi-weekly)\n• Set lead quantity preferences (5-20 leads per delivery)\n• Configure notification settings\n\n**💡 Pro Tip:** The more feedback you provide on delivered leads, the better Sales Assistant becomes at understanding your ideal prospect profile!"
                 }
             }
         };
@@ -167,12 +171,21 @@ function generateRecommendationCards() {
         const chevronIcon = isExpanded ? 'fa-chevron-up' : 'fa-chevron-down';
         
         // Generate links HTML
-        const linksHTML = rec.links.map(link => 
-            `<a href="#" class="link-item" onclick="${link.action === 'showDetailPage' ? 'showDetailPage(); return false;' : 'return false;'}">
+        const linksHTML = rec.links.map(link => {
+            let clickAction = 'return false;';
+            
+            // Make specific links clickable
+            if (link.action === 'showDetailPage') {
+                clickAction = 'showDetailPage(); return false;';
+            } else if (link.text === 'Where to see leads from Sales Assistant') {
+                clickAction = 'showDetailPageForLeads(); return false;';
+            }
+            
+            return `<a href="#" class="link-item" onclick="${clickAction}">
                 <div class="diamond-icon"></div>
                 ${link.text}
-            </a>`
-        ).join('');
+            </a>`;
+        }).join('');
         
         const cardHTML = `
             <div class="recommendation-item ${expandedClass}" id="${rec.id}">
@@ -576,10 +589,22 @@ function typeResponse() {
     const responseContent = document.getElementById('responseContent');
     if (!responseContent) return;
     
-    // Get response from JSON configuration
-    const responseData = helpWidgetConfig?.responses?.salesAssistant;
+    // Determine which response to show based on current context
+    let responseData;
+    
+    // Check if we're in the leads chat context
+    const chatContainer = document.getElementById('salesAssistantChat');
+    const userMessages = chatContainer?.querySelectorAll('.user-message p');
+    const lastUserMessage = userMessages?.[userMessages.length - 1]?.textContent;
+    
+    if (lastUserMessage && lastUserMessage.includes('Where to see leads')) {
+        responseData = helpWidgetConfig?.responses?.salesAssistantLeads;
+    } else {
+        responseData = helpWidgetConfig?.responses?.salesAssistant;
+    }
+    
     if (!responseData) {
-        console.error('Sales Assistant response not found in configuration');
+        console.error('Response not found in configuration');
         return;
     }
     
@@ -701,6 +726,94 @@ window.showDetailPageWithGreyMessage = function() {
         // Initialize follow-up input functionality for general chat thread
         setTimeout(() => {
             handleFollowUpMessage('generalChat');
+        }, 100);
+    } else {
+        console.log('ERROR: Could not find main page or detail page elements');
+    }
+};
+
+window.showDetailPageForLeads = function() {
+    console.log('showDetailPageForLeads called - Sales Assistant Leads chat thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show Sales Assistant chat thread with leads content
+        if (salesAssistantChat) salesAssistantChat.style.display = 'block';
+        if (generalChat) generalChat.style.display = 'none';
+        
+        // Update the chat container with leads-specific content
+        const leadsRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec1');
+        if (leadsRec) {
+            // Generate links HTML for leads chat
+            const linksHTML = leadsRec.links.map(link => 
+                `<div class="link-item-static">
+                    <div class="diamond-icon"></div>
+                    ${link.text}
+                </div>`
+            ).join('');
+            
+            // Clear previous chat and add leads-specific content card
+            salesAssistantChat.innerHTML = `
+                <div class="recommendation-card">
+                    <h3>${leadsRec.title}</h3>
+                    <p>${leadsRec.description}</p>
+                    <div class="button-container">
+                        <button class="btn-primary">${leadsRec.buttonText}</button>
+                    </div>
+                    <div class="recommendation-links">
+                        ${linksHTML}
+                    </div>
+                </div>
+                <div class="user-message-container">
+                    <div class="user-message">
+                        <p>Where to see leads from Sales Assistant</p>
+                    </div>
+                </div>
+                
+                <div class="ai-thinking-container" id="aiThinking">
+                    <div class="ai-thinking">
+                        <div class="thinking-dots">
+                            <span class="thinking-dot"></span>
+                            <span class="thinking-dot"></span>
+                            <span class="thinking-dot"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="assistant-response-container" id="assistantResponse" style="display: none;">
+                    <div class="assistant-response">
+                        <div class="response-content" id="responseContent">
+                            <!-- Content will be typed in by animation -->
+                        </div>
+                        <div class="feedback-buttons" id="feedbackButtons" style="display: none;">
+                            <button class="feedback-btn thumbs-up" title="Helpful">
+                                <i class="fas fa-thumbs-up"></i>
+                            </button>
+                            <button class="feedback-btn thumbs-down" title="Not helpful">
+                                <i class="fas fa-thumbs-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        console.log('Page navigation completed - Sales Assistant Leads chat thread visible');
+        
+        // Start the AI response after a short delay
+        setTimeout(() => {
+            startAIResponse();
+        }, 500);
+        
+        // Initialize follow-up input functionality for Sales Assistant leads chat thread
+        setTimeout(() => {
+            handleFollowUpMessage('salesAssistantChat');
         }, 100);
     } else {
         console.log('ERROR: Could not find main page or detail page elements');
@@ -1345,6 +1458,7 @@ function findConfigResponse(question) {
         const questionLower = question.toLowerCase();
         const categoryKeywords = {
             'salesAssistant': ['sales assistant', 'lead delivery', 'how does sales assistant work', 'assistant'],
+            'salesAssistantLeads': ['where to see leads', 'find leads', 'leads from sales assistant', 'locate leads', 'view leads'],
             'strategies': ['strategy', 'webinar', 'speakers', 'sales strategies', 'training'],
             'innovations': ['innovation', 'message assist', 'account iq', 'q2', 'features', 'new features']
         };
