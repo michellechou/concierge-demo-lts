@@ -105,6 +105,22 @@ async function loadConfiguration() {
                 "salesAssistantLeads": {
                     "question": "Where to see leads from Sales Assistant",
                     "answer": "**Finding Your Sales Assistant Leads**\n\nSales Assistant delivers your personalized leads through multiple locations within Sales Navigator:\n\n**📥 Primary Delivery Methods:**\n• **Weekly Email Digest** - Leads sent directly to your registered email every Monday\n• **Lead Builder Results** - Appears in your saved searches with \"Sales Assistant\" label\n• **Home Dashboard** - Featured in the \"Recommended for You\" section\n\n**🔍 Locating Delivered Leads:**\n• Navigate to **Lead Builder** → **Saved Searches**\n• Look for searches marked with the **⚡ Sales Assistant** icon\n• Click on any saved search to view the latest lead recommendations\n\n**📋 Managing Your Leads:**\n• **Save Leads** - Click the bookmark icon to add to your lead lists\n• **Provide Feedback** - Mark leads as \"Good Fit\" or \"Not a Fit\" to improve future recommendations\n• **Export Options** - Download leads to CSV or sync with your CRM\n\n**⚙️ Customizing Delivery:**\n• Go to **Settings** → **Sales Assistant Preferences**\n• Adjust delivery frequency (Weekly/Bi-weekly)\n• Set lead quantity preferences (5-20 leads per delivery)\n• Configure notification settings\n\n**💡 Pro Tip:** The more feedback you provide on delivered leads, the better Sales Assistant becomes at understanding your ideal prospect profile!"
+                },
+                "webinarSpeakers": {
+                    "question": "Who are the speakers",
+                    "answer": "**Featured Speakers - Top 5 Sales Strategies Webinar**\n\n**🎤 Sarah Chen**\n• **Current Role:** VP of Sales at TechFlow Solutions\n• **Background:** Former LinkedIn Sales Director (5+ years)\n• **Expertise:** Enterprise B2B sales, team scaling, LinkedIn selling strategies\n• **Session Topic:** \"Advanced Lead Qualification Techniques\"\n\n**📚 Marcus Rodriguez**\n• **Current Role:** Sales Trainer & Author\n• **Background:** Author of bestselling 'Modern Sales Playbook'\n• **Expertise:** Psychology-based selling, objection handling, negotiation\n• **Session Topic:** \"Messaging Frameworks That Get Responses\"\n\n**🧠 Dr. Jennifer Walsh**\n• **Current Role:** Sales Psychology Researcher at Stanford\n• **Background:** 15+ years studying buyer behavior and decision-making\n• **Expertise:** Cognitive psychology, influence techniques, buyer psychology\n• **Session Topic:** \"The Psychology Behind Buying Decisions\"\n\n**💡 Interactive Format:**\n• 45-minute presentations with live Q&A\n• Small breakout networking sessions\n• Direct access to speakers via LinkedIn messaging post-event"
+                },
+                "augustWebinars": {
+                    "question": "Any other webinars in August",
+                    "answer": "**August 2024 Sales Navigator Webinar Series**\n\n**📅 August 8, 2:00 PM PST**\n**\"Account-Based Selling Mastery\"**\n• Focus on enterprise sales strategies\n• Multi-stakeholder engagement techniques\n• Account mapping and relationship building\n\n**📅 August 15, 11:00 AM PST**\n**\"Social Selling Success Stories\"**\n• Real customer case studies and results\n• ROI measurement and success metrics\n• Best practices from top performers\n\n**📅 August 22, 1:00 PM PST**\n**\"AI-Powered Prospecting Workshop\"**\n• Hands-on training with Sales Assistant\n• Message Assist optimization techniques\n• Advanced search and filtering strategies\n\n**🎁 Exclusive Benefits:**\n• All attendees receive 30-day Premium trial extension\n• Access to exclusive webinar resource library\n• Priority beta access to new features"
+                },
+                "messageAssistReplies": {
+                    "question": "Does Message Assist boost replies",
+                    "answer": "**Message Assist Reply Rate Performance**\n\n**📊 Proven Results:**\n• **73% higher response rates** compared to generic outreach\n• **2.3x more meeting bookings** from initial messages\n• **45% reduction in time** spent drafting personalized messages\n• **85% user satisfaction** rating from Sales Navigator Premium users\n\n**🎯 Why It Works:**\n• **Contextual Personalization** - Uses recent prospect activity and news\n• **Industry-Specific Language** - Adapts tone and terminology by sector\n• **Optimal Timing Suggestions** - Recommends best send times\n• **A/B Testing Built-In** - Learns from your response patterns\n\n**📈 Performance by Message Type:**\n• **Connection Requests:** 68% acceptance rate (vs 23% generic)\n• **Follow-Up Messages:** 41% response rate (vs 18% generic)\n• **Cold Outreach:** 29% response rate (vs 12% generic)\n\n**⚡ Quick Setup:** Available in all Premium+ plans, activate in Settings → Message Assist"
+                },
+                "accountIQInsights": {
+                    "question": "What insights does Account IQ provide",
+                    "answer": "**Account IQ Intelligence Dashboard**\n\n**📊 Business Health Signals**\n• **Financial Performance** - Revenue trends, growth patterns, funding events\n• **Market Position** - Competitive landscape analysis, market share data\n• **Operational Changes** - Leadership changes, reorganizations, office moves\n\n**🎯 Buyer Intent Scoring**\n• **High Intent Signals** - Job postings, technology searches, competitor research\n• **Medium Intent Signals** - Content engagement, industry event attendance\n• **Timing Indicators** - Budget cycles, contract renewal periods\n\n**📈 Growth Opportunity Analysis**\n• **Expansion Signals** - New office locations, team growth, product launches\n• **Partnership Opportunities** - Strategic alliances, vendor relationships\n• **Investment Activity** - Funding rounds, M&A activity, capital expenditure\n\n**🎨 Visualization Features**\n• **Interactive Dashboards** - Customizable views by priority and risk level\n• **Trend Analysis** - Historical data and predictive modeling\n• **Alert System** - Real-time notifications for significant changes"
                 }
             }
         };
@@ -174,11 +190,19 @@ function generateRecommendationCards() {
         const linksHTML = rec.links.map(link => {
             let clickAction = 'return false;';
             
-            // Make specific links clickable
+            // Make specific links clickable based on text content
             if (link.action === 'showDetailPage') {
                 clickAction = 'showDetailPage(); return false;';
             } else if (link.text === 'Where to see leads from Sales Assistant') {
                 clickAction = 'showDetailPageForLeads(); return false;';
+            } else if (link.text === 'Who are the speakers') {
+                clickAction = 'showDetailPageForSpeakers(); return false;';
+            } else if (link.text === 'Any other webinars in August') {
+                clickAction = 'showDetailPageForAugustWebinars(); return false;';
+            } else if (link.text === 'Does Message Assist boost replies') {
+                clickAction = 'showDetailPageForMessageAssist(); return false;';
+            } else if (link.text === 'What insights does Account IQ provide') {
+                clickAction = 'showDetailPageForAccountIQ(); return false;';
             }
             
             return `<a href="#" class="link-item" onclick="${clickAction}">
@@ -592,13 +616,33 @@ function typeResponse() {
     // Determine which response to show based on current context
     let responseData;
     
-    // Check if we're in the leads chat context
-    const chatContainer = document.getElementById('salesAssistantChat');
-    const userMessages = chatContainer?.querySelectorAll('.user-message p');
-    const lastUserMessage = userMessages?.[userMessages.length - 1]?.textContent;
+    // Check both chat containers for the last user message
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const generalChat = document.getElementById('generalChat');
     
-    if (lastUserMessage && lastUserMessage.includes('Where to see leads')) {
+    let lastUserMessage = '';
+    
+    // Find the last user message from both chat containers
+    [salesAssistantChat, generalChat].forEach(container => {
+        if (container && container.style.display !== 'none') {
+            const userMessages = container.querySelectorAll('.user-message p');
+            if (userMessages.length > 0) {
+                lastUserMessage = userMessages[userMessages.length - 1]?.textContent || '';
+            }
+        }
+    });
+    
+    // Match the question to the appropriate response
+    if (lastUserMessage.includes('Where to see leads')) {
         responseData = helpWidgetConfig?.responses?.salesAssistantLeads;
+    } else if (lastUserMessage.includes('Who are the speakers')) {
+        responseData = helpWidgetConfig?.responses?.webinarSpeakers;
+    } else if (lastUserMessage.includes('webinars in August')) {
+        responseData = helpWidgetConfig?.responses?.augustWebinars;
+    } else if (lastUserMessage.includes('Message Assist boost')) {
+        responseData = helpWidgetConfig?.responses?.messageAssistReplies;
+    } else if (lastUserMessage.includes('Account IQ provide')) {
+        responseData = helpWidgetConfig?.responses?.accountIQInsights;
     } else {
         responseData = helpWidgetConfig?.responses?.salesAssistant;
     }
@@ -732,8 +776,9 @@ window.showDetailPageWithGreyMessage = function() {
     }
 };
 
-window.showDetailPageForLeads = function() {
-    console.log('showDetailPageForLeads called - Sales Assistant Leads chat thread');
+// Generic function to show detail page with specific question
+function showDetailPageWithQuestion(questionText, questionType, recommendationId) {
+    console.log(`showDetailPageWithQuestion called - ${questionType} chat thread`);
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
@@ -743,28 +788,38 @@ window.showDetailPageForLeads = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show Sales Assistant chat thread with leads content
-        if (salesAssistantChat) salesAssistantChat.style.display = 'block';
-        if (generalChat) generalChat.style.display = 'none';
+        // Choose which chat container to use
+        let chatContainer, otherContainer;
+        if (recommendationId === 'rec1') {
+            chatContainer = salesAssistantChat;
+            otherContainer = generalChat;
+        } else {
+            chatContainer = generalChat;
+            otherContainer = salesAssistantChat;
+        }
         
-        // Update the chat container with leads-specific content
-        const leadsRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec1');
-        if (leadsRec) {
-            // Generate links HTML for leads chat
-            const linksHTML = leadsRec.links.map(link => 
+        // Show appropriate chat thread
+        if (chatContainer) chatContainer.style.display = 'block';
+        if (otherContainer) otherContainer.style.display = 'none';
+        
+        // Get recommendation data
+        const rec = helpWidgetConfig?.recommendations?.find(r => r.id === recommendationId);
+        if (rec) {
+            // Generate links HTML
+            const linksHTML = rec.links.map(link => 
                 `<div class="link-item-static">
                     <div class="diamond-icon"></div>
                     ${link.text}
                 </div>`
             ).join('');
             
-            // Clear previous chat and add leads-specific content card
-            salesAssistantChat.innerHTML = `
+            // Create chat content with the specific question
+            chatContainer.innerHTML = `
                 <div class="recommendation-card">
-                    <h3>${leadsRec.title}</h3>
-                    <p>${leadsRec.description}</p>
+                    <h3>${rec.title}</h3>
+                    <p>${rec.description}</p>
                     <div class="button-container">
-                        <button class="btn-primary">${leadsRec.buttonText}</button>
+                        <button class="btn-primary">${rec.buttonText}</button>
                     </div>
                     <div class="recommendation-links">
                         ${linksHTML}
@@ -772,7 +827,7 @@ window.showDetailPageForLeads = function() {
                 </div>
                 <div class="user-message-container">
                     <div class="user-message">
-                        <p>Where to see leads from Sales Assistant</p>
+                        <p>${questionText}</p>
                     </div>
                 </div>
                 
@@ -804,21 +859,45 @@ window.showDetailPageForLeads = function() {
             `;
         }
         
-        console.log('Page navigation completed - Sales Assistant Leads chat thread visible');
+        console.log(`Page navigation completed - ${questionType} chat thread visible`);
         
         // Start the AI response after a short delay
         setTimeout(() => {
             startAIResponse();
         }, 500);
         
-        // Initialize follow-up input functionality for Sales Assistant leads chat thread
+        // Initialize follow-up input functionality
+        const chatId = chatContainer.id;
         setTimeout(() => {
-            handleFollowUpMessage('salesAssistantChat');
+            handleFollowUpMessage(chatId);
         }, 100);
     } else {
         console.log('ERROR: Could not find main page or detail page elements');
     }
+}
+
+// Specific functions for each link
+window.showDetailPageForLeads = function() {
+    showDetailPageWithQuestion('Where to see leads from Sales Assistant', 'Sales Assistant Leads', 'rec1');
 };
+
+window.showDetailPageForSpeakers = function() {
+    showDetailPageWithQuestion('Who are the speakers', 'Webinar Speakers', 'rec2');
+};
+
+window.showDetailPageForAugustWebinars = function() {
+    showDetailPageWithQuestion('Any other webinars in August', 'August Webinars', 'rec2');
+};
+
+window.showDetailPageForMessageAssist = function() {
+    showDetailPageWithQuestion('Does Message Assist boost replies', 'Message Assist Replies', 'rec3');
+};
+
+window.showDetailPageForAccountIQ = function() {
+    showDetailPageWithQuestion('What insights does Account IQ provide', 'Account IQ Insights', 'rec3');
+};
+
+
 
 window.showDetailPageForSalesAssistant = function() {
     console.log('showDetailPageForSalesAssistant called - Sales Assistant chat thread');
@@ -1460,6 +1539,10 @@ function findConfigResponse(question) {
             'salesAssistant': ['sales assistant', 'lead delivery', 'how does sales assistant work', 'assistant'],
             'salesAssistantLeads': ['where to see leads', 'find leads', 'leads from sales assistant', 'locate leads', 'view leads'],
             'strategies': ['strategy', 'webinar', 'speakers', 'sales strategies', 'training'],
+            'webinarSpeakers': ['who are the speakers', 'speakers', 'presenters', 'webinar speakers'],
+            'augustWebinars': ['august webinars', 'other webinars', 'more webinars', 'upcoming webinars'],
+            'messageAssistReplies': ['message assist boost', 'reply rates', 'response rates', 'message assist replies'],
+            'accountIQInsights': ['account iq insights', 'account iq provide', 'account intelligence', 'what insights'],
             'innovations': ['innovation', 'message assist', 'account iq', 'q2', 'features', 'new features']
         };
         
