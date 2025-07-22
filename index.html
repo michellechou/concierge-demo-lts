@@ -389,12 +389,15 @@
         <!-- Main Help Page -->
         <div class="help-page main-help-page" id="mainHelpPage">
             <div class="help-header">
-                <h2>Help</h2>
+                <h2>Concierge</h2>
                 <i class="fas fa-times close-help" id="closeHelp"></i>
             </div>
         
         <div class="help-search">
-            <input type="text" placeholder="Ask anything" class="help-search-input">
+            <div class="help-search-container">
+                <input type="text" placeholder="Ask anything" class="help-search-input">
+                <i class="fas fa-paper-plane help-search-icon"></i>
+            </div>
         </div>
         
         <div class="help-greeting">
@@ -446,7 +449,7 @@
                     <div class="recommendation-links">
                         <div class="link-item-static">
                             <div class="diamond-icon"></div>
-                            Who are the speakers
+                            What tools will be featured
                         </div>
                         <div class="link-item-static">
                             <div class="diamond-icon"></div>
@@ -508,7 +511,7 @@
             <div class="help-header">
                 <div class="back-button-container">
                     <i class="fas fa-arrow-left back-button" id="backButton" onclick="showMainPage()"></i>
-                    <h2>Help</h2>
+                    <h2>Concierge</h2>
                 </div>
                 <i class="fas fa-times close-help" id="closeHelpDetail" onclick="closeHelpPanel(); setTimeout(() => showMainPage(), 300);"></i>
             </div>
