@@ -32,13 +32,14 @@ async function loadConfiguration() {
         return helpWidgetConfig;
     } catch (error) {
         console.error('Failed to load configuration:', error);
-        // Return fallback configuration
-        return {
+        // Set fallback configuration
+        helpWidgetConfig = {
             greeting: { text: "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity" },
             recommendations: [],
             resources: { title: "Resources", links: [] },
-            chatResponses: {}
+            responses: {}
         };
+        return helpWidgetConfig;
     }
 }
 
@@ -48,12 +49,18 @@ function generateHelpContent() {
         return;
     }
     
-    console.log('Generating help content from configuration...');
+    console.log('Generating help content from configuration...', helpWidgetConfig);
     
     // Update greeting
     const greetingElement = document.querySelector('.help-greeting p');
-    if (greetingElement) {
+    if (greetingElement && helpWidgetConfig.greeting) {
+        console.log('Updating greeting with:', helpWidgetConfig.greeting.text);
         greetingElement.textContent = helpWidgetConfig.greeting.text;
+    } else {
+        console.error('Greeting element not found or greeting data missing', {
+            greetingElement: !!greetingElement,
+            greetingData: !!helpWidgetConfig.greeting
+        });
     }
     
     // Generate recommendation cards
@@ -1457,11 +1464,24 @@ function generateKeywordBasedResponse(keywords, message) {
 
 // Add entrance animations
 window.addEventListener('load', async () => {
-    // Load configuration first
-    await loadConfiguration();
-    
-    // Generate help content from config
-    generateHelpContent();
+    try {
+        // Load configuration first
+        await loadConfiguration();
+        
+        // Wait a bit for DOM to be ready
+        setTimeout(() => {
+            // Generate help content from config
+            generateHelpContent();
+        }, 100);
+        
+    } catch (error) {
+        console.error('Error during page initialization:', error);
+        // Fallback: set greeting manually if config fails
+        const greetingElement = document.querySelector('.help-greeting p');
+        if (greetingElement) {
+            greetingElement.textContent = "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity";
+        }
+    }
     
     // Create floating help button
     createFloatingHelpButton();
