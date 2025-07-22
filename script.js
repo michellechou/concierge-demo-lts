@@ -29,6 +29,8 @@ async function loadConfiguration() {
         }
         helpWidgetConfig = await response.json();
         console.log('Configuration loaded successfully:', helpWidgetConfig);
+        console.log('Greeting from JSON:', helpWidgetConfig.greeting?.text);
+        console.log('Recommendations count:', helpWidgetConfig.recommendations?.length);
         return helpWidgetConfig;
     } catch (error) {
         console.error('Failed to load configuration:', error);
@@ -116,9 +118,14 @@ function generateHelpContent() {
     
     // Update greeting
     const greetingElement = document.querySelector('.help-greeting p');
+    console.log('Found greeting element:', !!greetingElement);
+    console.log('Current greeting element text:', greetingElement?.textContent);
+    console.log('About to set greeting to:', helpWidgetConfig.greeting?.text);
+    
     if (greetingElement && helpWidgetConfig.greeting) {
         console.log('Updating greeting with:', helpWidgetConfig.greeting.text);
         greetingElement.textContent = helpWidgetConfig.greeting.text;
+        console.log('After update, greeting element text:', greetingElement.textContent);
     } else {
         console.error('Greeting element not found or greeting data missing', {
             greetingElement: !!greetingElement,
