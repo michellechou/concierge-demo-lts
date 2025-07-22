@@ -17,6 +17,146 @@ function scrollChatToBottom() {
     }
 }
 
+// Configuration loading and management
+let helpWidgetConfig = null;
+
+async function loadConfiguration() {
+    try {
+        console.log('Loading help widget configuration...');
+        const response = await fetch('./help-config.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        helpWidgetConfig = await response.json();
+        console.log('Configuration loaded successfully:', helpWidgetConfig);
+        return helpWidgetConfig;
+    } catch (error) {
+        console.error('Failed to load configuration:', error);
+        // Return fallback configuration
+        return {
+            greeting: { text: "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity" },
+            recommendations: [],
+            resources: { title: "Resources", links: [] },
+            chatResponses: {}
+        };
+    }
+}
+
+function generateHelpContent() {
+    if (!helpWidgetConfig) {
+        console.error('Configuration not loaded yet');
+        return;
+    }
+    
+    console.log('Generating help content from configuration...');
+    
+    // Update greeting
+    const greetingElement = document.querySelector('.help-greeting p');
+    if (greetingElement) {
+        greetingElement.textContent = helpWidgetConfig.greeting.text;
+    }
+    
+    // Generate recommendation cards
+    generateRecommendationCards();
+    
+    // Generate resource links
+    generateResourceLinks();
+    
+    console.log('Help content generated successfully');
+}
+
+function generateRecommendationCards() {
+    const recommendationsContainer = document.querySelector('.recommendations');
+    if (!recommendationsContainer || !helpWidgetConfig.recommendations) {
+        console.error('Recommendations container not found or no recommendations data');
+        return;
+    }
+    
+    // Clear existing content
+    recommendationsContainer.innerHTML = '';
+    
+    // Generate each recommendation card
+    helpWidgetConfig.recommendations.forEach((rec, index) => {
+        const isExpanded = rec.expanded;
+        const expandedClass = isExpanded ? 'expanded' : '';
+        const chevronIcon = isExpanded ? 'fa-chevron-up' : 'fa-chevron-down';
+        
+        // Generate links HTML
+        const linksHTML = rec.links.map(link => 
+            `<a href="#" class="link-item" onclick="${link.action === 'showDetailPage' ? 'showDetailPage(); return false;' : 'return false;'}">
+                <div class="diamond-icon"></div>
+                ${link.text}
+            </a>`
+        ).join('');
+        
+        const cardHTML = `
+            <div class="recommendation-item ${expandedClass}" id="${rec.id}">
+                <div class="recommendation-header" onclick="toggleRecommendation('${rec.id}')">
+                    <h3>${rec.title}</h3>
+                    <i class="fas ${chevronIcon} expand-icon"></i>
+                </div>
+                <div class="recommendation-content">
+                    <p>${rec.description}</p>
+                    <div class="button-container">
+                        <button class="btn-primary">${rec.buttonText}</button>
+                        <div class="chat-icon" onclick="${rec.chatFunction}(); return false;">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                    </div>
+                    <div class="recommendation-links">
+                        ${linksHTML}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        recommendationsContainer.innerHTML += cardHTML;
+    });
+}
+
+function generateResourceLinks() {
+    const resourcesContainer = document.querySelector('.help-resources');
+    if (!resourcesContainer || !helpWidgetConfig.resources) {
+        console.error('Resources container not found or no resources data');
+        return;
+    }
+    
+    // Update title
+    const titleElement = resourcesContainer.querySelector('h3');
+    if (titleElement) {
+        titleElement.textContent = helpWidgetConfig.resources.title;
+    }
+    
+    // Generate resource links
+    const linksContainer = resourcesContainer.querySelector('.resource-links');
+    if (linksContainer) {
+        linksContainer.innerHTML = '';
+        
+        helpWidgetConfig.resources.links.forEach(link => {
+            const linkHTML = `
+                <a href="${link.url}" class="resource-link">
+                    <i class="${link.icon}"></i>
+                    ${link.text}
+                </a>
+            `;
+            linksContainer.innerHTML += linkHTML;
+        });
+    }
+}
+
+function handleQuestionClick(recId, question) {
+    console.log('Question clicked:', question, 'from recommendation:', recId);
+    
+    // Navigate to appropriate detail page based on recommendation
+    if (recId === 'rec1') {
+        showDetailPage();
+    } else if (recId === 'rec2') {
+        showDetailPageForStrategies();
+    } else if (recId === 'rec3') {
+        showDetailPageForInnovations();
+    }
+}
+
 // DOM Elements
 const helpPanel = document.getElementById('helpPanel');
 const closeHelp = document.getElementById('closeHelp');
@@ -351,21 +491,28 @@ function typeResponse() {
     const responseContent = document.getElementById('responseContent');
     if (!responseContent) return;
     
-    // Full text content to type out
-    const fullText = "Sales Navigator's AI-powered Sales Assistant streamlines prospecting by delivering tailored leads, identifying connection pathways, and drafting personalized outreach messages.\n\nLead Recommendation and Feedback: Sales Assistant recommends leads based on your book of business, products, and personas. Providing feedback (e.g., \"Not a fit\" due to geography, seniority, or industry) fine-tunes future suggestions.\n\nPersonalized Messaging Assistance: Message Assist drafts custom first-touch messages using lead and account insights. Refine these drafts; Sales Assistant adapts to your edits for improved future messaging.\n\nProduct and Service Personalization: Specify your product or service and include detailed descriptions to ensure recommendations and messages address lead needs effectively.\n\nBook of Business: Create an account list (minimum five accounts) using CRM data, a CSV file, or manual input. This helps Sales Assistant target relevant accounts more efficiently.";
+    // Get response from JSON configuration
+    const responseData = helpWidgetConfig?.responses?.salesAssistant;
+    if (!responseData) {
+        console.error('Sales Assistant response not found in configuration');
+        return;
+    }
     
-    // Final formatted HTML
-    const finalHTML = `
-        <p>Sales Navigator's AI-powered Sales Assistant streamlines prospecting by delivering tailored leads, identifying connection pathways, and drafting personalized outreach messages.</p>
-        
-        <p><strong>Lead Recommendation and Feedback:</strong> Sales Assistant recommends leads based on your book of business, products, and personas. Providing feedback (e.g., "Not a fit" due to geography, seniority, or industry) fine-tunes future suggestions.</p>
-        
-        <p><strong>Personalized Messaging Assistance:</strong> Message Assist drafts custom first-touch messages using lead and account insights. Refine these drafts; Sales Assistant adapts to your edits for improved future messaging.</p>
-        
-        <p><strong>Product and Service Personalization:</strong> Specify your product or service and include detailed descriptions to ensure recommendations and messages address lead needs effectively.</p>
-        
-        <p><strong>Book of Business:</strong> Create an account list (minimum five accounts) using CRM data, a CSV file, or manual input. This helps Sales Assistant target relevant accounts more efficiently.</p>
-    `;
+    // Convert markdown-like formatting to plain text for typing
+    const fullText = responseData.answer
+        .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold markers for typing
+        .replace(/\n\n/g, '\n\n') // Keep paragraph breaks
+        .replace(/•/g, '•'); // Keep bullet points
+    
+    // Convert markdown to HTML for final display
+    const finalHTML = responseData.answer
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Convert bold
+        .replace(/\n\n/g, '</p><p>') // Convert paragraphs
+        .replace(/\n• /g, '<br>• ') // Convert bullet points
+        .replace(/\n/g, '<br>'); // Convert line breaks
+    
+    // Wrap in paragraph tags
+    const formattedHTML = `<p>${finalHTML}</p>`;
     
     let currentIndex = 0;
     const typingSpeed = 25; // milliseconds per character
@@ -397,7 +544,7 @@ function typeResponse() {
             setTimeout(typeNextChar, typingSpeed);
         } else {
             // Animation complete - remove cursor and set final formatted HTML
-            responseContent.innerHTML = finalHTML;
+            responseContent.innerHTML = formattedHTML;
             
             // Show feedback buttons after typing is complete
             const feedbackButtons = document.getElementById('feedbackButtons');
@@ -511,7 +658,7 @@ window.showDetailPageForSalesAssistant = function() {
             </div>
             <div class="user-message-container grey-message-container">
                 <div class="grey-message">
-                    <p>What follow-up questions about Sales Assistant can I help you with?</p>
+                    <p>Any follow-up questions about Sales Assistant I can help with?</p>
                 </div>
             </div>
         `;
@@ -542,28 +689,36 @@ window.showDetailPageForStrategies = function() {
         if (salesAssistantChat) salesAssistantChat.style.display = 'none';
         if (generalChat) generalChat.style.display = 'block';
         
+        // Get recommendation data from config
+        const strategiesRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec2');
+        if (!strategiesRec) {
+            console.error('Sales Strategies recommendation not found in config');
+            return;
+        }
+        
+        // Generate links HTML
+        const linksHTML = strategiesRec.links.map(link => 
+            `<div class="link-item-static">
+                <div class="diamond-icon"></div>
+                ${link.text}
+            </div>`
+        ).join('');
+        
         // Clear previous chat and add strategies-specific content card
         generalChat.innerHTML = `
             <div class="recommendation-card">
-                <h3>Discover New Sales Strategies</h3>
-                <p>Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.</p>
+                <h3>${strategiesRec.title}</h3>
+                <p>${strategiesRec.description}</p>
                 <div class="button-container">
-                    <button class="btn-primary">Reserve a spot</button>
+                    <button class="btn-primary">${strategiesRec.buttonText}</button>
                 </div>
                 <div class="recommendation-links">
-                    <div class="link-item-static">
-                        <div class="diamond-icon"></div>
-                        Who are the speakers
-                    </div>
-                    <div class="link-item-static">
-                        <div class="diamond-icon"></div>
-                        Any other webinars in August
-                    </div>
+                    ${linksHTML}
                 </div>
             </div>
             <div class="user-message-container grey-message-container">
                 <div class="grey-message">
-                    <p>Ask me about sales strategies and webinar details!</p>
+                    <p>Any questions about our upcoming sales strategies webinar I can help with?</p>
                 </div>
             </div>
         `;
@@ -594,28 +749,36 @@ window.showDetailPageForInnovations = function() {
         if (salesAssistantChat) salesAssistantChat.style.display = 'none';
         if (generalChat) generalChat.style.display = 'block';
         
+        // Get recommendation data from config
+        const innovationsRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec3');
+        if (!innovationsRec) {
+            console.error('Q2 Innovations recommendation not found in config');
+            return;
+        }
+        
+        // Generate links HTML
+        const linksHTML = innovationsRec.links.map(link => 
+            `<div class="link-item-static">
+                <div class="diamond-icon"></div>
+                ${link.text}
+            </div>`
+        ).join('');
+        
         // Clear previous chat and add innovations-specific content card
         generalChat.innerHTML = `
             <div class="recommendation-card">
-                <h3>Unlock Q2 Innovations</h3>
-                <p>Discover latest features to enhance sales workflow. Save time with Message Assist to draft outreach and gain deeper insights with Account IQ for smarter, strategic decisions.</p>
+                <h3>${innovationsRec.title}</h3>
+                <p>${innovationsRec.description}</p>
                 <div class="button-container">
-                    <button class="btn-primary">Explore Q2 updates</button>
+                    <button class="btn-primary">${innovationsRec.buttonText}</button>
                 </div>
                 <div class="recommendation-links">
-                    <div class="link-item-static">
-                        <div class="diamond-icon"></div>
-                        Does Message Assist boost replies
-                    </div>
-                    <div class="link-item-static">
-                        <div class="diamond-icon"></div>
-                        What insights does Account IQ provide
-                    </div>
+                    ${linksHTML}
                 </div>
             </div>
             <div class="user-message-container grey-message-container">
                 <div class="grey-message">
-                    <p>Ask me about Q2 features, Message Assist, and Account IQ!</p>
+                    <p>Any questions about our Q2 innovations I can help with?</p>
                 </div>
             </div>
         `;
@@ -1065,7 +1228,14 @@ function generateIntelligentResponse(userMessage) {
     console.log('generateIntelligentResponse called with:', userMessage);
     const message = userMessage.toLowerCase();
     
-    // Analyze the question type and context
+    // First, check if this matches any question in our JSON config
+    const configResponse = findConfigResponse(userMessage);
+    if (configResponse) {
+        console.log('Found response in config:', configResponse);
+        return formatResponseText(configResponse);
+    }
+    
+    // If no config response found, use intelligent generation
     const questionType = analyzeQuestionType(message);
     const keywords = extractKeywords(message);
     
@@ -1076,6 +1246,70 @@ function generateIntelligentResponse(userMessage) {
     console.log('Final response from generateContextualResponse:', response);
     
     return response;
+}
+
+function findConfigResponse(question) {
+    if (!helpWidgetConfig?.responses) {
+        console.log('No responses in config');
+        return null;
+    }
+    
+    // Search through all response categories
+    for (const [category, responseData] of Object.entries(helpWidgetConfig.responses)) {
+        // Check if the question matches any keywords in the category
+        const questionLower = question.toLowerCase();
+        const categoryKeywords = {
+            'salesAssistant': ['sales assistant', 'lead delivery', 'how does sales assistant work', 'assistant'],
+            'strategies': ['strategy', 'webinar', 'speakers', 'sales strategies', 'training'],
+            'innovations': ['innovation', 'message assist', 'account iq', 'q2', 'features', 'new features']
+        };
+        
+        // Check if question contains keywords for this category
+        if (categoryKeywords[category]) {
+            const isMatch = categoryKeywords[category].some(keyword => 
+                questionLower.includes(keyword) || keyword.includes(questionLower)
+            );
+            
+            if (isMatch) {
+                console.log(`Found matching response in category ${category}:`, responseData);
+                return responseData.answer;
+            }
+        }
+        
+        // Also check against the specific question in the response data
+        if (responseData.question && 
+            (questionLower.includes(responseData.question.toLowerCase()) || 
+             responseData.question.toLowerCase().includes(questionLower))) {
+            console.log(`Found direct question match in category ${category}:`, responseData);
+            return responseData.answer;
+        }
+    }
+    
+    console.log('No matching response found in config for question:', question);
+    return null;
+}
+
+function formatResponseText(responseText) {
+    if (!responseText) return '';
+    
+    // Convert markdown-style formatting to HTML
+    let formatted = responseText
+        // Convert bold text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Convert bullet points
+        .replace(/\n• /g, '<br>• ')
+        // Convert paragraph breaks
+        .replace(/\n\n/g, '</p><p>')
+        // Convert line breaks
+        .replace(/\n/g, '<br>');
+    
+    // Wrap in paragraph tags
+    formatted = `<p>${formatted}</p>`;
+    
+    // Clean up any double paragraph tags
+    formatted = formatted.replace(/<\/p><p><\/p><p>/g, '</p><p>');
+    
+    return formatted;
 }
 
 function analyzeQuestionType(message) {
@@ -1222,7 +1456,13 @@ function generateKeywordBasedResponse(keywords, message) {
 }
 
 // Add entrance animations
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
+    // Load configuration first
+    await loadConfiguration();
+    
+    // Generate help content from config
+    generateHelpContent();
+    
     // Create floating help button
     createFloatingHelpButton();
     

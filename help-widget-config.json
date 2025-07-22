@@ -1,16 +1,16 @@
 {
   "greeting": {
-    "text": "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity"
+    "text": "HELLO Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity"
   },
   "recommendations": [
     {
       "id": "rec1",
-      "title": "Save time with Sales Assistant",
+      "title": "Save time with 123 Sales Assistant",
       "expanded": true,
       "content": {
         "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Sales Assistant</span>.",
         "primaryButton": "Try Sales Assistant",
-        "chatGreeting": "What follow-up questions about Sales Assistant can I help you with?",
+        "chatGreeting": "Any follow-up questions about Sales Assistant I can help with?",
         "questions": [
           "How does Sales Assistant work",
           "Where to see leads from Sales Assistant"
@@ -69,7 +69,7 @@
   "chatResponses": {
     "salesAssistant": {
       "How does Sales Assistant work": {
-        "response": "Sales Navigator's AI-powered Sales Assistant streamlines prospecting by delivering tailored leads, identifying connection pathways, and drafting personalized outreach messages.\n\nLead Recommendation and Feedback: Sales Assistant recommends leads based on your book of business, products, and personas. Providing feedback (e.g., \"Not a fit\" due to geography, seniority, or industry) fine-tunes future suggestions.\n\nPersonalized Messaging Assistance: Message Assist drafts custom first-touch messages using lead and account insights. Refine these drafts; Sales Assistant adapts to your edits for improved future messaging.\n\nProduct and Service Personalization: Specify your product or service and include detailed descriptions to ensure recommendations and messages address lead needs effectively.\n\nBook of Business: Create an account list (minimum five accounts) using CRM data, a CSV file, or manual input. This helps Sales Assistant target relevant accounts more efficiently.",
+        "response": "Sales Navigator's AI-powered Sales Assistant is a tool designed to enhance the efficiency of prospecting by delivering pre-screened leads, identifying optimal paths to connect with prospects, and drafting personalized outreach messages. To maximize the effectiveness of Sales Assistant, here’s how it works and some tips to optimize its key features:\n\nLead Recommendation and Feedback:\n\nSales Assistant provides recommendations for leads based on your preferences, including your selected book of business, products, and personas.\n\nReviewing leads and providing feedback (e.g., marking a lead as \"Not a fit\" with specific reasons such as incorrect geography, seniority, or industry) helps Sales Assistant refine future recommendations to align with your needs.\n\nPersonalized Messaging Assistance:\n\nUsing Message Assist, Sales Assistant drafts personalized first-touch messages by leveraging account insights, lead data, and customization based on your product details and messaging preferences.\n\nYou can refine these drafts, and Sales Assistant learns from your edits to improve future message drafts automatically.\n\nProduct and Service Personalization:\n\nYou can specify the product or service you’re selling, ensuring that generated messages and lead recommendations are tailored to showcase how your offering solves a lead's needs.\n\nAdding detailed product descriptions enhances personalization and improves how prospects are targeted.\n\nBook of Business:\n\nDesignating an \"account list\" in your book of business helps target relevant accounts. Lists should include at least five accounts to be actively used by Sales Assistant.\n\nTo populate your book of business, you can use auto-saved CRM accounts, upload a CSV file, or manually create an account list.",
         "showFeedback": true
       },
       "Where to see leads from Sales Assistant": {

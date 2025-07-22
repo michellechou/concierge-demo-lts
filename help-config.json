@@ -1,0 +1,78 @@
+{
+  "greeting": {
+    "text": "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity"
+  },
+  "recommendations": [
+    {
+      "id": "rec1",
+      "title": "Save time with Sales Assistant",
+      "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Sales Assistant</span>.",
+      "buttonText": "Try Sales Assistant",
+      "buttonAction": "trySalesAssistant",
+      "links": [
+        {
+          "text": "How does Sales Assistant work",
+          "action": "showDetailPage"
+        },
+        {
+          "text": "Where to see leads from Sales Assistant",
+          "action": "viewLeads"
+        }
+      ],
+      "expanded": true,
+      "chatFunction": "showDetailPageForSalesAssistant"
+    },
+    {
+      "id": "rec2", 
+      "title": "Discover New Sales Strategies",
+      "description": "Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.",
+      "buttonText": "Reserve a spot",
+      "buttonAction": "reserveSpot",
+      "links": [
+        {
+          "text": "Who are the speakers",
+          "action": "viewSpeakers"
+        },
+        {
+          "text": "Any other webinars in August",
+          "action": "viewWebinars"
+        }
+      ],
+      "expanded": false,
+      "chatFunction": "showDetailPageForStrategies"
+    },
+    {
+      "id": "rec3",
+      "title": "Unlock Q2 Innovations", 
+      "description": "Discover latest features to enhance sales workflow. Save time with Message Assist to draft outreach and gain deeper insights with Account IQ for smarter, strategic decisions.",
+      "buttonText": "Explore Q2 updates",
+      "buttonAction": "exploreUpdates",
+      "links": [
+        {
+          "text": "Does Message Assist boost replies",
+          "action": "messageAssistInfo"
+        },
+        {
+          "text": "What insights does Account IQ provide",
+          "action": "accountIQInfo"
+        }
+      ],
+      "expanded": false,
+      "chatFunction": "showDetailPageForInnovations"
+    }
+  ],
+  "responses": {
+    "salesAssistant": {
+      "question": "How does Sales Assistant work",
+      "answer": "**Sales Assistant** is an AI-powered feature that streamlines your prospecting workflow in three key ways:\n\n**1. Automated Lead Delivery**\n• Identifies high-potential leads based on your saved searches and personas\n• Delivers fresh leads directly to your inbox weekly\n• Prioritizes leads with recent activity and buying signals\n\n**2. Smart Connection Paths**\n• Analyzes your LinkedIn network to find warm introductions\n• Suggests optimal outreach timing based on prospect activity\n• Identifies mutual connections and shared experiences\n\n**3. Personalized Outreach**\n• Generates customized message templates using prospect insights\n• Incorporates recent news, job changes, and company updates\n• Adapts tone and messaging based on seniority and industry\n\n**Getting Started:**\nTo activate Sales Assistant, go to your Lead Builder and enable the 'Weekly Lead Delivery' option. The AI will start analyzing your preferences and delivering qualified leads within 24 hours.\n\n*Sales Assistant learns from your engagement patterns and continuously improves lead quality over time.*"
+    },
+    "strategies": {
+      "question": "Tell me about the sales strategies webinar",
+      "answer": "**Top 5 Sales Strategies Webinar - July 25, 10:00 AM PST**\n\n**What You'll Learn:**\n• Advanced lead qualification techniques that increase conversion rates by 40%\n• AI-powered prospecting workflows for scaling outreach\n• Psychology-based messaging frameworks that get responses\n• Account-based selling strategies for enterprise deals\n• Social selling tactics using LinkedIn's latest features\n\n**Expert Speakers:**\n• **Sarah Chen** - VP of Sales at TechFlow (former LinkedIn Sales Director)\n• **Marcus Rodriguez** - Author of 'Modern Sales Playbook'\n• **Dr. Jennifer Walsh** - Sales Psychology Researcher, Stanford\n\n**Interactive Elements:**\n• Live Q&A with industry experts\n• Downloadable templates and frameworks\n• Exclusive Sales Navigator feature previews\n• Networking breakout sessions\n\n**Registration Benefits:**\n• Lifetime access to session recordings\n• 30-day free trial of Sales Navigator Premium\n• Exclusive invite to August follow-up workshop\n\n*Space is limited to 500 participants for optimal interaction.*"
+    },
+    "innovations": {
+      "question": "What are the Q2 innovations?",
+      "answer": "**Q2 2024 Sales Navigator Innovations**\n\n**🚀 Message Assist (NEW)**\n• AI-powered message drafting with 73% higher response rates\n• Contextual suggestions based on prospect's recent activity\n• Multi-language support for global outreach\n• Integration with CRM for seamless follow-ups\n\n**🧠 Account IQ Enhanced**\n• Predictive buyer intent scoring using 50+ signals\n• Competitive landscape analysis and positioning insights\n• Risk alerts for account health monitoring\n• Custom reporting dashboards for strategic planning\n\n**⚡ Smart Lists 2.0**\n• Dynamic list updates based on real-time criteria\n• Automated lead scoring and prioritization\n• Cross-platform sync with popular CRM systems\n• Advanced filtering with natural language queries\n\n**📊 Advanced Analytics**\n• Pipeline impact tracking and ROI measurement\n• Team performance benchmarking\n• A/B testing framework for outreach optimization\n• Predictive forecasting models\n\n**🔄 Workflow Automation**\n• Trigger-based actions for lead nurturing\n• Automated follow-up sequences\n• Integration marketplace with 200+ tools\n• Custom workflow builder with drag-and-drop interface\n\n*All features include comprehensive onboarding and 24/7 support.*"
+    }
+  }
+} 
