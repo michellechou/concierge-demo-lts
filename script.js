@@ -34,7 +34,7 @@ async function loadConfiguration() {
         console.error('Failed to load configuration:', error);
         // Set fallback configuration
         helpWidgetConfig = {
-            greeting: { text: "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity" },
+            greeting: { text: "HELLO!! Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity" },
             recommendations: [
                 {
                     "id": "rec1",
@@ -1550,7 +1550,7 @@ window.addEventListener('load', async () => {
         // Fallback: set greeting manually if config fails
         const greetingElement = document.querySelector('.help-greeting p');
         if (greetingElement) {
-            greetingElement.textContent = "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity";
+            greetingElement.textContent = "HELLO!! Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity";
         }
     }
     
