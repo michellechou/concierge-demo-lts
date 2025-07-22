@@ -195,7 +195,7 @@ function generateRecommendationCards() {
                 clickAction = 'showDetailPage(); return false;';
             } else if (link.text === 'Where to see leads from Sales Assistant') {
                 clickAction = 'showDetailPageForLeads(); return false;';
-            } else if (link.text === 'Who are the speakers') {
+            } else if (link.text === 'What tools will be featured') {
                 clickAction = 'showDetailPageForSpeakers(); return false;';
             } else if (link.text === 'Any other webinars in August') {
                 clickAction = 'showDetailPageForAugustWebinars(); return false;';
@@ -635,7 +635,7 @@ function typeResponse() {
     // Match the question to the appropriate response
     if (lastUserMessage.includes('Where to see leads')) {
         responseData = helpWidgetConfig?.responses?.salesAssistantLeads;
-    } else if (lastUserMessage.includes('Who are the speakers')) {
+    } else if (lastUserMessage.includes('What tools will be featured')) {
         responseData = helpWidgetConfig?.responses?.webinarSpeakers;
     } else if (lastUserMessage.includes('webinars in August')) {
         responseData = helpWidgetConfig?.responses?.augustWebinars;
@@ -882,7 +882,7 @@ window.showDetailPageForLeads = function() {
 };
 
 window.showDetailPageForSpeakers = function() {
-    showDetailPageWithQuestion('Who are the speakers', 'Webinar Speakers', 'rec2');
+    showDetailPageWithQuestion('What tools will be featured', 'Webinar Tools', 'rec2');
 };
 
 window.showDetailPageForAugustWebinars = function() {
@@ -1539,7 +1539,7 @@ function findConfigResponse(question) {
             'salesAssistant': ['sales assistant', 'lead delivery', 'how does sales assistant work', 'assistant'],
             'salesAssistantLeads': ['where to see leads', 'find leads', 'leads from sales assistant', 'locate leads', 'view leads'],
             'strategies': ['strategy', 'webinar', 'speakers', 'sales strategies', 'training'],
-            'webinarSpeakers': ['who are the speakers', 'speakers', 'presenters', 'webinar speakers'],
+            'webinarSpeakers': ['what tools will be featured', 'tools', 'featured tools', 'webinar tools'],
             'augustWebinars': ['august webinars', 'other webinars', 'more webinars', 'upcoming webinars'],
             'messageAssistReplies': ['message assist boost', 'reply rates', 'response rates', 'message assist replies'],
             'accountIQInsights': ['account iq insights', 'account iq provide', 'account intelligence', 'what insights'],
