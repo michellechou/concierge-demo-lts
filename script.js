@@ -1526,15 +1526,27 @@ function generateIntelligentResponse(userMessage) {
 }
 
 function findConfigResponse(question) {
+    console.log('=== findConfigResponse DEBUG ===');
+    console.log('Question received:', question);
+    console.log('helpWidgetConfig exists:', !!helpWidgetConfig);
+    console.log('helpWidgetConfig.responses exists:', !!helpWidgetConfig?.responses);
+    
     if (!helpWidgetConfig?.responses) {
         console.log('No responses in config');
         return null;
     }
     
+    console.log('Available response categories:', Object.keys(helpWidgetConfig.responses));
+    
     // Search through all response categories
     for (const [category, responseData] of Object.entries(helpWidgetConfig.responses)) {
+        console.log(`Checking category: ${category}`);
+        console.log(`Response data:`, responseData);
+        
         // Check if the question matches any keywords in the category
         const questionLower = question.toLowerCase();
+        console.log(`Question lowercase: "${questionLower}"`);
+        
         const categoryKeywords = {
             'salesAssistant': ['sales assistant', 'lead delivery', 'how does sales assistant work', 'assistant'],
             'salesAssistantLeads': ['where to see leads', 'find leads', 'leads from sales assistant', 'locate leads', 'view leads'],
@@ -1548,9 +1560,15 @@ function findConfigResponse(question) {
         
         // Check if question contains keywords for this category
         if (categoryKeywords[category]) {
-            const isMatch = categoryKeywords[category].some(keyword => 
-                questionLower.includes(keyword) || keyword.includes(questionLower)
-            );
+            console.log(`Keywords for ${category}:`, categoryKeywords[category]);
+            
+            const isMatch = categoryKeywords[category].some(keyword => {
+                const matches = questionLower.includes(keyword) || keyword.includes(questionLower);
+                console.log(`  Testing keyword "${keyword}": ${matches}`);
+                return matches;
+            });
+            
+            console.log(`Category ${category} keyword match result: ${isMatch}`);
             
             if (isMatch) {
                 console.log(`Found matching response in category ${category}:`, responseData);
@@ -1559,15 +1577,21 @@ function findConfigResponse(question) {
         }
         
         // Also check against the specific question in the response data
-        if (responseData.question && 
-            (questionLower.includes(responseData.question.toLowerCase()) || 
-             responseData.question.toLowerCase().includes(questionLower))) {
-            console.log(`Found direct question match in category ${category}:`, responseData);
-            return responseData.answer;
+        if (responseData.question) {
+            console.log(`Direct question check: "${responseData.question.toLowerCase()}" vs "${questionLower}"`);
+            const directMatch = questionLower.includes(responseData.question.toLowerCase()) || 
+                               responseData.question.toLowerCase().includes(questionLower);
+            console.log(`Direct question match: ${directMatch}`);
+            
+            if (directMatch) {
+                console.log(`Found direct question match in category ${category}:`, responseData);
+                return responseData.answer;
+            }
         }
     }
     
     console.log('No matching response found in config for question:', question);
+    console.log('=== END findConfigResponse DEBUG ===');
     return null;
 }
 
