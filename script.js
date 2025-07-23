@@ -566,12 +566,20 @@ window.checkLinks = function() {
 
 // AI Response Animation
 function startAIResponse() {
-    console.log('Starting AI response animation');
+    console.log('=== startAIResponse called ===');
+    console.log('helpWidgetConfig available:', !!helpWidgetConfig);
+    console.log('helpWidgetConfig.responses available:', !!helpWidgetConfig?.responses);
     
     // Reset the response state
     const aiThinking = document.getElementById('aiThinking');
     const assistantResponse = document.getElementById('assistantResponse');
     const responseContent = document.getElementById('responseContent');
+    
+    console.log('Elements found:', {
+        aiThinking: !!aiThinking,
+        assistantResponse: !!assistantResponse,
+        responseContent: !!responseContent
+    });
     
     if (aiThinking && assistantResponse && responseContent) {
         // Show thinking animation, hide response
@@ -586,6 +594,8 @@ function startAIResponse() {
         setTimeout(() => {
             hideThinkingAndStartTyping();
         }, 2000);
+    } else {
+        console.error('Missing required elements for AI response');
     }
 }
 
