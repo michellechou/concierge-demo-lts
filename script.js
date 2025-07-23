@@ -620,24 +620,41 @@ function hideThinkingAndStartTyping() {
 }
 
 function typeResponse() {
-    const responseContent = document.getElementById('responseContent');
-    if (!responseContent) return;
-    
-    // Check both chat containers for the last user message
+    // Find the currently visible chat container and its responseContent
     const salesAssistantChat = document.getElementById('salesAssistantChat');
     const generalChat = document.getElementById('generalChat');
     
+    let responseContent = null;
+    let activeChat = null;
+    
+    // Determine which chat is currently visible
+    if (salesAssistantChat && salesAssistantChat.style.display !== 'none') {
+        activeChat = salesAssistantChat;
+        responseContent = salesAssistantChat.querySelector('#responseContent');
+        console.log('typeResponse - Using Sales Assistant chat responseContent');
+    } else if (generalChat && generalChat.style.display !== 'none') {
+        activeChat = generalChat;
+        responseContent = generalChat.querySelector('#responseContent');
+        console.log('typeResponse - Using General chat responseContent');
+    }
+    
+    if (!responseContent) {
+        console.error('typeResponse - No responseContent found in active chat');
+        return;
+    }
+    
+    console.log('typeResponse - Active chat:', activeChat.id);
+    console.log('typeResponse - Response content element:', responseContent);
+    
     let lastUserMessage = '';
     
-    // Find the last user message from both chat containers
-    [salesAssistantChat, generalChat].forEach(container => {
-        if (container && container.style.display !== 'none') {
-            const userMessages = container.querySelectorAll('.user-message p');
-            if (userMessages.length > 0) {
-                lastUserMessage = userMessages[userMessages.length - 1]?.textContent || '';
-            }
+    // Find the last user message from the active chat container
+    if (activeChat) {
+        const userMessages = activeChat.querySelectorAll('.user-message p');
+        if (userMessages.length > 0) {
+            lastUserMessage = userMessages[userMessages.length - 1]?.textContent || '';
         }
-    });
+    }
     
     console.log('typeResponse - Last user message found:', lastUserMessage);
     
