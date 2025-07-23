@@ -118,7 +118,7 @@ async function loadConfiguration() {
                     "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Sales Assistant</span>.",
                     "buttonText": "Try Sales Assistant",
                     "buttonAction": "trySalesAssistant",
-                    "buttonUrl": "https://www.linkedin.com/sales/ssi",
+                    "buttonUrl": "https://www.linkedin.com/sales/sales-assistant",
                     "links": [
                         {
                             "text": "How does Sales Assistant work",
@@ -1637,7 +1637,7 @@ window.showDetailPageForSalesAssistant = function() {
                 <h3>Save time with Sales Assistant</h3>
                 <p>Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class="sales-assistant">Sales Assistant</span>.</p>
                 <div class="button-container">
-                    <button class="btn-primary" onclick="window.open('https://www.linkedin.com/sales/ssi', '_blank'); return false;">Try Sales Assistant</button>
+                    <button class="btn-primary" onclick="window.open('https://www.linkedin.com/sales/sales-assistant', '_blank'); return false;">Try Sales Assistant</button>
                 </div>
                 <div class="recommendation-links">
                     <div class="link-item-static">
