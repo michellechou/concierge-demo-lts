@@ -855,7 +855,7 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
                 </div>`
             ).join('');
             
-            // Create chat content with the specific question
+            // Create chat content with the exact same structure as Sales Assistant
             chatContainer.innerHTML = `
                 <div class="recommendation-card">
                     <h3>${rec.title}</h3>
@@ -872,7 +872,8 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
                         <p>${questionText}</p>
                     </div>
                 </div>
-                
+                        
+                <!-- AI Thinking Animation -->
                 <div class="ai-thinking-container" id="aiThinking">
                     <div class="ai-thinking">
                         <div class="thinking-dots">
@@ -882,7 +883,8 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- Assistant Response -->
                 <div class="assistant-response-container" id="assistantResponse" style="display: none;">
                     <div class="assistant-response">
                         <div class="response-content" id="generalResponseContent">
