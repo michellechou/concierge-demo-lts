@@ -765,8 +765,12 @@ function typeSalesAssistantLeadsResponse() {
     const responseContent = document.getElementById('salesLeadsResponseContent');
     if (!responseContent) return;
     
-    const answerText = findConfigResponse('Where to see leads from Sales Assistant');
-    if (!answerText) return;
+    // Get the specific salesAssistantLeads response from JSON
+    const answerText = helpWidgetConfig?.responses?.salesAssistantLeads?.answer;
+    if (!answerText) {
+        console.error('No salesAssistantLeads response found in helpWidgetConfig');
+        return;
+    }
     
     const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
     const finalHTML = answerText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
