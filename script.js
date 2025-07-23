@@ -630,11 +630,11 @@ function typeResponse() {
     // Determine which chat is currently visible
     if (salesAssistantChat && salesAssistantChat.style.display !== 'none') {
         activeChat = salesAssistantChat;
-        responseContent = salesAssistantChat.querySelector('#responseContent');
+        responseContent = document.getElementById('responseContent'); // Sales Assistant uses the original ID
         console.log('typeResponse - Using Sales Assistant chat responseContent');
     } else if (generalChat && generalChat.style.display !== 'none') {
         activeChat = generalChat;
-        responseContent = generalChat.querySelector('#responseContent');
+        responseContent = document.getElementById('generalResponseContent'); // General chat uses unique ID
         console.log('typeResponse - Using General chat responseContent');
     }
     
@@ -873,7 +873,7 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
                 
                 <div class="assistant-response-container" id="assistantResponse" style="display: none;">
                     <div class="assistant-response">
-                        <div class="response-content" id="responseContent">
+                        <div class="response-content" id="generalResponseContent">
                             <!-- Content will be typed in by animation -->
                         </div>
                         <div class="feedback-buttons" id="feedbackButtons" style="display: none;">
