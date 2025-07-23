@@ -199,8 +199,7 @@ function generateRecommendationCards() {
                 clickAction = 'showDetailPageForSpeakers(); return false;';
             } else if (link.text === 'Any other webinars in August') {
                 clickAction = 'showDetailPageForAugustWebinars(); return false;';
-            } else if (link.text === 'Does Message Assist boost replies') {
-                clickAction = 'showDetailPageForMessageAssist(); return false;';
+
             } else if (link.text === 'What insights does Account IQ provide') {
                 clickAction = 'showDetailPageForAccountIQ(); return false;';
             }
@@ -446,6 +445,20 @@ function openHelpPanel() {
                         showDetailPage();
                     });
                 }
+                
+                if (link.textContent.includes('Does Message Assist boost replies')) {
+                    console.log('Adding direct click handler to Message Assist link');
+                    
+                    // Remove existing listeners
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                    
+                    newLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('Direct Message Assist click handler triggered!');
+                        showDetailPageForMessageAssist();
+                    });
+                }
             });
             
             // Add click handler to chat icon
@@ -563,6 +576,104 @@ window.checkLinks = function() {
         console.log(`Link ${index}:`, `"${link.textContent.trim()}"`);
     });
 };
+
+// Message Assist AI Response Animation - Works exactly like Sales Assistant
+function startMessageAssistAIResponse() {
+    console.log('=== startMessageAssistAIResponse called ===');
+    console.log('helpWidgetConfig available:', !!helpWidgetConfig);
+    console.log('helpWidgetConfig.responses available:', !!helpWidgetConfig?.responses);
+    
+    // Reset the response state for Message Assist
+    const aiThinking = document.getElementById('messageAiThinking');
+    const assistantResponse = document.getElementById('messageAssistantResponse');
+    const responseContent = document.getElementById('messageResponseContent');
+    
+    console.log('Message Assist Elements found:', {
+        aiThinking: !!aiThinking,
+        assistantResponse: !!assistantResponse,
+        responseContent: !!responseContent
+    });
+    
+    if (aiThinking && assistantResponse && responseContent) {
+        // Show thinking animation, hide response
+        aiThinking.style.display = 'flex';
+        assistantResponse.style.display = 'none';
+        responseContent.innerHTML = '';
+        
+        // Auto-scroll when thinking animation appears
+        scrollChatToBottom();
+        
+        // Show thinking for 2 seconds, then start typing response
+        setTimeout(() => {
+            hideMessageAssistThinkingAndStartTyping();
+        }, 2000);
+    } else {
+        console.error('Missing required elements for Message Assist AI response');
+    }
+}
+
+function hideMessageAssistThinkingAndStartTyping() {
+    console.log('Hiding Message Assist thinking animation and starting typing');
+    
+    const aiThinking = document.getElementById('messageAiThinking');
+    const assistantResponse = document.getElementById('messageAssistantResponse');
+    const responseContent = document.getElementById('messageResponseContent');
+    
+    if (aiThinking && assistantResponse && responseContent) {
+        // Hide thinking, show response container
+        aiThinking.style.display = 'none';
+        assistantResponse.style.display = 'flex';
+        
+        console.log('Message Assist response container shown');
+        
+        // Auto-scroll when response container appears
+        scrollChatToBottom();
+        
+        // Start typing the Message Assist response
+        typeMessageAssistResponse();
+    }
+}
+
+function typeMessageAssistResponse() {
+    const responseContent = document.getElementById('messageResponseContent');
+    if (!responseContent) return;
+    
+    // Get the Message Assist response from JSON
+    const answerText = findConfigResponse('Does Message Assist boost replies');
+    
+    if (!answerText) {
+        console.error('No response found for Message Assist question');
+        return;
+    }
+    
+    console.log('Message Assist - Answer text received:', answerText.substring(0, 100) + '...');
+    
+    // Simple typing animation with the response
+    const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
+    const finalHTML = answerText
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+    
+    let currentIndex = 0;
+    responseContent.innerHTML = '<span class="typing-cursor"></span>';
+    
+    function typeNextChar() {
+        if (currentIndex < fullText.length) {
+            const currentText = fullText.substring(0, currentIndex + 1);
+            responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
+            currentIndex++;
+            setTimeout(typeNextChar, 25);
+        } else {
+            responseContent.innerHTML = `<p>${finalHTML}</p>`;
+            const feedbackButtons = document.getElementById('messageFeedbackButtons');
+            if (feedbackButtons) feedbackButtons.style.display = 'flex';
+            console.log('Message Assist typing completed');
+        }
+    }
+    
+    setTimeout(typeNextChar, 500);
+}
 
 // AI Response Animation
 function startAIResponse() {
@@ -786,6 +897,40 @@ window.showDetailPage = function() {
         // Initialize follow-up input functionality for Sales Assistant thread
         setTimeout(() => {
             handleFollowUpMessage('salesAssistantChat');
+        }, 100);
+    } else {
+        console.log('ERROR: Could not find main page or detail page elements');
+    }
+};
+
+window.showDetailPageForMessageAssist = function() {
+    console.log('showDetailPageForMessageAssist called - Message Assist thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const messageAssistChat = document.getElementById('messageAssistChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    console.log('Main page element:', mainPage);
+    console.log('Detail page element:', detailPage);
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show Message Assist chat thread, hide others
+        if (messageAssistChat) messageAssistChat.style.display = 'block';
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'none';
+        
+        console.log('Page navigation completed - Message Assist chat thread visible');
+        
+        // Start the AI thinking and response animation for Message Assist
+        startMessageAssistAIResponse();
+        
+        // Initialize follow-up input functionality for Message Assist thread
+        setTimeout(() => {
+            handleFollowUpMessage('messageAssistChat');
         }, 100);
     } else {
         console.log('ERROR: Could not find main page or detail page elements');
