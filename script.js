@@ -604,18 +604,30 @@ function hideThinkingAndStartTyping() {
     
     const aiThinking = document.getElementById('aiThinking');
     const assistantResponse = document.getElementById('assistantResponse');
-    const responseContent = document.getElementById('responseContent');
+    
+    // Check for either responseContent element (Sales Assistant or General chat)
+    let responseContent = document.getElementById('responseContent') || document.getElementById('generalResponseContent');
+    
+    console.log('hideThinkingAndStartTyping - Elements found:', {
+        aiThinking: !!aiThinking,
+        assistantResponse: !!assistantResponse,
+        responseContent: !!responseContent
+    });
     
     if (aiThinking && assistantResponse && responseContent) {
         // Hide thinking, show response container
         aiThinking.style.display = 'none';
         assistantResponse.style.display = 'flex';
         
+        console.log('hideThinkingAndStartTyping - Showing assistantResponse container');
+        
         // Auto-scroll when response container appears
         scrollChatToBottom();
         
         // Start typing the response
         typeResponse();
+    } else {
+        console.error('hideThinkingAndStartTyping - Missing required elements');
     }
 }
 
