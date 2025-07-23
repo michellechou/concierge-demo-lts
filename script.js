@@ -69,6 +69,15 @@ function resetAllChatContainers() {
         }
     });
     
+    // Reset icon chat containers (these use dynamic innerHTML)
+    const iconChatContainers = ['salesAssistantIconChat', 'strategiesIconChat', 'innovationsIconChat'];
+    iconChatContainers.forEach(chatId => {
+        const chatElement = document.getElementById(chatId);
+        if (chatElement) {
+            chatElement.innerHTML = '';
+        }
+    });
+    
     console.log('All chat containers reset to initial state');
 }
 
@@ -77,7 +86,8 @@ function hideAllChatContainersExcept(activeContainerId) {
     console.log('Hiding all chat containers except:', activeContainerId);
     const allChatContainers = [
         'salesAssistantChat', 'messageAssistChat', 'salesAssistantLeadsChat', 
-        'webinarToolsChat', 'augustWebinarsChat', 'accountIQChat', 'generalChat'
+        'webinarToolsChat', 'augustWebinarsChat', 'accountIQChat', 'generalChat',
+        'salesAssistantIconChat', 'strategiesIconChat', 'innovationsIconChat'
     ];
     
     allChatContainers.forEach(chatId => {
@@ -1609,21 +1619,24 @@ window.showDetailPageForAccountIQ = function() {
 
 
 window.showDetailPageForSalesAssistant = function() {
-    console.log('showDetailPageForSalesAssistant called - Sales Assistant chat thread');
+    console.log('showDetailPageForSalesAssistant called - Sales Assistant Icon chat thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
-    const salesAssistantChat = document.getElementById('salesAssistantChat');
-    const generalChat = document.getElementById('generalChat');
+    const salesAssistantIconChat = document.getElementById('salesAssistantIconChat');
     
     if (mainPage && detailPage) {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Hide all chat containers and show only general chat
-        hideAllChatContainersExcept('generalChat');
+        // Hide all chat containers and show only Sales Assistant Icon chat
+        hideAllChatContainersExcept('salesAssistantIconChat');
         
         // Clear previous chat and add Sales Assistant-specific content card
-        generalChat.innerHTML = `
+        salesAssistantIconChat.innerHTML = `
             <div class="recommendation-card">
                 <h3>Save time with Sales Assistant</h3>
                 <p>Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class="sales-assistant">Sales Assistant</span>.</p>
@@ -1660,18 +1673,21 @@ window.showDetailPageForSalesAssistant = function() {
 };
 
 window.showDetailPageForStrategies = function() {
-    console.log('showDetailPageForStrategies called - Sales Strategies chat thread');
+    console.log('showDetailPageForStrategies called - Strategies Icon chat thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
-    const salesAssistantChat = document.getElementById('salesAssistantChat');
-    const generalChat = document.getElementById('generalChat');
+    const strategiesIconChat = document.getElementById('strategiesIconChat');
     
     if (mainPage && detailPage) {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Hide all chat containers and show only general chat
-        hideAllChatContainersExcept('generalChat');
+        // Hide all chat containers and show only Strategies Icon chat
+        hideAllChatContainersExcept('strategiesIconChat');
         
         // Get recommendation data from config
         const strategiesRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec2');
@@ -1689,7 +1705,7 @@ window.showDetailPageForStrategies = function() {
         ).join('');
         
         // Clear previous chat and add strategies-specific content card
-        generalChat.innerHTML = `
+        strategiesIconChat.innerHTML = `
             <div class="recommendation-card">
                 <h3>${strategiesRec.title}</h3>
                 <p>${strategiesRec.description}</p>
@@ -1719,18 +1735,21 @@ window.showDetailPageForStrategies = function() {
 };
 
 window.showDetailPageForInnovations = function() {
-    console.log('showDetailPageForInnovations called - Q2 Innovations chat thread');
+    console.log('showDetailPageForInnovations called - Innovations Icon chat thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
-    const salesAssistantChat = document.getElementById('salesAssistantChat');
-    const generalChat = document.getElementById('generalChat');
+    const innovationsIconChat = document.getElementById('innovationsIconChat');
     
     if (mainPage && detailPage) {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Hide all chat containers and show only general chat
-        hideAllChatContainersExcept('generalChat');
+        // Hide all chat containers and show only Innovations Icon chat
+        hideAllChatContainersExcept('innovationsIconChat');
         
         // Get recommendation data from config
         const innovationsRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec3');
@@ -1748,7 +1767,7 @@ window.showDetailPageForInnovations = function() {
         ).join('');
         
         // Clear previous chat and add innovations-specific content card
-        generalChat.innerHTML = `
+        innovationsIconChat.innerHTML = `
             <div class="recommendation-card">
                 <h3>${innovationsRec.title}</h3>
                 <p>${innovationsRec.description}</p>
