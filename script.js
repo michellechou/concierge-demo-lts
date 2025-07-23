@@ -649,6 +649,8 @@ function typeResponse() {
         return;
     }
     
+    console.log('typeResponse - Answer text received:', answerText ? answerText.substring(0, 100) + '...' : 'null');
+    
     // Create a response data object with the answer
     const responseData = { answer: answerText };
     
@@ -657,6 +659,9 @@ function typeResponse() {
         .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold markers for typing
         .replace(/\n\n/g, '\n\n') // Keep paragraph breaks
         .replace(/•/g, '•'); // Keep bullet points
+    
+    console.log('typeResponse - Full text length:', fullText.length);
+    console.log('typeResponse - Full text preview:', fullText.substring(0, 100) + '...');
     
     // Convert markdown to HTML for final display
     const finalHTML = responseData.answer
@@ -673,6 +678,7 @@ function typeResponse() {
     
     // Start with empty content and cursor
     responseContent.innerHTML = '<span class="typing-cursor"></span>';
+    console.log('typeResponse - Starting typing animation, responseContent element:', responseContent);
     
     function typeNextChar() {
         if (currentIndex < fullText.length) {
@@ -689,6 +695,11 @@ function typeResponse() {
             // Add cursor and update content
             responseContent.innerHTML = displayHTML + '<span class="typing-cursor"></span>';
             
+            // Debug: Log first few characters
+            if (currentIndex < 5) {
+                console.log(`Typing char ${currentIndex}: "${char}", current text: "${currentText.substring(0, 20)}..."`);
+            }
+            
             // Auto-scroll during typing to keep up with growing content
             if (currentIndex % 50 === 0) { // Scroll every 50 characters
                 scrollChatToBottom();
@@ -699,6 +710,8 @@ function typeResponse() {
         } else {
             // Animation complete - remove cursor and set final formatted HTML
             responseContent.innerHTML = formattedHTML;
+            
+            console.log('typeResponse - Final HTML set:', formattedHTML.substring(0, 100) + '...');
             
             // Show feedback buttons after typing is complete
             const feedbackButtons = document.getElementById('feedbackButtons');
