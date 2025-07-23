@@ -1,3 +1,77 @@
+// Reset all chat containers to initial state
+function resetAllChatContainers() {
+    console.log('Resetting all chat containers to initial state');
+    
+    // List of all chat containers with their reset elements
+    const chatContainers = [
+        {
+            id: 'salesAssistantChat',
+            thinkingId: 'aiThinking',
+            responseId: 'assistantResponse',
+            contentId: 'responseContent',
+            feedbackId: 'feedbackButtons'
+        },
+        {
+            id: 'messageAssistChat',
+            thinkingId: 'messageAiThinking',
+            responseId: 'messageAssistantResponse',
+            contentId: 'messageResponseContent',
+            feedbackId: 'messageFeedbackButtons'
+        },
+        {
+            id: 'salesAssistantLeadsChat',
+            thinkingId: 'salesLeadsAiThinking',
+            responseId: 'salesLeadsAssistantResponse',
+            contentId: 'salesLeadsResponseContent',
+            feedbackId: 'salesLeadsFeedbackButtons'
+        },
+        {
+            id: 'webinarToolsChat',
+            thinkingId: 'webinarToolsAiThinking',
+            responseId: 'webinarToolsAssistantResponse',
+            contentId: 'webinarToolsResponseContent',
+            feedbackId: 'webinarToolsFeedbackButtons'
+        },
+        {
+            id: 'augustWebinarsChat',
+            thinkingId: 'augustWebinarsAiThinking',
+            responseId: 'augustWebinarsAssistantResponse',
+            contentId: 'augustWebinarsResponseContent',
+            feedbackId: 'augustWebinarsFeedbackButtons'
+        },
+        {
+            id: 'accountIQChat',
+            thinkingId: 'accountIQAiThinking',
+            responseId: 'accountIQAssistantResponse',
+            contentId: 'accountIQResponseContent',
+            feedbackId: 'accountIQFeedbackButtons'
+        }
+    ];
+    
+    chatContainers.forEach(chat => {
+        const thinkingElement = document.getElementById(chat.thinkingId);
+        const responseElement = document.getElementById(chat.responseId);
+        const contentElement = document.getElementById(chat.contentId);
+        const feedbackElement = document.getElementById(chat.feedbackId);
+        
+        // Reset to initial state
+        if (thinkingElement) {
+            thinkingElement.style.display = 'none';
+        }
+        if (responseElement) {
+            responseElement.style.display = 'none';
+        }
+        if (contentElement) {
+            contentElement.innerHTML = '';
+        }
+        if (feedbackElement) {
+            feedbackElement.style.display = 'none';
+        }
+    });
+    
+    console.log('All chat containers reset to initial state');
+}
+
 // Auto-scroll function for chat messages
 function scrollChatToBottom() {
     console.log('scrollChatToBottom called');
@@ -1172,6 +1246,10 @@ function typeResponse() {
 // Page Navigation Functions - Make them global
 window.showDetailPage = function() {
     console.log('showDetailPage called - Sales Assistant thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
@@ -1204,6 +1282,10 @@ window.showDetailPage = function() {
 
 window.showDetailPageForMessageAssist = function() {
     console.log('showDetailPageForMessageAssist called - Message Assist thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
@@ -1380,6 +1462,10 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
 
 window.showDetailPageForSalesAssistantLeads = function() {
     console.log('showDetailPageForSalesAssistantLeads called - Sales Assistant Leads thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
@@ -1415,6 +1501,10 @@ window.showDetailPageForSalesAssistantLeads = function() {
 
 window.showDetailPageForWebinarTools = function() {
     console.log('showDetailPageForWebinarTools called - Webinar Tools thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
@@ -1449,6 +1539,10 @@ window.showDetailPageForWebinarTools = function() {
 
 window.showDetailPageForAugustWebinars = function() {
     console.log('showDetailPageForAugustWebinars called - August Webinars thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
@@ -1483,6 +1577,10 @@ window.showDetailPageForAugustWebinars = function() {
 
 window.showDetailPageForAccountIQ = function() {
     console.log('showDetailPageForAccountIQ called - Account IQ thread');
+    
+    // Reset all chat containers to ensure clean state
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
@@ -1691,6 +1789,10 @@ window.showDetailPageForInnovations = function() {
 
 window.showMainPage = function() {
     console.log('showMainPage called');
+    
+    // Reset all chat containers when returning to main page
+    resetAllChatContainers();
+    
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     
