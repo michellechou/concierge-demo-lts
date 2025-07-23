@@ -196,7 +196,7 @@ function generateRecommendationCards() {
             } else if (link.text === 'Where to see leads from Sales Assistant') {
                 clickAction = 'showDetailPageForLeads(); return false;';
             } else if (link.text === 'What tools will be featured') {
-                clickAction = 'showDetailPageForSpeakers(); return false;';
+                clickAction = 'showDetailPageForWebinarTools(); return false;';
             } else if (link.text === 'Any other webinars in August') {
                 clickAction = 'showDetailPageForAugustWebinars(); return false;';
             } else if (link.text === 'Does Message Assist boost replies') {
@@ -460,6 +460,48 @@ function openHelpPanel() {
                         showDetailPageForMessageAssist();
                     });
                 }
+                
+                if (link.textContent.includes('What tools will be featured')) {
+                    console.log('Adding direct click handler to Webinar Tools link');
+                    
+                    // Remove existing listeners
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                    
+                    newLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('Direct Webinar Tools click handler triggered!');
+                        showDetailPageForWebinarTools();
+                    });
+                }
+                
+                if (link.textContent.includes('Any other webinars in August')) {
+                    console.log('Adding direct click handler to August Webinars link');
+                    
+                    // Remove existing listeners
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                    
+                    newLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('Direct August Webinars click handler triggered!');
+                        showDetailPageForAugustWebinars();
+                    });
+                }
+                
+                if (link.textContent.includes('What insights does Account IQ provide')) {
+                    console.log('Adding direct click handler to Account IQ link');
+                    
+                    // Remove existing listeners
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                    
+                    newLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('Direct Account IQ click handler triggered!');
+                        showDetailPageForAccountIQ();
+                    });
+                }
             });
             
             // Add click handler to chat icon
@@ -670,6 +712,162 @@ function typeMessageAssistResponse() {
             const feedbackButtons = document.getElementById('messageFeedbackButtons');
             if (feedbackButtons) feedbackButtons.style.display = 'flex';
             console.log('Message Assist typing completed');
+        }
+    }
+    
+    setTimeout(typeNextChar, 500);
+}
+
+// Webinar Tools AI Response Animation
+function startWebinarToolsAIResponse() {
+    console.log('=== startWebinarToolsAIResponse called ===');
+    
+    const aiThinking = document.getElementById('webinarToolsAiThinking');
+    const assistantResponse = document.getElementById('webinarToolsAssistantResponse');
+    const responseContent = document.getElementById('webinarToolsResponseContent');
+    
+    if (aiThinking && assistantResponse && responseContent) {
+        aiThinking.style.display = 'flex';
+        assistantResponse.style.display = 'none';
+        responseContent.innerHTML = '';
+        scrollChatToBottom();
+        
+        setTimeout(() => {
+            aiThinking.style.display = 'none';
+            assistantResponse.style.display = 'flex';
+            scrollChatToBottom();
+            typeWebinarToolsResponse();
+        }, 2000);
+    }
+}
+
+function typeWebinarToolsResponse() {
+    const responseContent = document.getElementById('webinarToolsResponseContent');
+    if (!responseContent) return;
+    
+    const answerText = findConfigResponse('What tools will be featured');
+    if (!answerText) return;
+    
+    const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
+    const finalHTML = answerText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    
+    let currentIndex = 0;
+    responseContent.innerHTML = '<span class="typing-cursor"></span>';
+    
+    function typeNextChar() {
+        if (currentIndex < fullText.length) {
+            const currentText = fullText.substring(0, currentIndex + 1);
+            responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
+            currentIndex++;
+            setTimeout(typeNextChar, 25);
+        } else {
+            responseContent.innerHTML = `<p>${finalHTML}</p>`;
+            const feedbackButtons = document.getElementById('webinarToolsFeedbackButtons');
+            if (feedbackButtons) feedbackButtons.style.display = 'flex';
+        }
+    }
+    
+    setTimeout(typeNextChar, 500);
+}
+
+// August Webinars AI Response Animation
+function startAugustWebinarsAIResponse() {
+    console.log('=== startAugustWebinarsAIResponse called ===');
+    
+    const aiThinking = document.getElementById('augustWebinarsAiThinking');
+    const assistantResponse = document.getElementById('augustWebinarsAssistantResponse');
+    const responseContent = document.getElementById('augustWebinarsResponseContent');
+    
+    if (aiThinking && assistantResponse && responseContent) {
+        aiThinking.style.display = 'flex';
+        assistantResponse.style.display = 'none';
+        responseContent.innerHTML = '';
+        scrollChatToBottom();
+        
+        setTimeout(() => {
+            aiThinking.style.display = 'none';
+            assistantResponse.style.display = 'flex';
+            scrollChatToBottom();
+            typeAugustWebinarsResponse();
+        }, 2000);
+    }
+}
+
+function typeAugustWebinarsResponse() {
+    const responseContent = document.getElementById('augustWebinarsResponseContent');
+    if (!responseContent) return;
+    
+    const answerText = findConfigResponse('Any other webinars in August');
+    if (!answerText) return;
+    
+    const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
+    const finalHTML = answerText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    
+    let currentIndex = 0;
+    responseContent.innerHTML = '<span class="typing-cursor"></span>';
+    
+    function typeNextChar() {
+        if (currentIndex < fullText.length) {
+            const currentText = fullText.substring(0, currentIndex + 1);
+            responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
+            currentIndex++;
+            setTimeout(typeNextChar, 25);
+        } else {
+            responseContent.innerHTML = `<p>${finalHTML}</p>`;
+            const feedbackButtons = document.getElementById('augustWebinarsFeedbackButtons');
+            if (feedbackButtons) feedbackButtons.style.display = 'flex';
+        }
+    }
+    
+    setTimeout(typeNextChar, 500);
+}
+
+// Account IQ AI Response Animation
+function startAccountIQAIResponse() {
+    console.log('=== startAccountIQAIResponse called ===');
+    
+    const aiThinking = document.getElementById('accountIQAiThinking');
+    const assistantResponse = document.getElementById('accountIQAssistantResponse');
+    const responseContent = document.getElementById('accountIQResponseContent');
+    
+    if (aiThinking && assistantResponse && responseContent) {
+        aiThinking.style.display = 'flex';
+        assistantResponse.style.display = 'none';
+        responseContent.innerHTML = '';
+        scrollChatToBottom();
+        
+        setTimeout(() => {
+            aiThinking.style.display = 'none';
+            assistantResponse.style.display = 'flex';
+            scrollChatToBottom();
+            typeAccountIQResponse();
+        }, 2000);
+    }
+}
+
+function typeAccountIQResponse() {
+    const responseContent = document.getElementById('accountIQResponseContent');
+    if (!responseContent) return;
+    
+    const answerText = findConfigResponse('What insights does Account IQ provide');
+    if (!answerText) return;
+    
+    const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
+    const finalHTML = answerText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    
+    let currentIndex = 0;
+    responseContent.innerHTML = '<span class="typing-cursor"></span>';
+    
+    function typeNextChar() {
+        if (currentIndex < fullText.length) {
+            const currentText = fullText.substring(0, currentIndex + 1);
+            responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
+            currentIndex++;
+            setTimeout(typeNextChar, 25);
+        } else {
+            responseContent.innerHTML = `<p>${finalHTML}</p>`;
+            const feedbackButtons = document.getElementById('accountIQFeedbackButtons');
+            if (feedbackButtons) feedbackButtons.style.display = 'flex';
         }
     }
     
@@ -910,6 +1108,9 @@ window.showDetailPageForMessageAssist = function() {
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
     const messageAssistChat = document.getElementById('messageAssistChat');
+    const webinarToolsChat = document.getElementById('webinarToolsChat');
+    const augustWebinarsChat = document.getElementById('augustWebinarsChat');
+    const accountIQChat = document.getElementById('accountIQChat');
     const generalChat = document.getElementById('generalChat');
     
     console.log('Main page element:', mainPage);
@@ -922,6 +1123,9 @@ window.showDetailPageForMessageAssist = function() {
         // Show Message Assist chat thread, hide others
         if (messageAssistChat) messageAssistChat.style.display = 'block';
         if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (webinarToolsChat) webinarToolsChat.style.display = 'none';
+        if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
+        if (accountIQChat) accountIQChat.style.display = 'none';
         if (generalChat) generalChat.style.display = 'none';
         
         console.log('Page navigation completed - Message Assist chat thread visible');
@@ -1079,10 +1283,103 @@ window.showDetailPageForAugustWebinars = function() {
     showDetailPageWithQuestion('Any other webinars in August', 'August Webinars', 'rec2');
 };
 
+window.showDetailPageForWebinarTools = function() {
+    console.log('showDetailPageForWebinarTools called - Webinar Tools thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const messageAssistChat = document.getElementById('messageAssistChat');
+    const webinarToolsChat = document.getElementById('webinarToolsChat');
+    const augustWebinarsChat = document.getElementById('augustWebinarsChat');
+    const accountIQChat = document.getElementById('accountIQChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show Webinar Tools chat thread, hide others
+        if (webinarToolsChat) webinarToolsChat.style.display = 'block';
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (messageAssistChat) messageAssistChat.style.display = 'none';
+        if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
+        if (accountIQChat) accountIQChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'none';
+        
+        console.log('Page navigation completed - Webinar Tools chat thread visible');
+        
+        startWebinarToolsAIResponse();
+        
+        setTimeout(() => {
+            handleFollowUpMessage('webinarToolsChat');
+        }, 100);
+    }
+};
 
+window.showDetailPageForAugustWebinars = function() {
+    console.log('showDetailPageForAugustWebinars called - August Webinars thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const messageAssistChat = document.getElementById('messageAssistChat');
+    const webinarToolsChat = document.getElementById('webinarToolsChat');
+    const augustWebinarsChat = document.getElementById('augustWebinarsChat');
+    const accountIQChat = document.getElementById('accountIQChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show August Webinars chat thread, hide others
+        if (augustWebinarsChat) augustWebinarsChat.style.display = 'block';
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (messageAssistChat) messageAssistChat.style.display = 'none';
+        if (webinarToolsChat) webinarToolsChat.style.display = 'none';
+        if (accountIQChat) accountIQChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'none';
+        
+        console.log('Page navigation completed - August Webinars chat thread visible');
+        
+        startAugustWebinarsAIResponse();
+        
+        setTimeout(() => {
+            handleFollowUpMessage('augustWebinarsChat');
+        }, 100);
+    }
+};
 
 window.showDetailPageForAccountIQ = function() {
-    showDetailPageWithQuestion('What insights does Account IQ provide', 'Account IQ Insights', 'rec3');
+    console.log('showDetailPageForAccountIQ called - Account IQ thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const messageAssistChat = document.getElementById('messageAssistChat');
+    const webinarToolsChat = document.getElementById('webinarToolsChat');
+    const augustWebinarsChat = document.getElementById('augustWebinarsChat');
+    const accountIQChat = document.getElementById('accountIQChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show Account IQ chat thread, hide others
+        if (accountIQChat) accountIQChat.style.display = 'block';
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (messageAssistChat) messageAssistChat.style.display = 'none';
+        if (webinarToolsChat) webinarToolsChat.style.display = 'none';
+        if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'none';
+        
+        console.log('Page navigation completed - Account IQ chat thread visible');
+        
+        startAccountIQAIResponse();
+        
+        setTimeout(() => {
+            handleFollowUpMessage('accountIQChat');
+        }, 100);
+    }
 };
 
 
