@@ -1079,9 +1079,7 @@ window.showDetailPageForAugustWebinars = function() {
     showDetailPageWithQuestion('Any other webinars in August', 'August Webinars', 'rec2');
 };
 
-window.showDetailPageForMessageAssist = function() {
-    showDetailPageWithQuestion('Does Message Assist boost replies', 'Message Assist Replies', 'rec3');
-};
+
 
 window.showDetailPageForAccountIQ = function() {
     showDetailPageWithQuestion('What insights does Account IQ provide', 'Account IQ Insights', 'rec3');
