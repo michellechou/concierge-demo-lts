@@ -118,7 +118,7 @@ async function loadConfiguration() {
                     "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Sales Assistant</span>.",
                     "buttonText": "Try Sales Assistant",
                     "buttonAction": "trySalesAssistant",
-                    "buttonUrl": "sales-assistant.html",
+                                         "buttonUrl": "https://www.linkedin.com/sales/sales-assistant",
                     "links": [
                         {
                             "text": "How does Sales Assistant work",
