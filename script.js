@@ -1635,23 +1635,31 @@ window.showDetailPageForSalesAssistant = function() {
         // Hide all chat containers and show only Sales Assistant Icon chat
         hideAllChatContainersExcept('salesAssistantIconChat');
         
+        // Get recommendation data from config
+        const salesAssistantRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec1');
+        if (!salesAssistantRec) {
+            console.error('Sales Assistant recommendation not found in config');
+            return;
+        }
+        
+        // Generate links HTML
+        const linksHTML = salesAssistantRec.links.map(link => 
+            `<div class="link-item-static">
+                <div class="diamond-icon"></div>
+                ${link.text}
+            </div>`
+        ).join('');
+        
         // Clear previous chat and add Sales Assistant-specific content card
         salesAssistantIconChat.innerHTML = `
             <div class="recommendation-card">
-                <h3>Save time with Sales Assistant</h3>
-                <p>Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class="sales-assistant">Sales Assistant</span>.</p>
+                <h3>${salesAssistantRec.title}</h3>
+                <p>${salesAssistantRec.description}</p>
                 <div class="button-container">
-                    <button class="btn-primary" onclick="window.open('https://www.linkedin.com/sales/sales-assistant', '_blank'); return false;">Try Sales Assistant</button>
+                    <button class="btn-primary" onclick="window.open('${salesAssistantRec.buttonUrl}', '_blank'); return false;">${salesAssistantRec.buttonText}</button>
                 </div>
                 <div class="recommendation-links">
-                    <div class="link-item-static">
-                        <div class="diamond-icon"></div>
-                        How does Sales Assistant work
-                    </div>
-                    <div class="link-item-static">
-                        <div class="diamond-icon"></div>
-                        Where to see leads from Sales Assistant
-                    </div>
+                    ${linksHTML}
                 </div>
             </div>
             <div class="user-message-container grey-message-container">
@@ -1710,7 +1718,7 @@ window.showDetailPageForStrategies = function() {
                 <h3>${strategiesRec.title}</h3>
                 <p>${strategiesRec.description}</p>
                 <div class="button-container">
-                    <button class="btn-primary">${strategiesRec.buttonText}</button>
+                    <button class="btn-primary" onclick="window.open('${strategiesRec.buttonUrl}', '_blank'); return false;">${strategiesRec.buttonText}</button>
                 </div>
                 <div class="recommendation-links">
                     ${linksHTML}
@@ -1772,7 +1780,7 @@ window.showDetailPageForInnovations = function() {
                 <h3>${innovationsRec.title}</h3>
                 <p>${innovationsRec.description}</p>
                 <div class="button-container">
-                    <button class="btn-primary">${innovationsRec.buttonText}</button>
+                    <button class="btn-primary" onclick="window.open('${innovationsRec.buttonUrl}', '_blank'); return false;">${innovationsRec.buttonText}</button>
                 </div>
                 <div class="recommendation-links">
                     ${linksHTML}
