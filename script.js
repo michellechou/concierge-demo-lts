@@ -627,16 +627,8 @@ function openHelpPanel() {
                 }
             });
             
-            // Add click handler to chat icon
-            const chatIcon = document.querySelector('.chat-icon');
-            if (chatIcon) {
-                console.log('Adding click handler to chat icon');
-                chatIcon.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Chat icon clicked!');
-                    showDetailPageWithGreyMessage();
-                });
-            }
+            // Note: Chat icons use individual onclick attributes from HTML generation
+            // No generic handler needed here
         }, 100);
     }
 }
@@ -1619,7 +1611,7 @@ window.showDetailPageForAccountIQ = function() {
 
 
 window.showDetailPageForSalesAssistant = function() {
-    console.log('showDetailPageForSalesAssistant called - Sales Assistant Icon chat thread');
+    console.log('=== showDetailPageForSalesAssistant called - Sales Assistant Icon chat thread ===');
     
     // Reset all chat containers to ensure clean state
     resetAllChatContainers();
@@ -1628,38 +1620,36 @@ window.showDetailPageForSalesAssistant = function() {
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantIconChat = document.getElementById('salesAssistantIconChat');
     
-    if (mainPage && detailPage) {
+    console.log('Elements found:', {
+        mainPage: !!mainPage,
+        detailPage: !!detailPage,
+        salesAssistantIconChat: !!salesAssistantIconChat
+    });
+    
+    if (mainPage && detailPage && salesAssistantIconChat) {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
         // Hide all chat containers and show only Sales Assistant Icon chat
         hideAllChatContainersExcept('salesAssistantIconChat');
         
-        // Get recommendation data from config
-        const salesAssistantRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec1');
-        if (!salesAssistantRec) {
-            console.error('Sales Assistant recommendation not found in config');
-            return;
-        }
-        
-        // Generate links HTML
-        const linksHTML = salesAssistantRec.links.map(link => 
-            `<div class="link-item-static">
-                <div class="diamond-icon"></div>
-                ${link.text}
-            </div>`
-        ).join('');
-        
-        // Clear previous chat and add Sales Assistant-specific content card
+        // Clear previous chat and add Sales Assistant-specific content card (matching static chat)
         salesAssistantIconChat.innerHTML = `
             <div class="recommendation-card">
-                <h3>${salesAssistantRec.title}</h3>
-                <p>${salesAssistantRec.description}</p>
+                <h3>Save time with Sales Assistant</h3>
+                <p>Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class="sales-assistant">Sales Assistant</span>.</p>
                 <div class="button-container">
-                    <button class="btn-primary" onclick="window.open('${salesAssistantRec.buttonUrl}', '_blank'); return false;">${salesAssistantRec.buttonText}</button>
+                    <button class="btn-primary" onclick="window.open('https://www.linkedin.com/sales/sales-assistant', '_blank'); return false;">Try Sales Assistant</button>
                 </div>
                 <div class="recommendation-links">
-                    ${linksHTML}
+                    <div class="link-item-static">
+                        <div class="diamond-icon"></div>
+                        How does Sales Assistant work
+                    </div>
+                    <div class="link-item-static">
+                        <div class="diamond-icon"></div>
+                        Where to see leads from Sales Assistant
+                    </div>
                 </div>
             </div>
             <div class="user-message-container grey-message-container">
@@ -1669,14 +1659,23 @@ window.showDetailPageForSalesAssistant = function() {
             </div>
         `;
         
+        console.log('Sales Assistant icon chat content set successfully');
+        console.log('Container innerHTML length:', salesAssistantIconChat.innerHTML.length);
+        console.log('Container display style:', salesAssistantIconChat.style.display);
+        console.log('Container visibility:', window.getComputedStyle(salesAssistantIconChat).display);
+        
         console.log('Page navigation completed - Sales Assistant chat thread visible');
         
         // Initialize follow-up input functionality for Sales Assistant chat thread
         setTimeout(() => {
-            handleFollowUpMessage('generalChat');
+            handleFollowUpMessage('salesAssistantIconChat');
         }, 100);
     } else {
-        console.log('ERROR: Could not find main page or detail page elements');
+        console.log('ERROR: Could not find required elements', {
+            mainPage: !!mainPage,
+            detailPage: !!detailPage,
+            salesAssistantIconChat: !!salesAssistantIconChat
+        });
     }
 };
 
@@ -1735,7 +1734,7 @@ window.showDetailPageForStrategies = function() {
         
         // Initialize follow-up input functionality for strategies chat thread
         setTimeout(() => {
-            handleFollowUpMessage('generalChat');
+            handleFollowUpMessage('strategiesIconChat');
         }, 100);
     } else {
         console.log('ERROR: Could not find main page or detail page elements');
@@ -1797,7 +1796,7 @@ window.showDetailPageForInnovations = function() {
         
         // Initialize follow-up input functionality for innovations chat thread
         setTimeout(() => {
-            handleFollowUpMessage('generalChat');
+            handleFollowUpMessage('innovationsIconChat');
         }, 100);
     } else {
         console.log('ERROR: Could not find main page or detail page elements');
@@ -2010,12 +2009,12 @@ function handleFollowUpMessage(chatThreadId) {
     console.log('Attaching event listeners to follow-up input');
     
     // Make generateAIResponse globally accessible for testing
-    window.testAIResponse = function() {
+    window.testAIResponse = async function() {
         console.log('Testing AI response...');
-        generateAIResponse("test message", chatContainer);
+        await generateAIResponse("test message", chatContainer);
     };
     
-    function sendMessage() {
+    async function sendMessage() {
         console.log('sendMessage function called for thread:', currentChatThread);
         const message = followUpInput.value.trim();
         console.log('Message value:', message);
@@ -2054,10 +2053,10 @@ function handleFollowUpMessage(chatThreadId) {
         
         // Generate AI response after a short delay
         console.log('Setting timeout to generate AI response...');
-        setTimeout(() => {
+        setTimeout(async () => {
             console.log('Timeout executed, calling generateAIResponse');
             try {
-                generateAIResponse(message, activeChatContainer);
+                await generateAIResponse(message, activeChatContainer);
             } catch (error) {
                 console.error('Error generating AI response:', error);
             }
@@ -2090,8 +2089,10 @@ function handleFollowUpMessage(chatThreadId) {
     console.log('Follow-up message handlers attached successfully');
 }
 
+// Enhanced Static Response System - No external APIs needed
+
 // AI Response Generation with Typing Animation
-function generateAIResponse(userMessage, chatContainer) {
+async function generateAIResponse(userMessage, chatContainer) {
     console.log('generateAIResponse called with message:', userMessage);
     console.log('chatContainer element:', chatContainer);
     
@@ -2100,8 +2101,8 @@ function generateAIResponse(userMessage, chatContainer) {
         return;
     }
     
-    // Generate intelligent response based on user input
-    let response = generateIntelligentResponse(userMessage);
+    // Generate intelligent response based on user input (now async)
+    let response = await generateIntelligentResponse(userMessage);
     console.log('Generated response:', response);
     
     // Fallback if response is empty
@@ -2238,18 +2239,19 @@ function startFollowUpTyping(fullText, contentId, feedbackId) {
 
 
 // Advanced AI Response Generator
-function generateIntelligentResponse(userMessage) {
-    console.log('generateIntelligentResponse called with:', userMessage);
+async function generateIntelligentResponse(userMessage) {
+    console.log('=== generateIntelligentResponse called with:', userMessage);
     const message = userMessage.toLowerCase();
     
-    // First, check if this matches any question in our JSON config
+    // Check if this matches any question in our JSON config as fallback
     const configResponse = findConfigResponse(userMessage);
     if (configResponse) {
-        console.log('Found response in config:', configResponse);
+        console.log('Using config response as fallback:', configResponse);
         return formatResponseText(configResponse);
     }
     
-    // If no config response found, use intelligent generation
+    // Use enhanced static response generation
+    console.log('Using enhanced static response system');
     const questionType = analyzeQuestionType(message);
     const keywords = extractKeywords(message);
     
@@ -2371,16 +2373,24 @@ function analyzeQuestionType(message) {
 
 function extractKeywords(message) {
     const salesNavKeywords = {
-        'leads': ['lead', 'prospect', 'target', 'candidate'],
-        'search': ['search', 'filter', 'find', 'discover', 'locate'],
-        'messaging': ['message', 'inmail', 'outreach', 'contact', 'reach out', 'communicate'],
-        'networking': ['connect', 'network', 'relationship', 'introduction'],
-        'accounts': ['account', 'company', 'organization', 'business'],
-        'sales': ['sell', 'sales', 'deal', 'close', 'revenue', 'pipeline'],
-        'data': ['analytics', 'metrics', 'performance', 'tracking', 'insights'],
-        'features': ['premium', 'subscription', 'features', 'tools'],
-        'integration': ['crm', 'integrate', 'sync', 'export'],
-        'strategy': ['strategy', 'approach', 'plan', 'technique', 'method']
+        'leads': ['lead', 'prospect', 'target', 'candidate', 'potential', 'qualified', 'unqualified', 'scoring'],
+        'search': ['search', 'filter', 'find', 'discover', 'locate', 'query', 'boolean', 'advanced search', 'saved search'],
+        'messaging': ['message', 'inmail', 'outreach', 'contact', 'reach out', 'communicate', 'email', 'follow up', 'response', 'reply'],
+        'networking': ['connect', 'network', 'relationship', 'introduction', 'teamlink', 'mutual', 'warm', 'referral'],
+        'accounts': ['account', 'company', 'organization', 'business', 'enterprise', 'corporation', 'firm'],
+        'sales': ['sell', 'sales', 'deal', 'close', 'revenue', 'pipeline', 'quota', 'conversion', 'roi'],
+        'data': ['analytics', 'metrics', 'performance', 'tracking', 'insights', 'reporting', 'dashboard', 'stats'],
+        'features': ['premium', 'subscription', 'features', 'tools', 'functionality', 'capabilities'],
+        'integration': ['crm', 'integrate', 'sync', 'export', 'import', 'salesforce', 'hubspot', 'dynamics'],
+        'strategy': ['strategy', 'approach', 'plan', 'technique', 'method', 'best practice', 'tips', 'advice'],
+        'sales assistant': ['sales assistant', 'ai', 'artificial intelligence', 'automation', 'smart'],
+        'inmail': ['inmail', 'credits', 'premium messaging', 'direct message'],
+        'teamlink': ['teamlink', 'team link', 'colleague', 'coworker', 'team member'],
+        'boolean': ['boolean', 'and', 'or', 'not', 'operators', 'advanced query'],
+        'personalization': ['personalize', 'customize', 'tailor', 'specific', 'individual'],
+        'conversion': ['convert', 'conversion', 'success rate', 'effectiveness', 'results'],
+        'troubleshooting': ['problem', 'issue', 'error', 'bug', 'not working', 'broken', 'fix'],
+        'webinar': ['webinar', 'seminar', 'training', 'workshop', 'presentation', 'session']
     };
     
     let detectedCategories = [];
@@ -2411,64 +2421,199 @@ function generateContextualResponse(questionType, keywords, originalMessage) {
 }
 
 function generateHowToResponse(keywords, message) {
+    // Lead-related responses with variation
     if (keywords.includes('leads')) {
-        if (message.includes('find') || message.includes('get')) {
-            return "To find quality leads in Sales Navigator: 1) Use Lead Builder with specific filters (industry, location, seniority), 2) Apply boolean search with relevant keywords, 3) Leverage saved searches for ongoing lead discovery, 4) Use TeamLink to see warm connections, and 5) Review lead recommendations based on your past activity and saved accounts.";
+        if (message.includes('find') || message.includes('get') || message.includes('discover')) {
+            const responses = [
+                "To find quality leads in Sales Navigator, start with Lead Builder using specific filters like industry, location, and seniority level. Use boolean search operators for precision, save effective searches for ongoing discovery, leverage TeamLink for warm introductions, and review AI-recommended leads based on your activity patterns.",
+                "Finding the right leads requires a strategic approach: **Advanced Filtering** - Use industry, geography, and role-specific filters. **Boolean Search** - Combine keywords with AND, OR, NOT operators. **Saved Searches** - Set up alerts for new matches. **TeamLink** - Identify warm connection paths. **Lead Recommendations** - Review AI suggestions based on your engagement history.",
+                "Effective lead discovery in Sales Navigator involves multiple tactics. Start broad with industry filters, then narrow down using seniority and location parameters. Set up saved searches with notifications, use boolean keywords relevant to your target market, and always check TeamLink for potential warm introductions through your network."
+            ];
+            return getRandomResponse(responses);
         }
-        if (message.includes('qualify') || message.includes('score')) {
-            return "Qualify leads effectively by: 1) Reviewing their recent activity and posts, 2) Checking their company's growth signals, 3) Looking for mutual connections or shared experiences, 4) Analyzing their role and decision-making authority, and 5) Using Sales Navigator's lead scoring indicators to prioritize outreach.";
+        if (message.includes('qualify') || message.includes('score') || message.includes('prioritize')) {
+            const responses = [
+                "Lead qualification in Sales Navigator: **Recent Activity** - Check their posts and engagement patterns. **Company Signals** - Look for growth indicators like hiring, funding, or expansion. **Connection Quality** - Identify mutual connections or shared experiences. **Decision Authority** - Verify their role in purchasing decisions. **Timing Indicators** - Recent job changes or company announcements.",
+                "Prioritize leads by analyzing multiple factors: their recent LinkedIn activity shows engagement level, company growth signals indicate potential need, mutual connections provide warm introduction paths, and their seniority level suggests decision-making authority. Use Sales Navigator's lead scoring to rank prospects automatically.",
+                "Qualify prospects effectively by reviewing their profile completeness, recent content engagement, company news and growth signals, mutual connections for credibility, and their role's influence on purchasing decisions. Look for timing triggers like job changes, company milestones, or industry shifts."
+            ];
+            return getRandomResponse(responses);
+        }
+        if (message.includes('organize') || message.includes('manage') || message.includes('track')) {
+            return "Organize your leads using Sales Navigator's lead lists and tags. Create separate lists for different campaigns, stages of engagement, or prospect types. Use notes to track conversation history, set reminders for follow-ups, and leverage CRM integration to sync data across platforms. Regular list maintenance ensures your prospecting stays focused and efficient.";
         }
     }
     
-    if (keywords.includes('messaging')) {
-        return "Craft effective messages by: 1) Personalizing with specific details from their profile, 2) Mentioning mutual connections when relevant, 3) Leading with value or insights rather than a sales pitch, 4) Keeping initial messages concise (under 300 characters), and 5) Including a clear, low-pressure call-to-action.";
+    // Messaging responses with variation
+    if (keywords.includes('messaging') || keywords.includes('outreach') || keywords.includes('communication')) {
+        if (message.includes('personalize') || message.includes('customize')) {
+            const responses = [
+                "Personalize messages by referencing specific details from their profile, recent posts, or company news. Mention mutual connections when relevant, lead with industry insights rather than sales pitches, and include a clear but low-pressure call-to-action. Keep initial messages under 300 characters for higher response rates.",
+                "Effective personalization starts with research: **Profile Details** - Reference their experience or achievements. **Recent Activity** - Comment on their posts or shared content. **Company Context** - Mention industry trends affecting their business. **Mutual Connections** - Leverage shared network relationships. **Value First** - Lead with insights, not sales pitches.",
+                "Craft compelling outreach by studying their background, engaging with their content first, finding common ground through shared connections or experiences, addressing industry-specific challenges they might face, and always leading with value or relevant insights rather than jumping straight into your pitch."
+            ];
+            return getRandomResponse(responses);
+        }
+        if (message.includes('template') || message.includes('format') || message.includes('structure')) {
+            return "Structure effective messages with this framework: **Opening** - Personal connection or relevant insight (1-2 lines). **Value Proposition** - How you can help their specific situation (2-3 lines). **Soft CTA** - Low-pressure next step like 'Worth a brief conversation?' Keep total message under 300 characters and avoid sales-heavy language in the first touch.";
+        }
+        if (message.includes('follow up') || message.includes('followup')) {
+            return "Follow-up strategy: **First Follow-up** - Add value with industry insights or relevant content (1 week later). **Second Follow-up** - Reference mutual connections or shared experiences (2 weeks later). **Third Follow-up** - Address potential objections or timing concerns (1 month later). Always provide value in each touchpoint rather than just checking in.";
+        }
+        return "Effective messaging combines personalization, value, and timing. Research your prospect's background, engage with their content, craft messages that address their specific challenges, and always lead with insights rather than sales pitches. Keep initial outreach concise and focused on building rapport.";
     }
     
-    if (keywords.includes('search')) {
-        return "Master Sales Navigator search by: 1) Starting broad then narrowing with filters, 2) Using boolean operators (AND, OR, NOT) for precision, 3) Saving effective searches for regular updates, 4) Combining multiple filter types (geography + industry + seniority), and 5) Regularly refining based on results quality.";
+    // Search-related responses
+    if (keywords.includes('search') || keywords.includes('filter') || keywords.includes('query')) {
+        const responses = [
+            "Master Sales Navigator search with strategic filtering: Start broad with industry parameters, then narrow using geography, seniority, and company size. Use boolean operators (AND, OR, NOT) for keyword precision, save effective searches for automated updates, and combine multiple filter types for highly targeted results.",
+            "Advanced search techniques: **Boolean Logic** - Use AND, OR, NOT for precise targeting. **Keyword Strategy** - Include job titles, skills, and industry terms. **Filter Combinations** - Layer geography, industry, and seniority filters. **Saved Searches** - Set up notifications for new matches. **Regular Refinement** - Adjust based on result quality.",
+            "Optimize your search approach by building queries systematically. Start with core industry filters, add geographic constraints, specify seniority levels, use relevant keywords with boolean operators, save successful searches for ongoing monitoring, and regularly review and refine your criteria based on lead quality."
+        ];
+        return getRandomResponse(responses);
     }
     
-    return "I can help you with specific Sales Navigator techniques. Could you provide more details about what you're trying to accomplish?";
+    // CRM and integration responses
+    if (keywords.includes('crm') || keywords.includes('integration') || keywords.includes('sync')) {
+        return "Sales Navigator integrates with major CRMs like Salesforce, HubSpot, and Microsoft Dynamics. Sync lead data automatically, track engagement across platforms, maintain unified contact records, and leverage Sales Navigator insights within your existing workflow. Set up the integration through your CRM's app marketplace or Sales Navigator settings.";
+    }
+    
+    // Account-based responses
+    if (keywords.includes('account') || keywords.includes('company') || keywords.includes('organization')) {
+        return "Account-based selling with Sales Navigator: Use Account IQ for company insights and growth signals, identify key decision makers across departments, track account activity and news alerts, build comprehensive contact maps within target organizations, and coordinate team-based account strategies using shared lists and notes.";
+    }
+    
+    return "I can help you with specific Sales Navigator techniques. What particular aspect would you like to explore further - lead generation, messaging strategies, search optimization, or account management?";
+}
+
+// Helper function to return random responses for variety
+function getRandomResponse(responses) {
+    return responses[Math.floor(Math.random() * responses.length)];
 }
 
 function generateDefinitionResponse(keywords, message) {
     if (keywords.includes('leads')) {
-        return "In Sales Navigator, leads are potential customers or prospects identified through targeted searches. They're individuals who match your ideal customer profile and represent potential sales opportunities. Sales Navigator uses AI to recommend leads based on your saved searches, account preferences, and engagement history.";
+        const responses = [
+            "In Sales Navigator, leads are potential customers identified through targeted searches who match your ideal customer profile. Sales Navigator's AI recommends leads based on your saved searches, account preferences, and engagement patterns to help you find the most relevant prospects.",
+            "Leads represent qualified prospects discovered through Sales Navigator's advanced search capabilities. They're individuals within your target market who show potential for your products or services, prioritized by relevance based on your activity and preferences.",
+            "Sales Navigator leads are pre-qualified prospects generated through intelligent filtering and AI recommendations. These are potential customers who match your specified criteria for industry, role, company size, and other relevant factors that indicate sales opportunity."
+        ];
+        return getRandomResponse(responses);
     }
     
     if (keywords.includes('accounts')) {
-        return "Accounts in Sales Navigator represent companies or organizations you're targeting. They provide comprehensive company insights including employee count, recent news, growth signals, and decision-maker identification. You can save accounts to track changes and receive alerts about important updates.";
+        const responses = [
+            "Accounts represent target companies or organizations in your sales territory. Sales Navigator provides comprehensive account insights including employee count, recent news, growth signals, decision-maker identification, and relationship mapping to help you understand and engage entire organizations.",
+            "Sales Navigator accounts are companies you're actively targeting or monitoring. They offer detailed organizational insights, key personnel identification, company news and updates, growth indicators, and tools for coordinated team-based selling approaches.",
+            "Accounts in Sales Navigator encompass your target organizations with rich company data, employee insights, recent developments, and strategic information. You can track account changes, set up alerts for important updates, and collaborate with team members on account strategies."
+        ];
+        return getRandomResponse(responses);
+    }
+    
+    if (keywords.includes('inmail')) {
+        return "InMail is Sales Navigator's premium messaging feature that allows you to contact LinkedIn members outside your network. Unlike regular LinkedIn messages, InMail reaches prospects directly regardless of connection status, with higher deliverability rates and read receipts for tracking engagement.";
+    }
+    
+    if (keywords.includes('teamlink')) {
+        return "TeamLink shows you warm introduction paths to prospects through your company colleagues' networks. It reveals which team members are connected to your targets, enabling leveraged introductions and higher response rates through trusted referrals.";
+    }
+    
+    if (keywords.includes('sales assistant')) {
+        return "Sales Assistant is Sales Navigator's AI-powered prospecting tool that automatically delivers pre-screened leads, identifies optimal connection paths, and drafts personalized outreach messages. It learns from your preferences and feedback to continuously improve lead recommendations.";
     }
     
     if (keywords.includes('features') && message.includes('premium')) {
-        return "Sales Navigator Premium includes: unlimited people searches, advanced lead and company search filters, InMail messaging credits, real-time sales updates, CRM integration, team collaboration tools, and enhanced visibility into extended networks beyond your 1st-degree connections.";
+        return "Sales Navigator Premium includes unlimited people searches, advanced lead and company search filters, InMail messaging credits, real-time sales updates, CRM integration, team collaboration tools, enhanced visibility into extended networks, and AI-powered lead recommendations.";
     }
     
-    return "Sales Navigator is LinkedIn's advanced sales prospecting platform that helps sales professionals find, understand, and engage with prospects and accounts more effectively than standard LinkedIn.";
+    if (keywords.includes('boolean')) {
+        return "Boolean search in Sales Navigator uses logical operators (AND, OR, NOT) to create precise search queries. This advanced technique helps you combine multiple keywords and criteria to find highly specific prospects that match complex requirements.";
+    }
+    
+    if (keywords.includes('webinar')) {
+        return "A webinar is an online seminar or educational presentation that participants can join remotely. In the context of Sales Navigator, LinkedIn regularly hosts webinars to teach sales professionals best practices, new feature updates, advanced prospecting techniques, and strategic sales methodologies. These training sessions help users maximize their Sales Navigator effectiveness and stay current with platform capabilities.";
+    }
+    
+    const generalResponses = [
+        "Sales Navigator is LinkedIn's advanced sales prospecting platform that helps sales professionals find, understand, and engage with prospects and accounts more effectively than standard LinkedIn.",
+        "Sales Navigator provides sales teams with advanced tools for lead generation, account research, relationship mapping, and personalized outreach to accelerate the sales process.",
+        "LinkedIn Sales Navigator is a premium prospecting solution offering enhanced search capabilities, detailed prospect insights, team collaboration features, and AI-powered recommendations for sales professionals."
+    ];
+    return getRandomResponse(generalResponses);
 }
 
 function generateRecommendationResponse(keywords, message) {
-    if (keywords.includes('strategy')) {
-        return "Best Sales Navigator strategies: 1) Build a systematic prospecting routine with daily search activities, 2) Maintain organized saved searches and account lists, 3) Engage with prospect content before reaching out, 4) Use social selling techniques with valuable insights sharing, 5) Track and measure your outreach performance regularly.";
+    if (keywords.includes('strategy') || keywords.includes('approach')) {
+        const responses = [
+            "For effective Sales Navigator strategy: **Define Your ICP** - Create detailed ideal customer profiles. **Targeted Searches** - Set up precise saved searches with relevant filters. **Content Engagement** - Interact with prospects' posts before outreach. **Warm Introductions** - Leverage TeamLink for referrals. **Performance Tracking** - Monitor and analyze your results consistently.",
+            "Build a systematic Sales Navigator approach: Start with clear target market definition, create multiple saved searches for different prospect types, engage authentically with prospect content, use social selling techniques before direct outreach, and maintain consistent daily activity for compound results.",
+            "Strategic Sales Navigator usage involves profile optimization, systematic prospect research, content-first engagement, relationship-based outreach, consistent follow-up sequences, performance measurement, and continuous refinement based on response rates and conversion metrics."
+        ];
+        return getRandomResponse(responses);
     }
     
-    if (keywords.includes('messaging')) {
-        return "Top messaging best practices: 1) Research thoroughly before messaging, 2) Reference specific details from their profile or company, 3) Lead with industry insights or valuable resources, 4) Keep initial messages under 300 characters, 5) Follow up strategically with continued value, and 6) Use InMail for prospects outside your network.";
+    if (keywords.includes('messaging') || keywords.includes('outreach')) {
+        const responses = [
+            "Top messaging best practices: **Research First** - Study their profile and recent activity thoroughly. **Personalize Everything** - Reference specific details from their background or company. **Value-Led Opening** - Share industry insights or valuable resources. **Concise Format** - Keep initial messages under 300 characters. **Strategic Follow-up** - Continue providing value in subsequent touches.",
+            "Effective outreach recommendations: Research each prospect individually, engage with their content before messaging, craft personalized messages with specific value propositions, use soft call-to-actions, leverage mutual connections when possible, and maintain consistent but valuable follow-up sequences.",
+            "Optimize your messaging approach: Lead with relevant insights rather than sales pitches, reference mutual connections or shared experiences, address industry-specific challenges they might face, keep initial outreach conversational and brief, and always provide clear next steps or value in follow-ups."
+        ];
+        return getRandomResponse(responses);
     }
     
-    return "For best results with Sales Navigator, focus on building genuine relationships, providing value in every interaction, and maintaining consistent prospecting activities. What specific area would you like recommendations for?";
+    if (keywords.includes('best practices') || keywords.includes('tips')) {
+        return "Sales Navigator best practices: **Profile Optimization** - Professional, complete LinkedIn profile. **Systematic Prospecting** - Daily search and engagement routines. **Content Engagement** - Meaningful interactions before outreach. **Personalized Messaging** - Customized approaches for each prospect. **Performance Tracking** - Monitor metrics and refine strategies based on results.";
+    }
+    
+    if (keywords.includes('results') || keywords.includes('performance')) {
+        return "Improve your Sales Navigator results: Set clear daily activity goals, track response rates and conversion metrics, A/B test different message approaches, engage with prospect content before outreach, use TeamLink for warm introductions, maintain consistent follow-up schedules, and regularly review and refine your ideal customer profile.";
+    }
+    
+    const generalRecommendations = [
+        "For best results with Sales Navigator, focus on building genuine relationships, providing value in every interaction, and maintaining consistent prospecting activities. What specific area would you like recommendations for?",
+        "Success with Sales Navigator requires a strategic approach: clear target definition, systematic prospecting, authentic engagement, personalized outreach, and consistent performance measurement. Which aspect interests you most?",
+        "My recommendations center on relationship-first selling: thorough research, value-driven engagement, personalized communication, and long-term relationship development. What particular challenge can I help you address?"
+    ];
+    return getRandomResponse(generalRecommendations);
 }
 
 function generateTroubleshootingResponse(keywords, message) {
-    if (message.includes('not working') || message.includes('error')) {
-        return "Common Sales Navigator issues and solutions: 1) Clear browser cache and cookies, 2) Try using an incognito/private window, 3) Check your subscription status and permissions, 4) Ensure you're using a supported browser, 5) Contact LinkedIn support if problems persist. What specific issue are you experiencing?";
+    if (message.includes('not working') || message.includes('error') || message.includes('broken')) {
+        const responses = [
+            "Common Sales Navigator issues and solutions: **Browser Issues** - Clear cache and cookies, try incognito mode. **Subscription** - Verify your account status and permissions. **Compatibility** - Use supported browsers (Chrome, Firefox, Safari). **Network** - Check internet connection stability. If problems persist, contact LinkedIn support with specific error details.",
+            "Troubleshooting Sales Navigator problems: First, try refreshing the page and clearing your browser cache. Check if you're logged into the correct LinkedIn account with Sales Navigator access. Try using a different browser or incognito mode. For persistent issues, note the specific error message and contact LinkedIn support.",
+            "Sales Navigator troubleshooting steps: **Quick Fixes** - Refresh page, clear cache, try incognito mode. **Account Check** - Verify subscription status and permissions. **Browser Test** - Try different browsers or disable extensions. **Network Test** - Check internet connection. **Support** - Contact LinkedIn with specific error details if issues continue."
+        ];
+        return getRandomResponse(responses);
     }
     
-    if (message.includes('slow') || message.includes('loading')) {
-        return "To improve Sales Navigator performance: 1) Close unnecessary browser tabs, 2) Clear cache and browsing data, 3) Disable browser extensions temporarily, 4) Check your internet connection speed, 5) Try using a different browser. Large searches can also take time to load.";
+    if (message.includes('slow') || message.includes('loading') || message.includes('performance')) {
+        const responses = [
+            "To improve Sales Navigator performance: **Browser Optimization** - Close unnecessary tabs and disable unused extensions. **Clear Data** - Remove cache and browsing data. **Network Check** - Verify internet connection speed. **Search Scope** - Large searches with many filters can take longer to process.",
+            "Speed up Sales Navigator: Close other browser tabs consuming memory, clear your cache and cookies, disable browser extensions temporarily, check your internet connection speed, and consider breaking large searches into smaller, more focused queries for faster results.",
+            "Performance optimization tips: **Memory Management** - Close unused tabs and applications. **Browser Maintenance** - Clear cache regularly and update to latest version. **Search Strategy** - Use more specific filters to reduce result processing time. **Connection** - Ensure stable, high-speed internet access."
+        ];
+        return getRandomResponse(responses);
     }
     
-    return "I'm here to help troubleshoot your Sales Navigator challenges. Could you describe the specific issue you're encountering in more detail?";
+    if (message.includes('search') && (message.includes('results') || message.includes('finding'))) {
+        return "If you're not finding the right search results: **Broaden Filters** - Remove some restrictive criteria initially. **Keyword Strategy** - Try different job titles, skills, or industry terms. **Boolean Logic** - Use OR to expand, AND to narrow searches. **Geographic Settings** - Check location filters aren't too restrictive. **Save & Refine** - Save searches and adjust based on result quality.";
+    }
+    
+    if (message.includes('message') && (message.includes('send') || message.includes('delivery'))) {
+        return "Message delivery issues: **Connection Status** - Verify if you're connected to the recipient. **InMail Credits** - Check if you have available InMail credits for non-connections. **Message Limits** - Ensure you haven't exceeded daily messaging limits. **Account Status** - Confirm your Sales Navigator subscription is active. **Content Guidelines** - Review LinkedIn's messaging policies.";
+    }
+    
+    if (message.includes('login') || message.includes('access') || message.includes('permission')) {
+        return "Access issues troubleshooting: **Account Verification** - Ensure you're using the correct LinkedIn credentials. **Subscription Status** - Verify your Sales Navigator subscription is active and current. **Admin Permissions** - Check with your team admin if using a company account. **Browser Settings** - Clear cookies and try logging in with incognito mode.";
+    }
+    
+    const generalTroubleshooting = [
+        "I'm here to help troubleshoot your Sales Navigator challenges. Could you describe the specific issue you're encountering in more detail?",
+        "For effective troubleshooting, please share more specifics about the problem: What were you trying to do? What happened instead? Any error messages? This helps me provide more targeted solutions.",
+        "Let me help resolve your Sales Navigator issue. What specific feature or function isn't working as expected? The more details you provide, the better I can assist with a solution."
+    ];
+    return getRandomResponse(generalTroubleshooting);
 }
 
 function generateKeywordBasedResponse(keywords, message) {
