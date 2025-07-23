@@ -138,6 +138,7 @@ async function loadConfiguration() {
                     "description": "Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.",
                     "buttonText": "Reserve a spot",
                     "buttonAction": "reserveSpot",
+                    "buttonUrl": "https://training.sales.linkedin.com/live-introduction-to-sales-navigator",
                     "links": [
                         {
                             "text": "What tools will be featured",
