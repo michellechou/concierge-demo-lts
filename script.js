@@ -613,9 +613,6 @@ function typeResponse() {
     const responseContent = document.getElementById('responseContent');
     if (!responseContent) return;
     
-    // Determine which response to show based on current context
-    let responseData;
-    
     // Check both chat containers for the last user message
     const salesAssistantChat = document.getElementById('salesAssistantChat');
     const generalChat = document.getElementById('generalChat');
@@ -632,25 +629,18 @@ function typeResponse() {
         }
     });
     
-    // Match the question to the appropriate response
-    if (lastUserMessage.includes('Where to see leads')) {
-        responseData = helpWidgetConfig?.responses?.salesAssistantLeads;
-    } else if (lastUserMessage.includes('What tools will be featured')) {
-        responseData = helpWidgetConfig?.responses?.webinarSpeakers;
-    } else if (lastUserMessage.includes('webinars in August')) {
-        responseData = helpWidgetConfig?.responses?.augustWebinars;
-    } else if (lastUserMessage.includes('Message Assist boost')) {
-        responseData = helpWidgetConfig?.responses?.messageAssistReplies;
-    } else if (lastUserMessage.includes('Account IQ provide')) {
-        responseData = helpWidgetConfig?.responses?.accountIQInsights;
-    } else {
-        responseData = helpWidgetConfig?.responses?.salesAssistant;
-    }
+    console.log('typeResponse - Last user message found:', lastUserMessage);
     
-    if (!responseData) {
-        console.error('Response not found in configuration');
+    // Use the findConfigResponse function to get the answer
+    const answerText = findConfigResponse(lastUserMessage);
+    
+    if (!answerText) {
+        console.error('No response found for question:', lastUserMessage);
         return;
     }
+    
+    // Create a response data object with the answer
+    const responseData = { answer: answerText };
     
     // Convert markdown-like formatting to plain text for typing
     const fullText = responseData.answer
