@@ -194,7 +194,7 @@ function generateRecommendationCards() {
             if (link.action === 'showDetailPage') {
                 clickAction = 'showDetailPage(); return false;';
             } else if (link.text === 'Where to see leads from Sales Assistant') {
-                clickAction = 'showDetailPageForLeads(); return false;';
+                clickAction = 'showDetailPageForSalesAssistantLeads(); return false;';
             } else if (link.text === 'What tools will be featured') {
                 clickAction = 'showDetailPageForWebinarTools(); return false;';
             } else if (link.text === 'Any other webinars in August') {
@@ -444,6 +444,20 @@ function openHelpPanel() {
                         e.preventDefault();
                         console.log('Direct click handler triggered!');
                         showDetailPage();
+                    });
+                }
+                
+                if (link.textContent.includes('Where to see leads from Sales Assistant')) {
+                    console.log('Adding direct click handler to Sales Assistant Leads link');
+                    
+                    // Remove existing listeners
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+                    
+                    newLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('Direct Sales Assistant Leads click handler triggered!');
+                        showDetailPageForSalesAssistantLeads();
                     });
                 }
                 
@@ -712,6 +726,58 @@ function typeMessageAssistResponse() {
             const feedbackButtons = document.getElementById('messageFeedbackButtons');
             if (feedbackButtons) feedbackButtons.style.display = 'flex';
             console.log('Message Assist typing completed');
+        }
+    }
+    
+    setTimeout(typeNextChar, 500);
+}
+
+// Sales Assistant Leads AI Response Animation
+function startSalesAssistantLeadsAIResponse() {
+    console.log('=== startSalesAssistantLeadsAIResponse called ===');
+    
+    const aiThinking = document.getElementById('salesLeadsAiThinking');
+    const assistantResponse = document.getElementById('salesLeadsAssistantResponse');
+    const responseContent = document.getElementById('salesLeadsResponseContent');
+    
+    if (aiThinking && assistantResponse && responseContent) {
+        aiThinking.style.display = 'flex';
+        assistantResponse.style.display = 'none';
+        responseContent.innerHTML = '';
+        scrollChatToBottom();
+        
+        setTimeout(() => {
+            aiThinking.style.display = 'none';
+            assistantResponse.style.display = 'flex';
+            scrollChatToBottom();
+            typeSalesAssistantLeadsResponse();
+        }, 2000);
+    }
+}
+
+function typeSalesAssistantLeadsResponse() {
+    const responseContent = document.getElementById('salesLeadsResponseContent');
+    if (!responseContent) return;
+    
+    const answerText = findConfigResponse('Where to see leads from Sales Assistant');
+    if (!answerText) return;
+    
+    const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
+    const finalHTML = answerText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    
+    let currentIndex = 0;
+    responseContent.innerHTML = '<span class="typing-cursor"></span>';
+    
+    function typeNextChar() {
+        if (currentIndex < fullText.length) {
+            const currentText = fullText.substring(0, currentIndex + 1);
+            responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
+            currentIndex++;
+            setTimeout(typeNextChar, 25);
+        } else {
+            responseContent.innerHTML = `<p>${finalHTML}</p>`;
+            const feedbackButtons = document.getElementById('salesLeadsFeedbackButtons');
+            if (feedbackButtons) feedbackButtons.style.display = 'flex';
         }
     }
     
@@ -1107,6 +1173,7 @@ window.showDetailPageForMessageAssist = function() {
     const mainPage = document.getElementById('mainHelpPage');
     const detailPage = document.getElementById('detailHelpPage');
     const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const salesAssistantLeadsChat = document.getElementById('salesAssistantLeadsChat');
     const messageAssistChat = document.getElementById('messageAssistChat');
     const webinarToolsChat = document.getElementById('webinarToolsChat');
     const augustWebinarsChat = document.getElementById('augustWebinarsChat');
@@ -1123,6 +1190,7 @@ window.showDetailPageForMessageAssist = function() {
         // Show Message Assist chat thread, hide others
         if (messageAssistChat) messageAssistChat.style.display = 'block';
         if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'none';
         if (webinarToolsChat) webinarToolsChat.style.display = 'none';
         if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
         if (accountIQChat) accountIQChat.style.display = 'none';
@@ -1271,16 +1339,44 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
 }
 
 // Specific functions for each link
-window.showDetailPageForLeads = function() {
-    showDetailPageWithQuestion('Where to see leads from Sales Assistant', 'Sales Assistant Leads', 'rec1');
-};
 
-window.showDetailPageForSpeakers = function() {
-    showDetailPageWithQuestion('What tools will be featured', 'Webinar Tools', 'rec2');
-};
 
-window.showDetailPageForAugustWebinars = function() {
-    showDetailPageWithQuestion('Any other webinars in August', 'August Webinars', 'rec2');
+
+
+
+window.showDetailPageForSalesAssistantLeads = function() {
+    console.log('showDetailPageForSalesAssistantLeads called - Sales Assistant Leads thread');
+    const mainPage = document.getElementById('mainHelpPage');
+    const detailPage = document.getElementById('detailHelpPage');
+    const salesAssistantChat = document.getElementById('salesAssistantChat');
+    const salesAssistantLeadsChat = document.getElementById('salesAssistantLeadsChat');
+    const messageAssistChat = document.getElementById('messageAssistChat');
+    const webinarToolsChat = document.getElementById('webinarToolsChat');
+    const augustWebinarsChat = document.getElementById('augustWebinarsChat');
+    const accountIQChat = document.getElementById('accountIQChat');
+    const generalChat = document.getElementById('generalChat');
+    
+    if (mainPage && detailPage) {
+        mainPage.style.display = 'none';
+        detailPage.style.display = 'block';
+        
+        // Show Sales Assistant Leads chat thread, hide others
+        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'block';
+        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (messageAssistChat) messageAssistChat.style.display = 'none';
+        if (webinarToolsChat) webinarToolsChat.style.display = 'none';
+        if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
+        if (accountIQChat) accountIQChat.style.display = 'none';
+        if (generalChat) generalChat.style.display = 'none';
+        
+        console.log('Page navigation completed - Sales Assistant Leads chat thread visible');
+        
+        startSalesAssistantLeadsAIResponse();
+        
+        setTimeout(() => {
+            handleFollowUpMessage('salesAssistantLeadsChat');
+        }, 100);
+    }
 };
 
 window.showDetailPageForWebinarTools = function() {
@@ -1301,6 +1397,7 @@ window.showDetailPageForWebinarTools = function() {
         // Show Webinar Tools chat thread, hide others
         if (webinarToolsChat) webinarToolsChat.style.display = 'block';
         if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'none';
         if (messageAssistChat) messageAssistChat.style.display = 'none';
         if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
         if (accountIQChat) accountIQChat.style.display = 'none';
@@ -1334,6 +1431,7 @@ window.showDetailPageForAugustWebinars = function() {
         // Show August Webinars chat thread, hide others
         if (augustWebinarsChat) augustWebinarsChat.style.display = 'block';
         if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'none';
         if (messageAssistChat) messageAssistChat.style.display = 'none';
         if (webinarToolsChat) webinarToolsChat.style.display = 'none';
         if (accountIQChat) accountIQChat.style.display = 'none';
@@ -1367,6 +1465,7 @@ window.showDetailPageForAccountIQ = function() {
         // Show Account IQ chat thread, hide others
         if (accountIQChat) accountIQChat.style.display = 'block';
         if (salesAssistantChat) salesAssistantChat.style.display = 'none';
+        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'none';
         if (messageAssistChat) messageAssistChat.style.display = 'none';
         if (webinarToolsChat) webinarToolsChat.style.display = 'none';
         if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
