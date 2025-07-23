@@ -72,6 +72,28 @@ function resetAllChatContainers() {
     console.log('All chat containers reset to initial state');
 }
 
+// Helper function to hide all chat containers and show only one
+function hideAllChatContainersExcept(activeContainerId) {
+    console.log('Hiding all chat containers except:', activeContainerId);
+    const allChatContainers = [
+        'salesAssistantChat', 'messageAssistChat', 'salesAssistantLeadsChat', 
+        'webinarToolsChat', 'augustWebinarsChat', 'accountIQChat', 'generalChat'
+    ];
+    
+    allChatContainers.forEach(chatId => {
+        const chatElement = document.getElementById(chatId);
+        if (chatElement) {
+            if (chatId === activeContainerId) {
+                chatElement.style.display = 'block';
+                console.log(`Showing chat container: ${chatId}`);
+            } else {
+                chatElement.style.display = 'none';
+                console.log(`Hiding chat container: ${chatId}`);
+            }
+        }
+    });
+}
+
 // Auto-scroll function for chat messages
 function scrollChatToBottom() {
     console.log('scrollChatToBottom called');
@@ -1265,9 +1287,8 @@ window.showDetailPage = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show Sales Assistant chat thread, hide general chat
-        if (salesAssistantChat) salesAssistantChat.style.display = 'block';
-        if (generalChat) generalChat.style.display = 'none';
+        // Hide all chat containers and show only Sales Assistant
+        hideAllChatContainersExcept('salesAssistantChat');
         
         console.log('Page navigation completed - Sales Assistant chat thread visible');
         
@@ -1306,14 +1327,8 @@ window.showDetailPageForMessageAssist = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show Message Assist chat thread, hide others
-        if (messageAssistChat) messageAssistChat.style.display = 'block';
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'none';
-        if (webinarToolsChat) webinarToolsChat.style.display = 'none';
-        if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
-        if (accountIQChat) accountIQChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'none';
+        // Hide all chat containers and show only Message Assist
+        hideAllChatContainersExcept('messageAssistChat');
         
         console.log('Page navigation completed - Message Assist chat thread visible');
         
@@ -1340,9 +1355,8 @@ window.showDetailPageWithGreyMessage = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show general chat thread, hide Sales Assistant chat
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'block';
+        // Hide all chat containers and show only general chat
+        hideAllChatContainersExcept('generalChat');
         
         console.log('Page navigation completed - General chat thread visible');
         
@@ -1483,14 +1497,8 @@ window.showDetailPageForSalesAssistantLeads = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show Sales Assistant Leads chat thread, hide others
-        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'block';
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (messageAssistChat) messageAssistChat.style.display = 'none';
-        if (webinarToolsChat) webinarToolsChat.style.display = 'none';
-        if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
-        if (accountIQChat) accountIQChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'none';
+        // Hide all chat containers and show only Sales Assistant Leads
+        hideAllChatContainersExcept('salesAssistantLeadsChat');
         
         console.log('Page navigation completed - Sales Assistant Leads chat thread visible');
         
@@ -1521,14 +1529,8 @@ window.showDetailPageForWebinarTools = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show Webinar Tools chat thread, hide others
-        if (webinarToolsChat) webinarToolsChat.style.display = 'block';
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'none';
-        if (messageAssistChat) messageAssistChat.style.display = 'none';
-        if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
-        if (accountIQChat) accountIQChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'none';
+        // Hide all chat containers and show only Webinar Tools
+        hideAllChatContainersExcept('webinarToolsChat');
         
         console.log('Page navigation completed - Webinar Tools chat thread visible');
         
@@ -1559,14 +1561,8 @@ window.showDetailPageForAugustWebinars = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show August Webinars chat thread, hide others
-        if (augustWebinarsChat) augustWebinarsChat.style.display = 'block';
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'none';
-        if (messageAssistChat) messageAssistChat.style.display = 'none';
-        if (webinarToolsChat) webinarToolsChat.style.display = 'none';
-        if (accountIQChat) accountIQChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'none';
+        // Hide all chat containers and show only August Webinars
+        hideAllChatContainersExcept('augustWebinarsChat');
         
         console.log('Page navigation completed - August Webinars chat thread visible');
         
@@ -1597,14 +1593,8 @@ window.showDetailPageForAccountIQ = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show Account IQ chat thread, hide others
-        if (accountIQChat) accountIQChat.style.display = 'block';
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (salesAssistantLeadsChat) salesAssistantLeadsChat.style.display = 'none';
-        if (messageAssistChat) messageAssistChat.style.display = 'none';
-        if (webinarToolsChat) webinarToolsChat.style.display = 'none';
-        if (augustWebinarsChat) augustWebinarsChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'none';
+        // Hide all chat containers and show only Account IQ
+        hideAllChatContainersExcept('accountIQChat');
         
         console.log('Page navigation completed - Account IQ chat thread visible');
         
@@ -1629,9 +1619,8 @@ window.showDetailPageForSalesAssistant = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show general chat thread for Sales Assistant, hide Sales Assistant chat
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'block';
+        // Hide all chat containers and show only general chat
+        hideAllChatContainersExcept('generalChat');
         
         // Clear previous chat and add Sales Assistant-specific content card
         generalChat.innerHTML = `
@@ -1681,9 +1670,8 @@ window.showDetailPageForStrategies = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show general chat thread for strategies, hide Sales Assistant chat
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'block';
+        // Hide all chat containers and show only general chat
+        hideAllChatContainersExcept('generalChat');
         
         // Get recommendation data from config
         const strategiesRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec2');
@@ -1741,9 +1729,8 @@ window.showDetailPageForInnovations = function() {
         mainPage.style.display = 'none';
         detailPage.style.display = 'block';
         
-        // Show general chat thread for innovations, hide Sales Assistant chat
-        if (salesAssistantChat) salesAssistantChat.style.display = 'none';
-        if (generalChat) generalChat.style.display = 'block';
+        // Hide all chat containers and show only general chat
+        hideAllChatContainersExcept('generalChat');
         
         // Get recommendation data from config
         const innovationsRec = helpWidgetConfig?.recommendations?.find(rec => rec.id === 'rec3');
