@@ -199,7 +199,8 @@ function generateRecommendationCards() {
                 clickAction = 'showDetailPageForSpeakers(); return false;';
             } else if (link.text === 'Any other webinars in August') {
                 clickAction = 'showDetailPageForAugustWebinars(); return false;';
-
+            } else if (link.text === 'Does Message Assist boost replies') {
+                clickAction = 'showDetailPageForMessageAssist(); return false;';
             } else if (link.text === 'What insights does Account IQ provide') {
                 clickAction = 'showDetailPageForAccountIQ(); return false;';
             }
