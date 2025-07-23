@@ -720,6 +720,12 @@ function typeMessageAssistResponse() {
             const currentText = fullText.substring(0, currentIndex + 1);
             responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
             currentIndex++;
+            
+            // Auto-scroll during typing to keep up with growing content
+            if (currentIndex % 50 === 0) { // Scroll every 50 characters
+                scrollChatToBottom();
+            }
+            
             setTimeout(typeNextChar, 25);
         } else {
             responseContent.innerHTML = `<p>${finalHTML}</p>`;
@@ -773,6 +779,12 @@ function typeSalesAssistantLeadsResponse() {
             const currentText = fullText.substring(0, currentIndex + 1);
             responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
             currentIndex++;
+            
+            // Auto-scroll during typing to keep up with growing content
+            if (currentIndex % 50 === 0) { // Scroll every 50 characters
+                scrollChatToBottom();
+            }
+            
             setTimeout(typeNextChar, 25);
         } else {
             responseContent.innerHTML = `<p>${finalHTML}</p>`;
@@ -825,6 +837,12 @@ function typeWebinarToolsResponse() {
             const currentText = fullText.substring(0, currentIndex + 1);
             responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
             currentIndex++;
+            
+            // Auto-scroll during typing to keep up with growing content
+            if (currentIndex % 50 === 0) { // Scroll every 50 characters
+                scrollChatToBottom();
+            }
+            
             setTimeout(typeNextChar, 25);
         } else {
             responseContent.innerHTML = `<p>${finalHTML}</p>`;
@@ -877,6 +895,12 @@ function typeAugustWebinarsResponse() {
             const currentText = fullText.substring(0, currentIndex + 1);
             responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
             currentIndex++;
+            
+            // Auto-scroll during typing to keep up with growing content
+            if (currentIndex % 50 === 0) { // Scroll every 50 characters
+                scrollChatToBottom();
+            }
+            
             setTimeout(typeNextChar, 25);
         } else {
             responseContent.innerHTML = `<p>${finalHTML}</p>`;
@@ -929,6 +953,12 @@ function typeAccountIQResponse() {
             const currentText = fullText.substring(0, currentIndex + 1);
             responseContent.innerHTML = currentText.replace(/\n/g, '<br>') + '<span class="typing-cursor"></span>';
             currentIndex++;
+            
+            // Auto-scroll during typing to keep up with growing content
+            if (currentIndex % 50 === 0) { // Scroll every 50 characters
+                scrollChatToBottom();
+            }
+            
             setTimeout(typeNextChar, 25);
         } else {
             responseContent.innerHTML = `<p>${finalHTML}</p>`;
