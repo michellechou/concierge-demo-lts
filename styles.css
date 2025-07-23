@@ -935,7 +935,7 @@ body {
 
 /* Recommendations */
 .recommendations {
-    padding: 20px 24px 40px 24px; /* Added 20px more bottom padding for white space */
+    padding: 20px 24px 30px 24px; /* Added 10px more bottom padding for white space */
     background: #FFFFFF;
 }
 
