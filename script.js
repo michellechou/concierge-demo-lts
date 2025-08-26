@@ -147,7 +147,7 @@ async function loadConfiguration() {
                 {
                     "id": "rec1",
                     "title": "Streamline Your Hiring Process",
-                    "description": "Connect with top talent more efficiently using the AI-powered LinkedIn <span class=\"sales-assistant\">Hiring Assistant</span> for smarter recruiting.",
+                    "description": "Connect with top talent more efficiently using<br>the AI-powered LinkedIn <span class=\"sales-assistant\">Hiring Assistant</span> for smarter recruiting.",
                     "buttonText": "Try Hiring Assistant",
                     "buttonAction": "",
                     "buttonUrl": "",
@@ -2665,7 +2665,7 @@ function getDefaultHelpConfig() {
             {
                 "id": "rec1",
                 "title": "Streamline Your Hiring Process",
-                "description": "Connect with top talent more efficiently using the AI-powered LinkedIn <span class=\"sales-assistant\">Hiring Assistant</span> for smarter recruiting.",
+                "description": "Connect with top talent more efficiently using<br>the AI-powered LinkedIn <span class=\"sales-assistant\">Hiring Assistant</span> for smarter recruiting.",
                 "buttonText": "Try Hiring Assistant",
                 "buttonAction": "",
                 "buttonUrl": "",
