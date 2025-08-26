@@ -142,22 +142,22 @@ async function loadConfiguration() {
         console.error('Failed to load configuration:', error);
         // Set fallback configuration
         helpWidgetConfig = {
-            greeting: { text: "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity" },
+            greeting: { text: "Hi Alice, you saved 15 leads last week. Here are 2 recommendations to boost productivity" },
             recommendations: [
                 {
                     "id": "rec1",
-                    "title": "Save time with Sales Assistant",
-                    "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Sales Assistant</span>.",
-                    "buttonText": "Try Sales Assistant",
-                    "buttonAction": "trySalesAssistant",
-                                         "buttonUrl": "https://www.linkedin.com/sales/sales-assistant",
+                    "title": "Streamline Your Hiring Process",
+                    "description": "Connect with top talent more efficiently using the AI-powered LinkedIn <span class=\"sales-assistant\">Hiring Assistant</span> for smarter recruiting.",
+                    "buttonText": "Try Hiring Assistant",
+                    "buttonAction": "",
+                    "buttonUrl": "",
                     "links": [
                         {
-                            "text": "How does Sales Assistant work",
+                            "text": "How does Hiring Assistant work",
                             "action": "showDetailPage"
                         },
                         {
-                            "text": "Where to see leads from Sales Assistant",
+                            "text": "Where to see leads from Hiring Assistant",
                             "action": "viewLeads"
                         }
                     ],
@@ -183,36 +183,16 @@ async function loadConfiguration() {
                     ],
                     "expanded": false,
                     "chatFunction": "showDetailPageForStrategies"
-                },
-                {
-                    "id": "rec3",
-                    "title": "Unlock Q2 Innovations", 
-                    "description": "Discover latest features to enhance sales workflow. Save time with Message Assist to draft outreach and gain deeper insights with Account IQ for smarter, strategic decisions.",
-                    "buttonText": "Explore Q2 updates",
-                    "buttonAction": "exploreUpdates",
-                    "buttonUrl": "https://www.linkedin.com/help/sales-navigator/answer/a7796319?hcppcid=search",
-                    "links": [
-                        {
-                            "text": "Does Message Assist boost replies",
-                            "action": "messageAssistInfo"
-                        },
-                        {
-                            "text": "What insights does Account IQ provide",
-                            "action": "accountIQInfo"
-                        }
-                    ],
-                    "expanded": false,
-                    "chatFunction": "showDetailPageForInnovations"
                 }
             ],
             resources: { title: "Resources", links: [] },
             responses: {
                 "salesAssistant": {
-                    "question": "How does Sales Assistant work",
-                    "answer": "Sales Navigator's AI-powered Sales Assistant is a tool designed to enhance the efficiency of prospecting by delivering pre-screened leads, identifying optimal paths to connect with prospects, and drafting personalized outreach messages. To maximize the effectiveness of Sales Assistant, here's how it works and some tips to optimize its key features:\n\n· **Lead Recommendation and Feedback:**\n· Sales Assistant provides recommendations for leads based on your preferences, including your selected book of business, products, and personas.\n· Reviewing leads and providing feedback (e.g., marking a lead as \"Not a fit\" with specific reasons such as incorrect geography, seniority, or industry) helps Sales Assistant refine future recommendations to align with your needs.\n\n· **Personalized Messaging Assistance:**\n· Using Message Assist, Sales Assistant drafts personalized first-touch messages by leveraging account insights, lead data, and customization based on your product details and messaging preferences.\n· You can refine these drafts, and Sales Assistant learns from your edits to improve future message drafts automatically.\n\n· **Product and Service Personalization:**\n· You can specify the product or service you're selling, ensuring that generated messages and lead recommendations are tailored to showcase how your offering solves a lead's needs.\n· Adding detailed product descriptions enhances personalization and improves how prospects are targeted.\n\n· **Book of Business:**\n· Designating an \"account list\" in your book of business helps target relevant accounts. Lists should include at least five accounts to be actively used by Sales Assistant.\n· To populate your book of business, you can use auto-saved CRM accounts, upload a CSV file, or manually create an account list."
+                    "question": "How does Hiring Assistant work",
+                    "answer": "LinkedIn's AI-powered Hiring Assistant streamlines your recruiting process by identifying top talent, providing candidate insights, and automating outreach. Here's how it works and tips to optimize its key features:\n\n· **Candidate Recommendation and Matching:**\n· Hiring Assistant analyzes job requirements and provides pre-screened candidate recommendations based on skills, experience, and role fit.\n· Providing feedback on candidate matches (e.g., marking as \"Great fit\" or \"Not suitable\" with specific reasons) helps refine future recommendations.\n\n· **Intelligent Sourcing:**\n· Uses AI to search across LinkedIn's talent pool, identifying passive candidates who match your specific hiring criteria.\n· Leverages behavioral signals and profile data to surface candidates most likely to be interested in your opportunity.\n\n· **Personalized Outreach:**\n· Drafts personalized recruiting messages by analyzing candidate backgrounds, interests, and career progression.\n· You can customize these drafts, and the AI learns from your preferences to improve future messaging.\n\n· **Talent Pipeline Management:**\n· Organizes candidates into talent pipelines based on roles, departments, or hiring priorities.\n· Tracks candidate engagement and provides insights on optimal outreach timing and messaging strategies."
                 },
                 "salesAssistantLeads": {
-                    "question": "Where to see leads from Sales Assistant",
+                    "question": "Where to see leads from Hiring Assistant",
                     "answer": "To see leads from Sales Assistant in Sales Navigator, follow these steps:\\n\\n1. **Navigate to the Prospecting Tab:**\\n· Click on the \\\"Prospecting\\\" option in the top menu.\\n\\n2. **Review the Recommended Leads:**\\n· In the \\\"Prospecting\\\" tab, the left pane will display leads recommended by Sales Assistant.\\n· Each recommended lead includes details on why it was selected, such as alignment with your lead preferences, account list, or personas. This helps you understand the recommendation's relevance.\\n\\n3. **Interact with Leads:**\\n· Select a specific lead from the left pane to view its details.\\n· To confirm if the lead recommendation is suitable for you:\\n  · Click \\\"Good fit\\\" to approve the lead. Approved leads are saved automatically to your \\\"Leads from Sales Assistant\\\" list for future tracking.\\n  · Click \\\"Not a fit\\\" to reject the lead. You will be prompted to provide feedback on why the lead does not meet your needs, which allows the Sales Assistant to refine future recommendations.\\n\\n4. **First-Touch Messaging:**\\n· If you mark a lead as a \\\"Good fit,\\\" Sales Assistant will automatically draft a personalized first-touch message. You can:\\n  · Edit the draft before sending.\\n  · Copy the message to send through another medium (e.g., email).\\n  · Save it for later use.\\n\\n5. **Generate More Leads:**\\n· If you want to explore additional leads beyond the initial batch:\\n  · Click \\\"Generate leads\\\" in the left pane. This action provides new recommendations; however, you must review the existing batch before accessing more leads.\\n  · Keep in mind that there is a daily limit for generating new lead suggestions.\\n\\nBy following these steps, you can efficiently access and manage the leads recommended by Sales Assistant to optimize your prospecting process."
                 },
                 "webinarSpeakers": {
@@ -238,32 +218,48 @@ async function loadConfiguration() {
 }
 
 function generateHelpContent() {
-    if (!helpWidgetConfig) {
+    const currentConfig = getHelpConfiguration();
+    if (!currentConfig) {
         console.error('Configuration not loaded yet');
         return;
     }
     
-    console.log('Generating help content from configuration...', helpWidgetConfig);
+    console.log('Generating help content from configuration...', currentConfig);
     
     // Update greeting
     const greetingElement = document.querySelector('.help-greeting p');
     console.log('Found greeting element:', !!greetingElement);
     console.log('Current greeting element text:', greetingElement?.textContent);
-    console.log('About to set greeting to:', helpWidgetConfig.greeting?.text);
+    console.log('About to set greeting to:', currentConfig.greeting?.text);
     
-    if (greetingElement && helpWidgetConfig.greeting) {
-        console.log('Updating greeting with:', helpWidgetConfig.greeting.text);
-        greetingElement.textContent = helpWidgetConfig.greeting.text;
+    if (greetingElement && currentConfig.greeting) {
+        console.log('Updating greeting with:', currentConfig.greeting.text);
+        greetingElement.textContent = currentConfig.greeting.text;
         console.log('After update, greeting element text:', greetingElement.textContent);
     } else {
         console.error('Greeting element not found or greeting data missing', {
             greetingElement: !!greetingElement,
-            greetingData: !!helpWidgetConfig.greeting
+            greetingData: !!currentConfig.greeting
         });
     }
     
     // Generate recommendation cards
     generateRecommendationCards();
+    
+    // Show/hide open cases section and related divider based on use case
+    const openCasesSection = document.querySelector('.open-cases-section');
+    const helpDivider = document.querySelector('.help-divider');
+    const activeUseCase = getActiveUseCase();
+    
+    if (activeUseCase === 'onboarding') {
+        // Hide open cases section and the divider above "We're here to help"
+        if (openCasesSection) openCasesSection.style.display = 'none';
+        if (helpDivider) helpDivider.style.display = 'none';
+    } else {
+        // Show both for growth use case
+        if (openCasesSection) openCasesSection.style.display = 'block';
+        if (helpDivider) helpDivider.style.display = 'block';
+    }
     
     // Generate resource links
     generateResourceLinks();
@@ -273,24 +269,33 @@ function generateHelpContent() {
 
 function generateRecommendationCards() {
     console.log('generateRecommendationCards called');
+    const currentConfig = getHelpConfiguration();
     const recommendationsContainer = document.querySelector('.recommendations');
     console.log('recommendationsContainer found:', !!recommendationsContainer);
-    console.log('helpWidgetConfig.recommendations:', helpWidgetConfig?.recommendations);
+    console.log('currentConfig:', currentConfig);
     
-    if (!recommendationsContainer || !helpWidgetConfig.recommendations) {
-        console.error('Recommendations container not found or no recommendations data', {
-            container: !!recommendationsContainer,
-            recommendations: !!helpWidgetConfig?.recommendations,
-            recommendationsLength: helpWidgetConfig?.recommendations?.length
-        });
+    if (!recommendationsContainer) {
+        console.error('Recommendations container not found');
         return;
     }
     
     // Clear existing content
     recommendationsContainer.innerHTML = '';
     
+    // Check if this is a checklist type (onboarding) or recommendations type (growth)
+    if (currentConfig.type === 'checklist' && currentConfig.checklist) {
+        generateChecklistContent(recommendationsContainer, currentConfig.checklist);
+        return;
+    }
+    
+    // Default recommendation cards generation
+    if (!currentConfig.recommendations) {
+        console.error('No recommendations data found');
+        return;
+    }
+    
     // Generate each recommendation card
-    helpWidgetConfig.recommendations.forEach((rec, index) => {
+    currentConfig.recommendations.forEach((rec, index) => {
         const isExpanded = rec.expanded;
         const expandedClass = isExpanded ? 'expanded' : '';
         const chevronIcon = isExpanded ? 'fa-chevron-up' : 'fa-chevron-down';
@@ -315,7 +320,7 @@ function generateRecommendationCards() {
             }
             
             return `<a href="#" class="link-item" onclick="${clickAction}">
-                <div class="diamond-icon"></div>
+                <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
                 ${link.text}
             </a>`;
         }).join('');
@@ -331,7 +336,7 @@ function generateRecommendationCards() {
                     <div class="button-container">
                         <button class="btn-primary" onclick="${rec.buttonUrl ? `window.open('${rec.buttonUrl}', '_blank'); return false;` : 'return false;'}">${rec.buttonText}</button>
                         <div class="chat-icon" onclick="${rec.chatFunction}(); return false;">
-                            <i class="fas fa-comment-dots"></i>
+                            <i class="fas fa-comments"></i>
                         </div>
                     </div>
                     <div class="recommendation-links">
@@ -343,6 +348,63 @@ function generateRecommendationCards() {
         
         recommendationsContainer.innerHTML += cardHTML;
     });
+}
+
+function generateChecklistContent(container, checklistData) {
+    console.log('Generating checklist content:', checklistData);
+    
+    const checklistHTML = `
+        <div class="onboarding-checklist">
+            <div class="checklist-header">
+                <h3 class="checklist-title">${checklistData.title}</h3>
+                <p class="checklist-subtitle">${checklistData.subtitle}</p>
+                <div class="progress-section">
+                    <span class="progress-text">${checklistData.completedItems}/${checklistData.totalItems}</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${(checklistData.completedItems / checklistData.totalItems) * 100}%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="checklist-items">
+                ${checklistData.items.map(item => `
+                    <div class="checklist-item ${item.completed ? 'completed' : ''}" data-item-id="${item.id}">
+                        <div class="checklist-item-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="checklist-item-content">
+                            <div class="checklist-item-title">${item.title}</div>
+                            <div class="checklist-item-subtitle">${item.subtitle}</div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = checklistHTML;
+    
+    // Add click handlers for checklist items
+    const checklistItems = container.querySelectorAll('.checklist-item');
+    checklistItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const itemId = this.dataset.itemId;
+            toggleChecklistItem(itemId);
+        });
+    });
+}
+
+function toggleChecklistItem(itemId) {
+    // Find the item in the onboarding config and toggle its completed state
+    const item = onboardingHelpConfig.checklist.items.find(i => i.id === itemId);
+    if (item) {
+        item.completed = !item.completed;
+        
+        // Update completed count
+        onboardingHelpConfig.checklist.completedItems = onboardingHelpConfig.checklist.items.filter(i => i.completed).length;
+        
+        // Regenerate the checklist to update UI
+        generateRecommendationCards();
+    }
 }
 
 function generateResourceLinks() {
@@ -395,123 +457,7 @@ const closeHelp = document.getElementById('closeHelp');
 // State management
 let isHelpPanelOpen = false;
 
-// Create floating help button
-function createFloatingHelpButton() {
-    const floatingButton = document.createElement('div');
-    floatingButton.id = 'floatingHelpButton';
-    floatingButton.className = 'floating-help-button';
-    floatingButton.innerHTML = `
-        <div class="floating-button-content">
-            <span class="help-icon">
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.44262 12.2014C1.29784 11.8243 1.31039 11.4044 1.47751 11.0343C1.64464 10.6641 1.95264 10.374 2.33378 10.2277C2.71491 10.0814 3.13795 10.0909 3.50983 10.2541C3.8817 10.4174 4.17196 10.721 4.31674 11.0982L5.95446 15.3646L6.91251 14.9968L4.18297 7.88613C4.03819 7.50896 4.05074 7.08911 4.21787 6.71896C4.38499 6.34881 4.693 6.05866 5.07413 5.91236C5.45526 5.76606 5.8783 5.77558 6.25018 5.93883C6.62206 6.10208 6.91232 6.40568 7.0571 6.78286L9.42269 12.9454L10.3807 12.5777L7.28727 4.51892C7.14248 4.14175 7.15503 3.7219 7.32216 3.35175C7.48928 2.9816 7.79729 2.69145 8.17842 2.54515C8.55956 2.39885 8.98259 2.40837 9.35447 2.57162C9.72635 2.73487 10.0166 3.03847 10.1614 3.41565L13.2549 11.4744L14.2129 11.1067L11.8473 4.94407C11.7025 4.5669 11.7151 4.14705 11.8822 3.7769C12.0493 3.40674 12.3573 3.1166 12.7385 2.9703C13.1196 2.82399 13.5426 2.83352 13.9145 2.99677C14.2864 3.16002 14.5767 3.46362 14.7214 3.8408L18.1788 12.8476L19.4653 10.4719C19.6216 10.2257 19.8522 10.0344 20.1239 9.92542C20.27 9.86355 20.4267 9.83093 20.5851 9.82944C20.7436 9.82795 20.9005 9.85763 21.0469 9.91675C21.1932 9.97587 21.3261 10.0633 21.4379 10.1739C21.5497 10.2845 21.6381 10.4162 21.698 10.5613C21.8132 10.8363 21.826 11.1436 21.7341 11.4285L19.5892 17.8105C19.2052 18.9564 18.5699 20.0052 17.7294 20.8809C16.8888 21.7567 15.864 22.4375 14.7289 22.8743L14.384 23.0067C12.3513 23.787 10.0951 23.7362 8.11179 22.8655C6.12843 21.9948 4.58039 20.3756 3.80821 18.364L1.44262 12.2014Z" fill="white"/>
-                </svg>
-            </span>
-            <span class="help-text">Recommendations</span>
-        </div>
-    `;
-    
-    // Add styles for the floating button
-    const style = document.createElement('style');
-    style.textContent = `
-        .floating-help-button {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            background: #0A66C2;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(10, 102, 194, 0.4);
-            transition: all 0.6s ease;
-            z-index: 1000;
-            overflow: hidden;
-            transform-origin: right center;
-                }
-        
-        .floating-help-button.auto-expanded {
-            width: auto;
-            padding: 0 20px 0 16px;
-            border-radius: 30px;
-            box-shadow: 0 6px 20px rgba(10, 102, 194, 0.6);
-        }
-        
-
-        
-        .floating-help-button:hover {
-            transform: scale(1.05);
-        }
-        
-        .floating-button-content {
-            display: flex;
-            align-items: center;
-            color: white;
-            font-weight: 500;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .floating-help-button.auto-expanded .floating-button-content {
-            justify-content: flex-start;
-            gap: 8px;
-        }
-        
-
-        
-        .help-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .help-icon svg {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-                }
-        
-        .help-text {
-            white-space: nowrap;
-            opacity: 0;
-            width: 0;
-            overflow: hidden;
-            transition: all 0.6s ease;
-            font-size: 14px;
-            font-weight: 500;
-            display: none;
-        }
-        
-        .floating-help-button.auto-expanded .help-text {
-            display: inline;
-            opacity: 1;
-            width: auto;
-        }
-        
-        @media (max-width: 768px) {
-            .floating-help-button {
-                bottom: 1rem;
-                right: 1rem;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Add click handler
-    floatingButton.addEventListener('click', openHelpPanel);
-    
-    document.body.appendChild(floatingButton);
-    
-    // Auto-expand after 2 seconds
-    setTimeout(() => {
-        floatingButton.classList.add('auto-expanded');
-    }, 2000);
-}
+// Floating help button removed - functionality moved to question mark icon in top nav
 
 // Store the natural height of the first page
 let naturalHeight = null;
@@ -521,6 +467,9 @@ function openHelpPanel() {
     if (helpPanel) {
         helpPanel.classList.add('open');
         isHelpPanelOpen = true;
+        
+        // Hide the notification badge when help panel opens
+        hideBadge();
         
         // Capture the natural height after the panel is fully opened
         setTimeout(() => {
@@ -542,7 +491,7 @@ function openHelpPanel() {
             links.forEach((link, index) => {
                 console.log(`Link ${index}:`, link.textContent.trim());
                 
-                if (link.textContent.includes('How does Sales Assistant work')) {
+                if (link.textContent.includes('How does Hiring Assistant work')) {
                     console.log('Adding direct click handler to Sales Assistant link');
                     
                     // Remove existing listeners
@@ -655,7 +604,7 @@ document.addEventListener('click', (e) => {
     if (isHelpPanelOpen && 
         helpPanel && 
         !helpPanel.contains(e.target) && 
-        !e.target.closest('.floating-help-button')) {
+        !e.target.closest('.nav-icon-with-badge')) {
         closeHelpPanel();
     }
 });
@@ -1403,7 +1352,7 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
             // Generate links HTML
             const linksHTML = rec.links.map(link => 
                 `<div class="link-item-static">
-                    <div class="diamond-icon"></div>
+                    <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
                     ${link.text}
                 </div>`
             ).join('');
@@ -1636,25 +1585,25 @@ window.showDetailPageForSalesAssistant = function() {
         // Clear previous chat and add Sales Assistant-specific content card (matching static chat)
         salesAssistantIconChat.innerHTML = `
             <div class="recommendation-card">
-                <h3>Save time with Sales Assistant</h3>
-                <p>Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class="sales-assistant">Sales Assistant</span>.</p>
+                <h3>Streamline Your Hiring Process</h3>
+                <p>Connect with top talent more efficiently using the AI-powered LinkedIn <span class="sales-assistant">Hiring Assistant</span> for smarter recruiting.</p>
                 <div class="button-container">
-                    <button class="btn-primary" onclick="window.open('https://www.linkedin.com/sales/sales-assistant', '_blank'); return false;">Try Sales Assistant</button>
+                    <button class="btn-primary" onclick="return false;">Try Hiring Assistant</button>
                 </div>
                 <div class="recommendation-links">
                     <div class="link-item-static">
-                        <div class="diamond-icon"></div>
-                        How does Sales Assistant work
+                        <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
+                        How does Hiring Assistant work
                     </div>
                     <div class="link-item-static">
-                        <div class="diamond-icon"></div>
-                        Where to see leads from Sales Assistant
+                        <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
+                        Where to see leads from Hiring Assistant
                     </div>
                 </div>
             </div>
             <div class="user-message-container grey-message-container">
                 <div class="grey-message">
-                    <p>Any follow-up questions about Sales Assistant I can help with?</p>
+                    <p>Any follow-up questions about Hiring Assistant I can help with?</p>
                 </div>
             </div>
         `;
@@ -1706,7 +1655,7 @@ window.showDetailPageForStrategies = function() {
         // Generate links HTML
         const linksHTML = strategiesRec.links.map(link => 
             `<div class="link-item-static">
-                <div class="diamond-icon"></div>
+                <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
                 ${link.text}
             </div>`
         ).join('');
@@ -1768,7 +1717,7 @@ window.showDetailPageForInnovations = function() {
         // Generate links HTML
         const linksHTML = innovationsRec.links.map(link => 
             `<div class="link-item-static">
-                <div class="diamond-icon"></div>
+                <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
                 ${link.text}
             </div>`
         ).join('');
@@ -1858,7 +1807,7 @@ function restoreOriginalUserMessage() {
         // Restore the original user message
         userMessageContainer.innerHTML = `
             <div class="user-message">
-                <p>How does Sales Assistant work</p>
+                <p>How does Hiring Assistant work</p>
             </div>
         `;
         
@@ -1894,9 +1843,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (linkItem) {
                 const linkText = linkItem.textContent.replace(/\s+/g, ' ').trim();
                 console.log('Link item text content:', `"${linkText}"`);
-                console.log('Checking if includes: "How does Sales Assistant work"');
+                console.log('Checking if includes: "How does Hiring Assistant work"');
                 
-                if (linkText.includes('How does Sales Assistant work')) {
+                if (linkText.includes('How does Hiring Assistant work')) {
                     e.preventDefault();
                     console.log('Sales Assistant link clicked - navigating to detail page');
                     showDetailPage();
@@ -2643,6 +2592,185 @@ function generateKeywordBasedResponse(keywords, message) {
     return "I understand you're asking about " + (keywords.length > 0 ? keywords.join(' and ') : "Sales Navigator") + ". Could you provide more specific details about your situation or what you're trying to achieve? This will help me give you more targeted advice.";
 }
 
+// Onboarding Use Case Configuration
+const onboardingHelpConfig = {
+    greeting: { text: "Hi Alice, we are here to help you best onboard to Recruiter and set you up for success." },
+    type: "checklist", // Different type to generate checklist instead of recommendations
+    checklist: {
+        title: "Onboarding checklist",
+        subtitle: "Top actions for the first 7 days",
+        totalItems: 5,
+        completedItems: 0,
+        items: [
+            {
+                id: "item1",
+                title: "Item 1 title",
+                subtitle: "Item 1 subtitle",
+                completed: false
+            },
+            {
+                id: "item2", 
+                title: "Item 2 title",
+                subtitle: "Item 2 subtitle",
+                completed: false
+            },
+            {
+                id: "item3",
+                title: "Item 3 title", 
+                subtitle: "Item 3 subtitle",
+                completed: false
+            },
+            {
+                id: "item4",
+                title: "Item 4 title",
+                subtitle: "Item 4 subtitle", 
+                completed: false
+            },
+            {
+                id: "item5",
+                title: "Item 5 title",
+                subtitle: "Item 5 subtitle",
+                completed: false
+            }
+        ]
+    },
+    responses: {}
+};
+
+// Function to get current active use case
+function getActiveUseCase() {
+    const onboardingPill = document.getElementById('onboarding-pill');
+    const growthPill = document.getElementById('growth-pill');
+    
+    if (onboardingPill && onboardingPill.classList.contains('active')) {
+        return 'onboarding';
+    } else if (growthPill && growthPill.classList.contains('active')) {
+        return 'growth';
+    }
+    return 'growth'; // Default to growth if none active
+}
+
+// Function to load appropriate help configuration
+function getHelpConfiguration() {
+    const activeUseCase = getActiveUseCase();
+    console.log('Active use case:', activeUseCase);
+    
+    if (activeUseCase === 'onboarding') {
+        console.log('Returning onboarding config');
+        return onboardingHelpConfig;
+    } else {
+        console.log('Returning growth config (default)');
+        return getDefaultHelpConfig(); // Always use default for growth
+    }
+}
+
+function getDefaultHelpConfig() {
+    return {
+        greeting: { text: "Hi Alice, you saved 15 leads last week. Here are 2 recommendations to boost productivity" },
+        recommendations: [
+            {
+                "id": "rec1",
+                "title": "Streamline Your Hiring Process",
+                "description": "Connect with top talent more efficiently using the AI-powered LinkedIn <span class=\"sales-assistant\">Hiring Assistant</span> for smarter recruiting.",
+                "buttonText": "Try Hiring Assistant",
+                "buttonAction": "",
+                "buttonUrl": "",
+                "links": [
+                    {
+                        "text": "How does Hiring Assistant work",
+                        "action": "showDetailPage"
+                    },
+                    {
+                        "text": "Where to see leads from Hiring Assistant",
+                        "action": "viewLeads"
+                    }
+                ],
+                "expanded": true,
+                "chatFunction": "showDetailPageForSalesAssistant"
+            },
+            {
+                "id": "rec2", 
+                "title": "Discover New Sales Strategies",
+                "description": "Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.",
+                "buttonText": "Reserve a spot",
+                "buttonAction": "reserveSpot",
+                "buttonUrl": "https://training.sales.linkedin.com/live-introduction-to-sales-navigator",
+                "links": [
+                    {
+                        "text": "What tools will be featured",
+                        "action": "viewSpeakers"
+                    },
+                    {
+                        "text": "Any other webinars in August",
+                        "action": "viewWebinars"
+                    }
+                ],
+                "expanded": false,
+                "chatFunction": "showDetailPageForStrategies"
+            }
+        ]
+    };
+}
+
+// Badge management functions
+function showBadge() {
+    const badge = document.querySelector('.notification-badge');
+    if (badge) {
+        badge.style.display = 'flex';
+    }
+}
+
+function showBadgeWithDelay() {
+    setTimeout(() => {
+        showBadge();
+    }, 500); // 0.5 second delay
+}
+
+function hideBadge() {
+    const badge = document.querySelector('.notification-badge');
+    if (badge) {
+        badge.style.display = 'none';
+    }
+}
+
+// Control Panel Toggle Functionality
+function toggleControlPill(pillType) {
+    const onboardingPill = document.getElementById('onboarding-pill');
+    const growthPill = document.getElementById('growth-pill');
+    
+    if (pillType === 'onboarding') {
+        // Activate onboarding pill only if it's not already active
+        if (!onboardingPill.classList.contains('active')) {
+            onboardingPill.classList.add('active');
+            growthPill.classList.remove('active');
+            // Show badge with delay when switching to different use case
+            showBadgeWithDelay();
+        }
+    } else if (pillType === 'growth') {
+        // Activate growth pill only if it's not already active
+        if (!growthPill.classList.contains('active')) {
+            growthPill.classList.add('active');
+            onboardingPill.classList.remove('active');
+            // Show badge with delay when switching to different use case
+            showBadgeWithDelay();
+        }
+    }
+    
+    // Regenerate help content if help panel is open
+    if (isHelpPanelOpen) {
+        console.log('Regenerating help content due to use case change');
+        generateHelpContent();
+    }
+    
+    // Also force regeneration for testing - remove this line if not needed
+    console.log('Force regenerating help content for testing');
+    generateHelpContent();
+    
+    // Add console log to see current state
+    console.log('Onboarding active:', onboardingPill.classList.contains('active'));
+    console.log('Growth active:', growthPill.classList.contains('active'));
+}
+
 // Add entrance animations
 window.addEventListener('load', async () => {
     try {
@@ -2655,6 +2783,9 @@ window.addEventListener('load', async () => {
             generateHelpContent();
         }, 100);
         
+        // Show badge with delay after page load
+        showBadgeWithDelay();
+        
     } catch (error) {
         console.error('Error during page initialization:', error);
         // Fallback: set greeting manually if config fails
@@ -2664,8 +2795,12 @@ window.addEventListener('load', async () => {
         }
     }
     
-    // Create floating help button
-    createFloatingHelpButton();
+    // Add click handler to question mark icon in top nav
+    const questionMarkIcon = document.querySelector('.nav-icon-with-badge');
+    if (questionMarkIcon) {
+        questionMarkIcon.addEventListener('click', openHelpPanel);
+        questionMarkIcon.style.cursor = 'pointer';
+    }
     
     // Initialize follow-up input functionality
     handleFollowUpMessage();

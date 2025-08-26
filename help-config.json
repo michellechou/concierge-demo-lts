@@ -1,22 +1,22 @@
 {
   "greeting": {
-    "text": "Hi Sam, you saved 15 leads last week. Here are 3 recommendations to boost productivity"
+    "text": "Hi Sam, you saved 15 leads last week. Here are 2 recommendations to boost productivity"
   },
   "recommendations": [
     {
       "id": "rec1",
-      "title": "Save time with Sales Assistant",
-      "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Sales Assistant</span>.",
-      "buttonText": "Try Sales Assistant",
+      "title": "Save time with Hiring Assistant",
+      "description": "Automate lead delivery, identify best paths to connect, and draft personalized outreach with the newly introduced <span class=\"sales-assistant\">Hiring Assistant</span>.",
+      "buttonText": "Try Hiring Assistant",
       "buttonAction": "trySalesAssistant",
       "buttonUrl": "https://www.linkedin.com/sales/sales-assistant",
       "links": [
         {
-          "text": "How does Sales Assistant work",
+          "text": "How does Hiring Assistant work",
           "action": "showDetailPage"
         },
         {
-          "text": "Where to see leads from Sales Assistant",
+          "text": "Where to see leads from Hiring Assistant",
           "action": "viewLeads"
         }
       ],
@@ -42,36 +42,16 @@
       ],
       "expanded": false,
       "chatFunction": "showDetailPageForStrategies"
-    },
-    {
-      "id": "rec3",
-      "title": "Unlock Q2 Innovations", 
-      "description": "Discover latest features to enhance sales workflow. Save time with Message Assist to draft outreach and gain deeper insights with Account IQ for smarter, strategic decisions.",
-      "buttonText": "Explore Q2 updates",
-      "buttonAction": "exploreUpdates",
-      "buttonUrl": "https://www.linkedin.com/help/sales-navigator/answer/a7796319?hcppcid=search",
-      "links": [
-        {
-          "text": "Does Message Assist boost replies",
-          "action": "messageAssistInfo"
-        },
-        {
-          "text": "What insights does Account IQ provide",
-          "action": "accountIQInfo"
-        }
-      ],
-      "expanded": false,
-      "chatFunction": "showDetailPageForInnovations"
     }
   ],
   "responses": {
     "salesAssistant": {
-      "question": "How does Sales Assistant work",
-      "answer": "Sales Navigator's AI-powered Sales Assistant is a tool designed to enhance the efficiency of prospecting by delivering pre-screened leads, identifying optimal paths to connect with prospects, and drafting personalized outreach messages. To maximize the effectiveness of Sales Assistant, here's how it works and some tips to optimize its key features:\n\n**Lead Recommendation and Feedback:**\n· Sales Assistant provides recommendations for leads based on your preferences, including your selected book of business, products, and personas.\n· Reviewing leads and providing feedback (e.g., marking a lead as \"Not a fit\" with specific reasons such as incorrect geography, seniority, or industry) helps Sales Assistant refine future recommendations to align with your needs.\n\n**Personalized Messaging Assistance:**\n· Using Message Assist, Sales Assistant drafts personalized first-touch messages by leveraging account insights, lead data, and customization based on your product details and messaging preferences.\n· You can refine these drafts, and Sales Assistant learns from your edits to improve future message drafts automatically.\n\n**Product and Service Personalization:**\n· You can specify the product or service you're selling, ensuring that generated messages and lead recommendations are tailored to showcase how your offering solves a lead's needs.\n· Adding detailed product descriptions enhances personalization and improves how prospects are targeted.\n\n**Book of Business:**\n· Designating an \"account list\" in your book of business helps target relevant accounts. Lists should include at least five accounts to be actively used by Sales Assistant.\n· To populate your book of business, you can use auto-saved CRM accounts, upload a CSV file, or manually create an account list."
+      "question": "How does Hiring Assistant work",
+      "answer": "Sales Navigator's AI-powered Hiring Assistant is a tool designed to enhance the efficiency of prospecting by delivering pre-screened leads, identifying optimal paths to connect with prospects, and drafting personalized outreach messages. To maximize the effectiveness of Hiring Assistant, here's how it works and some tips to optimize its key features:\n\n**Lead Recommendation and Feedback:**\n· Hiring Assistant provides recommendations for leads based on your preferences, including your selected book of business, products, and personas.\n· Reviewing leads and providing feedback (e.g., marking a lead as \"Not a fit\" with specific reasons such as incorrect geography, seniority, or industry) helps Hiring Assistant refine future recommendations to align with your needs.\n\n**Personalized Messaging Assistance:**\n· Using Message Assist, Hiring Assistant drafts personalized first-touch messages by leveraging account insights, lead data, and customization based on your product details and messaging preferences.\n· You can refine these drafts, and Hiring Assistant learns from your edits to improve future message drafts automatically.\n\n**Product and Service Personalization:**\n· You can specify the product or service you're selling, ensuring that generated messages and lead recommendations are tailored to showcase how your offering solves a lead's needs.\n· Adding detailed product descriptions enhances personalization and improves how prospects are targeted.\n\n**Book of Business:**\n· Designating an \"account list\" in your book of business helps target relevant accounts. Lists should include at least five accounts to be actively used by Hiring Assistant.\n· To populate your book of business, you can use auto-saved CRM accounts, upload a CSV file, or manually create an account list."
     },
     "salesAssistantLeads": {
-      "question": "Where to see leads from Sales Assistant",
-      "answer": "To see leads from Sales Assistant in Sales Navigator, follow these steps:\n\n**1. Navigate to the Prospecting Tab:**\n· Click on the \"Prospecting\" option in the top menu.\n\n**2. Review the Recommended Leads:**\n· In the \"Prospecting\" tab, the left pane will display leads recommended by Sales Assistant.\n· Each recommended lead includes details on why it was selected, such as alignment with your lead preferences, account list, or personas. This helps you understand the recommendation's relevance.\n\n**3. Interact with Leads:**\n· Select a specific lead from the left pane to view its details.\n· To confirm if the lead recommendation is suitable for you:\n  · Click \"Good fit\" to approve the lead. Approved leads are saved automatically to your \"Leads from Sales Assistant\" list for future tracking.\n  · Click \"Not a fit\" to reject the lead. You will be prompted to provide feedback on why the lead does not meet your needs, which allows the Sales Assistant to refine future recommendations.\n\n**4. First-Touch Messaging:**\n· If you mark a lead as a \"Good fit,\" Sales Assistant will automatically draft a personalized first-touch message. You can:\n  · Edit the draft before sending.\n  · Copy the message to send through another medium (e.g., email).\n  · Save it for later use.\n\n**5. Generate More Leads:**\n· If you want to explore additional leads beyond the initial batch:\n  · Click \"Generate leads\" in the left pane. This action provides new recommendations; however, you must review the existing batch before accessing more leads.\n  · Keep in mind that there is a daily limit for generating new lead suggestions.\n\nBy following these steps, you can efficiently access and manage the leads recommended by Sales Assistant to optimize your prospecting process."
+      "question": "Where to see leads from Hiring Assistant",
+      "answer": "To see leads from Hiring Assistant in Sales Navigator, follow these steps:\n\n**1. Navigate to the Prospecting Tab:**\n· Click on the \"Prospecting\" option in the top menu.\n\n**2. Review the Recommended Leads:**\n· In the \"Prospecting\" tab, the left pane will display leads recommended by Hiring Assistant.\n· Each recommended lead includes details on why it was selected, such as alignment with your lead preferences, account list, or personas. This helps you understand the recommendation's relevance.\n\n**3. Interact with Leads:**\n· Select a specific lead from the left pane to view its details.\n· To confirm if the lead recommendation is suitable for you:\n  · Click \"Good fit\" to approve the lead. Approved leads are saved automatically to your \"Leads from Hiring Assistant\" list for future tracking.\n  · Click \"Not a fit\" to reject the lead. You will be prompted to provide feedback on why the lead does not meet your needs, which allows the Hiring Assistant to refine future recommendations.\n\n**4. First-Touch Messaging:**\n· If you mark a lead as a \"Good fit,\" Hiring Assistant will automatically draft a personalized first-touch message. You can:\n  · Edit the draft before sending.\n  · Copy the message to send through another medium (e.g., email).\n  · Save it for later use.\n\n**5. Generate More Leads:**\n· If you want to explore additional leads beyond the initial batch:\n  · Click \"Generate leads\" in the left pane. This action provides new recommendations; however, you must review the existing batch before accessing more leads.\n  · Keep in mind that there is a daily limit for generating new lead suggestions.\n\nBy following these steps, you can efficiently access and manage the leads recommended by Hiring Assistant to optimize your prospecting process."
     },
     "webinarSpeakers": {
       "question": "What tools will be featured",
@@ -80,14 +60,6 @@
     "augustWebinars": {
       "question": "Any other webinars in August",
       "answer": "There are no other live webinars in August for LinkedIn Sales Navigator, but there is a range of on-demand webinars available that can provide valuable insights into Sales Navigator's features and use cases. Here are some noteworthy ones to explore:\n\n1. **\"Overview of LinkedIn's Sales Navigator\"**\n· Learn about how Sales Navigator supports modern selling with an overview of features such as lead targeting, company insights, and sales-enhancing tools.\n· Watch Here\n\n2. **\"Master LinkedIn Sales Navigator with These Best Practices\"**\n· Highlights the best practices leveraged by top-performing sellers to maximize Sales Navigator efficiency.\n· Duration: 30 minutes\n· Access the Webinar\n\n3. **\"5 Tips to Accelerate Virtual Selling with Sales Navigator\"**\n· Offers strategies to effectively navigate LinkedIn Sales Navigator for virtual selling in evolving markets.\n· Duration: 30 minutes\n· View Webinar\n\n4. **\"LinkedIn Sales Navigator and Microsoft Dynamics 365 Integration\"**\n· Teaches the steps and benefits of integrating Sales Navigator with Dynamics 365 for seamless CRM workflows and improved productivity.\n· Duration: 45 minutes\n· Watch the Webinar\n\n5. **\"LinkedIn Sales Navigator: Unveiling the Latest Updates and Features\"**\n· Showcases the newest feature enhancements designed to revolutionize user prospecting and lead generation.\n· Explore Features\n\nThese resources can provide actionable insights and showcase best practices for leveraging Sales Navigator effectively in your sales strategy."
-    },
-    "messageAssistReplies": {
-      "question": "Does Message Assist boost replies",
-      "answer": "Message Assist is an AI-powered feature in LinkedIn Sales Navigator designed to help you craft personalized InMail messages. It generates drafts based on account insights, lead data, and key selling points, which can significantly enhance your outreach efforts.\n\nMessage Assist can help to boost replies by creating more relevant and tailored messages that resonate with your prospects. Personalized outreach can receive up to 2x the replies compared to generic communication, as buyers are more likely to respond when they see that a seller understands their business challenges and priorities.\n\nFor more details on how to use Message Assist effectively, you can check out the Message Assist guide.\n\nThis feature is available for all account types: Sales Navigator Core, Sales Navigator Advanced, and Sales Navigator Advanced Plus."
-    },
-    "accountIQInsights": {
-      "question": "What insights does Account IQ provide",
-      "answer": "Account IQ in LinkedIn Sales Navigator delivers valuable and actionable insights to enhance account research, sales prospecting, and engagement. Here are some key features of Account IQ:\n\n1. **Quick Access to Company Insights:** Instead of searching the internet for relevant information, Account IQ offers a centralized summary of key, up-to-date company insights.\n\n2. **Preparation for Buyer Meetings:** It helps users understand buyers' strategic priorities, likely pain points, financials, and discussions happening among the company's employees on LinkedIn.\n\n3. **Improved Prospecting:** Account IQ aids in account qualification, prioritization, and preparing for lead engagement.\n\n4. **Personalized Insights:** Users can see how their specific products can help the company, enhancing the relevance of their outreach.\n\n5. **Data Sources:** Insights are derived from LinkedIn's first-party data and public information, although availability may vary by company.\n\nAccount IQ is available for users with Sales Navigator Advanced and Advanced Plus accounts. Admins can enable or disable this feature for all users on their account.\n\nFor more detailed information, you can refer to the Account IQ article."
     }
   }
 } 
