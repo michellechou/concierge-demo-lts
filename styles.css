@@ -1075,7 +1075,7 @@ body {
 
 /* Help Support Section */
 .help-support-section {
-    padding: 20px 24px 40px 24px;
+    padding: 20px 24px 45px 24px;
     background: #FFFFFF;
     display: flex;
     align-items: center;
@@ -1186,7 +1186,7 @@ body {
     border-radius: 50%;
     transition: background-color 0.3s ease;
     color: rgba(0, 0, 0, 0.6);
-    font-size: 14px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1195,7 +1195,7 @@ body {
 }
 
 .close-help:hover {
-    background: rgba(140, 140, 140, 0.1);
+    background: transparent;
     color: #000000;
 }
 
@@ -2106,7 +2106,8 @@ body {
 /* Greeting Section */
 .greeting-section {
     text-align: center;
-    padding: 0 0 30px;
+    padding: 0 0 25px;
+    margin-top: -10px;
 }
 
 .greeting-section h1 {
@@ -2235,6 +2236,7 @@ body {
     width: 14px;
     height: 14px;
     flex-shrink: 0;
+    filter: brightness(0) saturate(100%) invert(13%) sepia(9%) saturate(1157%) hue-rotate(177deg) brightness(94%) contrast(92%);
 }
 
 .more-chip {
