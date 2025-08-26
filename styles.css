@@ -1022,7 +1022,7 @@ body {
 
 /* Open Cases Section */
 .open-cases-section {
-    padding: 20px 24px 4px 24px;
+    padding: 24px 24px 4px 24px;
     background: #FFFFFF;
 }
 
@@ -1043,7 +1043,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.15s ease;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 
