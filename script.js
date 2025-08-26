@@ -142,7 +142,7 @@ async function loadConfiguration() {
         console.error('Failed to load configuration:', error);
         // Set fallback configuration
         helpWidgetConfig = {
-            greeting: { text: "Hi Alice, you saved 15 leads last week. Here are 2 recommendations to boost productivity" },
+            greeting: { text: "Hi Alice, you sent 15 InMails last week. Here are 2 recommendations to boost productivity" },
             recommendations: [
                 {
                     "id": "rec1",
@@ -2660,7 +2660,7 @@ function getHelpConfiguration() {
 
 function getDefaultHelpConfig() {
     return {
-        greeting: { text: "Hi Alice, you saved 15 leads last week. Here are 2 recommendations to boost productivity" },
+        greeting: { text: "Hi Alice, you sent 15 InMails last week. Here are 2 recommendations to boost productivity" },
         recommendations: [
             {
                 "id": "rec1",
