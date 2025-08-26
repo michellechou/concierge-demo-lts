@@ -180,6 +180,6 @@ This project is for demonstration and portfolio purposes. LinkedIn and LinkedIn 
 
 ---
 
-**Built with ❤️ for next-generation recruiting experiences**
+**Built with ❤️ for enhanced customer success**
 
-*Last updated: January 2025*
+*Last updated: August 2025*
