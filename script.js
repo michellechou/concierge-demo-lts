@@ -383,14 +383,8 @@ function generateChecklistContent(container, checklistData) {
     
     container.innerHTML = checklistHTML;
     
-    // Add click handlers for checklist items
-    const checklistItems = container.querySelectorAll('.checklist-item');
-    checklistItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const itemId = this.dataset.itemId;
-            toggleChecklistItem(itemId);
-        });
-    });
+    // Checklist items are now non-clickable
+    // Click handlers removed
 }
 
 function toggleChecklistItem(itemId) {
