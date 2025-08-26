@@ -336,7 +336,7 @@ function generateRecommendationCards() {
                     <div class="button-container">
                         <button class="btn-primary" onclick="${rec.buttonUrl ? `window.open('${rec.buttonUrl}', '_blank'); return false;` : 'return false;'}">${rec.buttonText}</button>
                         <div class="chat-icon" onclick="${rec.chatFunction}(); return false;">
-                            <i class="fas fa-comments"></i>
+                            <img src="Messages Active.svg" alt="Messages" class="chat-icon-svg">
                         </div>
                     </div>
                     <div class="recommendation-links">
