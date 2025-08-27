@@ -335,7 +335,7 @@ function generateRecommendationCards() {
                     <p>${rec.description}</p>
                     <div class="button-container">
                         <button class="btn-primary" onclick="${rec.buttonUrl ? `window.open('${rec.buttonUrl}', '_blank'); return false;` : 'return false;'}">${rec.buttonText}</button>
-                        <div class="chat-icon" onclick="${rec.chatFunction}(); return false;">
+                        <div class="chat-icon" onclick="${rec.id === 'rec2' ? 'return false;' : `${rec.chatFunction}(); return false;`}">
                             <img src="Messages Active.svg" alt="Messages" class="chat-icon-svg">
                         </div>
                     </div>
