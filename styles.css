@@ -1895,7 +1895,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 
 .recommendation-card .btn-primary {
