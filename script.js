@@ -2563,7 +2563,7 @@ const onboardingHelpConfig = {
     type: "checklist", // Different type to generate checklist instead of recommendations
     checklist: {
         title: "Onboarding checklist",
-        subtitle: "Top actions for the first 7 days",
+        subtitle: "Top actions for the first 7 days to succeed",
         totalItems: 4,
         completedItems: 1,
         items: [
