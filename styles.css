@@ -1463,7 +1463,7 @@ body {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.4;
-    padding: 8px 12px;
+    padding: 4px 12px;
     border-radius: 8px;
     background: #F5F7FA;
     cursor: default;
@@ -1919,7 +1919,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    margin-top: 8px !important;
+    margin-top: -4px !important;
+    background: yellow !important;
+    border: 2px solid red !important;
 }
 
 /* User Message */
