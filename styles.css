@@ -7,10 +7,9 @@
 
 body {
     font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #FFCCCC !important;
+    background-color: #FFFFFF;
     color: #000000;
     line-height: 1.25;
-    border: 10px solid purple !important;
 }
 
 /* Control Panel Pills - Updated layout */
@@ -1466,8 +1465,9 @@ body {
     line-height: 1.4;
     padding: 4px 12px;
     border-radius: 8px;
-    background: #F5F7FA;
+    background: orange !important;
     cursor: default;
+    border: 3px solid blue !important;
 }
 
 .link-item .diamond-icon {
