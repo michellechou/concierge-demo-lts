@@ -7,9 +7,10 @@
 
 body {
     font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #FFFFFF;
+    background-color: #FFCCCC !important;
     color: #000000;
     line-height: 1.25;
+    border: 10px solid purple !important;
 }
 
 /* Control Panel Pills - Updated layout */
