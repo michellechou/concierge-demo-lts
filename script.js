@@ -310,9 +310,9 @@ function generateRecommendationCards() {
             } else if (link.text === 'Where to see leads from Sales Assistant') {
                 clickAction = 'showDetailPageForSalesAssistantLeads(); return false;';
             } else if (link.text === 'How does AI-Assisted Messages work') {
-                clickAction = 'showDetailPageForWebinarTools(); return false;';
+                clickAction = 'return false;';
             } else if (link.text === 'What languages can I send a message in') {
-                clickAction = 'showDetailPageForAugustWebinars(); return false;';
+                clickAction = 'return false;';
             } else if (link.text === 'Does Message Assist boost replies') {
                 clickAction = 'showDetailPageForMessageAssist(); return false;';
             } else if (link.text === 'What insights does Account IQ provide') {
@@ -528,7 +528,7 @@ function openHelpPanel() {
                 }
                 
                 if (link.textContent.includes('How does AI-Assisted Messages work')) {
-                    console.log('Adding direct click handler to Webinar Tools link');
+                    console.log('Disabling click handler for Webinar Tools link');
                     
                     // Remove existing listeners
                     const newLink = link.cloneNode(true);
@@ -536,13 +536,13 @@ function openHelpPanel() {
                     
                     newLink.addEventListener('click', function(e) {
                         e.preventDefault();
-                        console.log('Direct Webinar Tools click handler triggered!');
-                        showDetailPageForWebinarTools();
+                        console.log('Webinar Tools link clicked but disabled');
+                        return false;
                     });
                 }
                 
                 if (link.textContent.includes('What languages can I send a message in')) {
-                    console.log('Adding direct click handler to August Webinars link');
+                    console.log('Disabling click handler for August Webinars link');
                     
                     // Remove existing listeners
                     const newLink = link.cloneNode(true);
@@ -550,8 +550,8 @@ function openHelpPanel() {
                     
                     newLink.addEventListener('click', function(e) {
                         e.preventDefault();
-                        console.log('Direct August Webinars click handler triggered!');
-                        showDetailPageForAugustWebinars();
+                        console.log('August Webinars link clicked but disabled');
+                        return false;
                     });
                 }
                 
