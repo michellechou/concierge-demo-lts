@@ -166,7 +166,7 @@ async function loadConfiguration() {
                 },
                 {
                     "id": "rec2", 
-                    "title": "Engage Candidates with AI-<br>Assisted Messages",
+                    "title": "Engage Candidates with AI-Assisted<br>Messages",
                     "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
                     "buttonText": "Try AI-Assisted Messages",
                     "buttonAction": "reserveSpot",
