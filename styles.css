@@ -927,7 +927,7 @@ body {
 .progress-bar {
     flex: 1;
     height: 8px;
-    background-color: #E7E8E7;
+    background-color: #DEDEDE;
     border-radius: 4px;
     overflow: hidden;
 }
@@ -987,7 +987,7 @@ body {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background-color: #E7E8E7;
+    background-color: #DEDEDE;
     display: flex;
     align-items: center;
     justify-content: center;
