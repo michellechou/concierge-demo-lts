@@ -1420,12 +1420,14 @@ body {
 }
 
 .recommendation-links {
-    margin-top: 8px;
+    margin-top: 8px !important;
     display: flex;
     flex-direction: column;
     gap: 4px;
     align-items: flex-start;
 }
+
+/* Cache bust: 2024-12-19-v3 */
 
 .link-item {
     display: inline-flex;
@@ -1914,7 +1916,10 @@ body {
 }
 
 .recommendation-card .recommendation-links {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px !important;
 }
 
 /* User Message */
