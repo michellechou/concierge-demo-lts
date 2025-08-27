@@ -147,7 +147,7 @@ async function loadConfiguration() {
                 {
                     "id": "rec1",
                     "title": "Streamline Your Hiring Process",
-                    "description": "Connect with top talent more efficiently using<br>the AI-powered <span class=\"sales-assistant\">LinkedIn Hiring Assistant</span> for smarter recruiting.",
+                    "description": "Connect with top talent more efficiently using<br>the AI-powered <span class=\"sales-assistant\">LinkedIn Hiring Assistant</span> for smarter recruiting",
                     "buttonText": "Try Hiring Assistant",
                     "buttonAction": "",
                     "buttonUrl": "",
@@ -166,18 +166,18 @@ async function loadConfiguration() {
                 },
                 {
                     "id": "rec2", 
-                    "title": "Discover New Sales Strategies",
-                    "description": "Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.",
-                    "buttonText": "Reserve a spot",
+                    "title": "Engage Candidates with AI-<br>Assisted Messages",
+                    "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
+                    "buttonText": "Try AI-Assisted Messages",
                     "buttonAction": "reserveSpot",
                     "buttonUrl": "https://training.sales.linkedin.com/live-introduction-to-sales-navigator",
                     "links": [
                         {
-                            "text": "What tools will be featured",
+                            "text": "How does AI-Assisted Messages work",
                             "action": "viewSpeakers"
                         },
                         {
-                            "text": "Any other webinars in August",
+                            "text": "What languages can I send a message in",
                             "action": "viewWebinars"
                         }
                     ],
@@ -196,11 +196,11 @@ async function loadConfiguration() {
                     "answer": "To access candidates from Hiring Assistant in LinkedIn Recruiter, follow these steps:\\n\\n1. **Navigate to Your Projects:**\\n· Access your Hiring Assistant projects from the main dashboard in LinkedIn Recruiter.\\n\\n2. **Review Recommended Candidates:**\\n· In your project, the candidate pipeline will display profiles recommended by Hiring Assistant.\\n· Each recommended candidate includes details on why they were selected, such as alignment with your job requirements, skills match, and experience level.\\n\\n3. **Evaluate Candidates:**\\n· Select a specific candidate to view their full profile and assessment.\\n· To provide feedback on candidate fit:\\n  · Mark as \\\"Great fit\\\" to move them forward in your pipeline.\\n  · Mark as \\\"Not suitable\\\" to decline and help refine future recommendations.\\n\\n4. **Candidate Outreach:**\\n· For candidates you approve, Hiring Assistant can draft personalized InMail messages. You can:\\n  · Review and edit the draft before sending.\\n  · Send directly through LinkedIn Recruiter.\\n  · Save templates for future use.\\n\\n5. **Generate Additional Candidates:**\\n· To expand your candidate pool:\\n  · Use the \\\"Find more candidates\\\" option within your project.\\n  · Hiring Assistant will source additional profiles based on your feedback and criteria.\\n  · Daily sourcing limits may apply depending on your LinkedIn Recruiter plan.\\n\\nBy following these steps, you can efficiently manage candidates sourced by Hiring Assistant and optimize your recruiting workflow."
                 },
                 "webinarSpeakers": {
-                    "question": "What tools will be featured",
+                    "question": "How does AI-Assisted Messages work",
                     "answer": "The LinkedIn Recruiter Mastery webinar will cover the following recruiting tools, designed to enhance talent acquisition and candidate sourcing.\\n\\n· **Advanced candidate search:** Quickly find qualified candidates with detailed search capabilities, including skills, experience, and location filters.\\n\\n· **Hiring Assistant:** Get AI-powered candidate recommendations and automated sourcing based on your job requirements and hiring patterns.\\n\\n· **InMail optimization:** Access insights and templates for crafting effective candidate outreach messages.\\n\\n· **Pipeline management:** Learn to organize and track candidates through your hiring process effectively.\\n\\nRegister for the webinar to learn how top recruiters are using these tools for smarter hiring."
                 },
                 "augustWebinars": {
-                    "question": "Any other webinars in August",
+                    "question": "What languages can I send a message in",
                     "answer": "**August 2024 LinkedIn Recruiter Training Series**\n\n**📅 August 8, 2:00 PM PST**\n**\"Advanced Talent Sourcing Strategies\"**\n• Focus on passive candidate engagement\n• Multi-channel recruitment approaches\n• Building diverse talent pipelines\n\n**📅 August 15, 11:00 AM PST**\n**\"Recruiter Success Stories\"**\n• Real hiring case studies and results\n• Time-to-hire optimization metrics\n• Best practices from top talent teams\n\n**📅 August 22, 1:00 PM PST**\n**\"AI-Powered Recruiting Workshop\"**\n• Hands-on training with Hiring Assistant\n• InMail optimization techniques\n• Advanced search and Boolean strategies\n\n**🎁 Exclusive Benefits:**\n• All attendees receive 30-day Recruiter trial extension\n• Access to exclusive recruiting resource library\n• Priority beta access to new recruiting features"
                 },
                 "messageAssistReplies": {
@@ -309,9 +309,9 @@ function generateRecommendationCards() {
                 clickAction = 'showDetailPage(); return false;';
             } else if (link.text === 'Where to see leads from Sales Assistant') {
                 clickAction = 'showDetailPageForSalesAssistantLeads(); return false;';
-            } else if (link.text === 'What tools will be featured') {
+            } else if (link.text === 'How does AI-Assisted Messages work') {
                 clickAction = 'showDetailPageForWebinarTools(); return false;';
-            } else if (link.text === 'Any other webinars in August') {
+            } else if (link.text === 'What languages can I send a message in') {
                 clickAction = 'showDetailPageForAugustWebinars(); return false;';
             } else if (link.text === 'Does Message Assist boost replies') {
                 clickAction = 'showDetailPageForMessageAssist(); return false;';
@@ -527,7 +527,7 @@ function openHelpPanel() {
                     });
                 }
                 
-                if (link.textContent.includes('What tools will be featured')) {
+                if (link.textContent.includes('How does AI-Assisted Messages work')) {
                     console.log('Adding direct click handler to Webinar Tools link');
                     
                     // Remove existing listeners
@@ -541,7 +541,7 @@ function openHelpPanel() {
                     });
                 }
                 
-                if (link.textContent.includes('Any other webinars in August')) {
+                if (link.textContent.includes('What languages can I send a message in')) {
                     console.log('Adding direct click handler to August Webinars link');
                     
                     // Remove existing listeners
@@ -871,7 +871,7 @@ function typeWebinarToolsResponse() {
     const responseContent = document.getElementById('webinarToolsResponseContent');
     if (!responseContent) return;
     
-    const answerText = findConfigResponse('What tools will be featured');
+    const answerText = findConfigResponse('How does AI-Assisted Messages work');
     if (!answerText) return;
     
     const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
@@ -929,7 +929,7 @@ function typeAugustWebinarsResponse() {
     const responseContent = document.getElementById('augustWebinarsResponseContent');
     if (!responseContent) return;
     
-    const answerText = findConfigResponse('Any other webinars in August');
+    const answerText = findConfigResponse('What languages can I send a message in');
     if (!answerText) return;
     
     const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
@@ -1580,7 +1580,7 @@ window.showDetailPageForSalesAssistant = function() {
         salesAssistantIconChat.innerHTML = `
             <div class="recommendation-card">
                 <h3>Streamline Your Hiring Process</h3>
-                <p>Connect with top talent more efficiently using the AI-powered LinkedIn <span class="sales-assistant">Hiring Assistant</span> for smarter recruiting.</p>
+                <p>Connect with top talent more efficiently using the AI-powered LinkedIn <span class="sales-assistant">Hiring Assistant</span> for smarter recruiting</p>
                 <div class="button-container">
                     <button class="btn-primary" onclick="return false;">Try Hiring Assistant</button>
                 </div>
@@ -2665,7 +2665,7 @@ function getDefaultHelpConfig() {
             {
                 "id": "rec1",
                 "title": "Streamline Your Hiring Process",
-                "description": "Connect with top talent more efficiently using<br>the AI-powered <span class=\"sales-assistant\">LinkedIn Hiring Assistant</span> for smarter recruiting.",
+                "description": "Connect with top talent more efficiently using<br>the AI-powered <span class=\"sales-assistant\">LinkedIn Hiring Assistant</span> for smarter recruiting",
                 "buttonText": "Try Hiring Assistant",
                 "buttonAction": "",
                 "buttonUrl": "",
@@ -2684,18 +2684,18 @@ function getDefaultHelpConfig() {
             },
             {
                 "id": "rec2", 
-                "title": "Discover New Sales Strategies",
-                "description": "Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.",
-                "buttonText": "Reserve a spot",
+                "title": "Engage Candidates with AI-Assisted Messages",
+                "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
+                "buttonText": "Try AI-Assisted Messages",
                 "buttonAction": "reserveSpot",
                 "buttonUrl": "https://training.sales.linkedin.com/live-introduction-to-sales-navigator",
                 "links": [
                     {
-                        "text": "What tools will be featured",
+                        "text": "How does AI-Assisted Messages work",
                         "action": "viewSpeakers"
                     },
                     {
-                        "text": "Any other webinars in August",
+                        "text": "What languages can I send a message in",
                         "action": "viewWebinars"
                     }
                 ],

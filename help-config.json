@@ -25,18 +25,18 @@
     },
     {
       "id": "rec2", 
-      "title": "Discover New Sales Strategies",
-      "description": "Stay ahead and sign up for the Top 5 Sales Strategies webinar coming up on July 25 10AM. Learn advanced lead generation and smarter prospecting from industry experts.",
-      "buttonText": "Reserve a spot",
+      "title": "Engage Candidates with AI-<br>Assisted Messages",
+      "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
+      "buttonText": "Try AI-Assisted Messages",
       "buttonAction": "reserveSpot",
       "buttonUrl": "https://training.sales.linkedin.com/live-introduction-to-sales-navigator",
       "links": [
         {
-          "text": "What tools will be featured",
+          "text": "How does AI-Assisted Messages work",
           "action": "viewSpeakers"
         },
         {
-          "text": "Any other webinars in August",
+          "text": "What languages can I send a message in",
           "action": "viewWebinars"
         }
       ],
@@ -54,11 +54,11 @@
       "answer": "To see leads from Hiring Assistant in Sales Navigator, follow these steps:\n\n**1. Navigate to the Prospecting Tab:**\n· Click on the \"Prospecting\" option in the top menu.\n\n**2. Review the Recommended Leads:**\n· In the \"Prospecting\" tab, the left pane will display leads recommended by Hiring Assistant.\n· Each recommended lead includes details on why it was selected, such as alignment with your lead preferences, account list, or personas. This helps you understand the recommendation's relevance.\n\n**3. Interact with Leads:**\n· Select a specific lead from the left pane to view its details.\n· To confirm if the lead recommendation is suitable for you:\n  · Click \"Good fit\" to approve the lead. Approved leads are saved automatically to your \"Leads from Hiring Assistant\" list for future tracking.\n  · Click \"Not a fit\" to reject the lead. You will be prompted to provide feedback on why the lead does not meet your needs, which allows the Hiring Assistant to refine future recommendations.\n\n**4. First-Touch Messaging:**\n· If you mark a lead as a \"Good fit,\" Hiring Assistant will automatically draft a personalized first-touch message. You can:\n  · Edit the draft before sending.\n  · Copy the message to send through another medium (e.g., email).\n  · Save it for later use.\n\n**5. Generate More Leads:**\n· If you want to explore additional leads beyond the initial batch:\n  · Click \"Generate leads\" in the left pane. This action provides new recommendations; however, you must review the existing batch before accessing more leads.\n  · Keep in mind that there is a daily limit for generating new lead suggestions.\n\nBy following these steps, you can efficiently access and manage the leads recommended by Hiring Assistant to optimize your prospecting process."
     },
     "webinarSpeakers": {
-      "question": "What tools will be featured",
+      "question": "How does AI-Assisted Messages work",
       "answer": "The Top 5 Sales Strategies webinar will cover the following Sales Navigator tools, designed to enhance lead generation and prospecting.\n\n· **Advanced search filters:** Quickly find the right leads with detailed search capabilities, with the ability to customize search preferences to match your needs.\n\n· **Recommended leads:** Get automated lead recommendations based on your activity and buyer intent signals.\n\n· **Lead IQ:** Access an AI-generated summary of key information on a lead and their company to improve initial interactions.\n\nRegister for the webinar to learn how industry experts are using these tools for smarter prospecting."
     },
     "augustWebinars": {
-      "question": "Any other webinars in August",
+      "question": "What languages can I send a message in",
       "answer": "There are no other live webinars in August for LinkedIn Sales Navigator, but there is a range of on-demand webinars available that can provide valuable insights into Sales Navigator's features and use cases. Here are some noteworthy ones to explore:\n\n1. **\"Overview of LinkedIn's Sales Navigator\"**\n· Learn about how Sales Navigator supports modern selling with an overview of features such as lead targeting, company insights, and sales-enhancing tools.\n· Watch Here\n\n2. **\"Master LinkedIn Sales Navigator with These Best Practices\"**\n· Highlights the best practices leveraged by top-performing sellers to maximize Sales Navigator efficiency.\n· Duration: 30 minutes\n· Access the Webinar\n\n3. **\"5 Tips to Accelerate Virtual Selling with Sales Navigator\"**\n· Offers strategies to effectively navigate LinkedIn Sales Navigator for virtual selling in evolving markets.\n· Duration: 30 minutes\n· View Webinar\n\n4. **\"LinkedIn Sales Navigator and Microsoft Dynamics 365 Integration\"**\n· Teaches the steps and benefits of integrating Sales Navigator with Dynamics 365 for seamless CRM workflows and improved productivity.\n· Duration: 45 minutes\n· Watch the Webinar\n\n5. **\"LinkedIn Sales Navigator: Unveiling the Latest Updates and Features\"**\n· Showcases the newest feature enhancements designed to revolutionize user prospecting and lead generation.\n· Explore Features\n\nThese resources can provide actionable insights and showcase best practices for leveraging Sales Navigator effectively in your sales strategy."
     }
   }

@@ -180,6 +180,6 @@ This project is for demonstration and portfolio purposes. LinkedIn and LinkedIn 
 
 ---
 
-**Built with ❤️ for enhanced customer success**
+**Built with ❤️ for empowering enhanced customer success**
 
 *Last updated: August 2025*
