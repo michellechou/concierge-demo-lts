@@ -2684,7 +2684,7 @@ function getDefaultHelpConfig() {
             },
             {
                 "id": "rec2", 
-                "title": "Engage Candidates with AI-<br>Assisted Messages",
+                "title": "Leverage AI-Assisted Messages",
                 "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
                 "buttonText": "Try AI-Assisted Messages",
                 "buttonAction": "reserveSpot",
