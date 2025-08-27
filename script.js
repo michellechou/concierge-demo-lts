@@ -353,20 +353,25 @@ function generateRecommendationCards() {
 function generateChecklistContent(container, checklistData) {
     console.log('Generating checklist content:', checklistData);
     
+    // Filter out item 5 and only show first 4 items
+    const filteredItems = checklistData.items.filter(item => item.id !== 'item5');
+    const filteredCompletedItems = filteredItems.filter(item => item.completed).length;
+    const filteredTotalItems = filteredItems.length;
+    
     const checklistHTML = `
         <div class="onboarding-checklist">
             <div class="checklist-header">
                 <h3 class="checklist-title">${checklistData.title}</h3>
                 <p class="checklist-subtitle">${checklistData.subtitle}</p>
                 <div class="progress-section">
-                    <span class="progress-text">${checklistData.completedItems}/${checklistData.totalItems}</span>
+                    <span class="progress-text">${filteredCompletedItems}/${filteredTotalItems}</span>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${(checklistData.completedItems / checklistData.totalItems) * 100}%"></div>
+                        <div class="progress-fill" style="width: ${(filteredCompletedItems / filteredTotalItems) * 100}%"></div>
                     </div>
                 </div>
             </div>
             <div class="checklist-items">
-                ${checklistData.items.map(item => `
+                ${filteredItems.map(item => `
                     <div class="checklist-item ${item.completed ? 'completed' : ''}" data-item-id="${item.id}">
                         <div class="checklist-item-check">
                             <i class="fas fa-check"></i>
@@ -2593,31 +2598,31 @@ const onboardingHelpConfig = {
     checklist: {
         title: "Onboarding checklist",
         subtitle: "Top actions for the first 7 days",
-        totalItems: 5,
-        completedItems: 0,
+        totalItems: 4,
+        completedItems: 1,
         items: [
             {
                 id: "item1",
-                title: "Item 1 title",
+                title: "Get started with <span class='checklist-link'>Hiring Assistant</span>",
                 subtitle: "Item 1 subtitle",
-                completed: false
+                completed: true
             },
             {
                 id: "item2", 
-                title: "Item 2 title",
+                title: "<a href='https://training.talent.linkedin.com/' target='_blank' class='checklist-link'>Explore on-demand and live training</a>  by talent goals or product features",
                 subtitle: "Item 2 subtitle",
                 completed: false
             },
             {
                 id: "item3",
-                title: "Item 3 title", 
+                title: "<a href='https://tcommunity.linkedin.com/p/home' target='_blank' class='checklist-link'>Join the Talent Community</a> to learn  with industry leaders and peers", 
                 subtitle: "Item 3 subtitle",
                 completed: false
             },
             {
                 id: "item4",
-                title: "Item 4 title",
-                subtitle: "Item 4 subtitle", 
+                title: "<a href='https://training.talent.linkedin.com/hiring-product-updates-achieve-talent-success-with-ai-driven-discover-connect-and-attract-features' target='_blank' class='checklist-link'>Register for webinars</a> on latest best practices",
+                subtitle: "Sep 2025: Achieve Talent Success with AI-Driven Discover, Connect and Attract", 
                 completed: false
             },
             {
