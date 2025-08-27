@@ -973,6 +973,10 @@ body {
     color: #9DA09C;
 }
 
+.checklist-item.completed .checklist-item-check i {
+    color: #9DA09C;
+}
+
 .checklist-item.completed .checklist-item-title {
     text-decoration: line-through;
     color: #666666;
