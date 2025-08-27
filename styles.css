@@ -1429,6 +1429,22 @@ body {
 
 /* Cache bust: 2024-12-19-v3 */
 
+/* EXTREME DEBUG: Make ALL possible pill elements visible */
+.link-item {
+    background: lime !important;
+    border: 3px solid purple !important;
+}
+
+.recommendation-links div {
+    background: cyan !important;
+    border: 3px solid magenta !important;
+}
+
+div[class*="link"] {
+    background: pink !important;
+    border: 3px solid green !important;
+}
+
 .link-item {
     display: inline-flex;
     align-items: center;
