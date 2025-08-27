@@ -1431,7 +1431,7 @@ body {
 
 /* Move first pill closer to CTA button */
 .link-item:first-child {
-    margin-top: -4px !important;
+    margin-top: -2px !important;
 }
 
 .link-item {
