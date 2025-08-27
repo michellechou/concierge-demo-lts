@@ -1420,10 +1420,10 @@ body {
 }
 
 .recommendation-links {
-    margin-top: 20px;
+    margin-top: 12px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     align-items: flex-start;
 }
 
