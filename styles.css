@@ -1925,9 +1925,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    margin-top: -4px !important;
-    background: yellow !important;
-    border: 2px solid red !important;
+    margin-top: 8px !important;
 }
 
 /* User Message */
