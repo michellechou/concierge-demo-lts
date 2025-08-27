@@ -970,7 +970,7 @@ body {
 
 .checklist-item.completed .checklist-item-check {
     background-color: #01754F;
-    color: rgba(0, 0, 0, 0.3);
+    color: #9DA09C;
 }
 
 .checklist-item.completed .checklist-item-title {
