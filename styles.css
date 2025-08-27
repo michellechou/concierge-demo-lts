@@ -1484,9 +1484,7 @@ body {
     line-height: 1.4;
     padding: 4px 12px;
     border-radius: 8px;
-    background: orange !important;
     cursor: default;
-    border: 3px solid blue !important;
 }
 
 .link-item .diamond-icon {

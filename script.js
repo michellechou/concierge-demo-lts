@@ -142,22 +142,22 @@ async function loadConfiguration() {
         console.error('Failed to load configuration:', error);
         // Set fallback configuration
         helpWidgetConfig = {
-            greeting: { text: "Hi Alice, you sent 15 InMails last week. Here are 2 recommendations to boost productivity" },
+            greeting: { text: "Hi Alice, you sent 15 InMails last week.<br>Here are 2 suggestions to boost productivity." },
             recommendations: [
                 {
                     "id": "rec1",
-                    "title": "Streamline Your Hiring Process",
-                    "description": "Connect with top talent more efficiently using<br>the AI-powered <span class=\"sales-assistant\">LinkedIn Hiring Assistant</span> for smarter recruiting",
-                    "buttonText": "Try Hiring Assistant",
+                    "title": "Leverage AI-Assisted Messages",
+                    "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
+                    "buttonText": "Try AI-Assisted Messages",
                     "buttonAction": "",
                     "buttonUrl": "",
                     "links": [
                         {
-                            "text": "How does Hiring Assistant work",
+                            "text": "How does AI-Assisted Messages work",
                             "action": "showDetailPage"
                         },
                         {
-                            "text": "How to post a job with Hiring Assistant",
+                            "text": "What languages can I send a message in",
                             "action": "viewLeads"
                         }
                     ],
@@ -166,18 +166,18 @@ async function loadConfiguration() {
                 },
                 {
                     "id": "rec2", 
-                    "title": "Leverage AI-Assisted Messages",
-                    "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
-                    "buttonText": "Try AI-Assisted Messages",
+                    "title": "Check out Q3 product updates",
+                    "description": "Help you gain deeper insights with InMail reporting enhancements, save time with ATS<br>and Job Wrapping synergies, and more",
+                    "buttonText": "View product updates",
                     "buttonAction": "reserveSpot",
-                    "buttonUrl": "https://training.sales.linkedin.com/live-introduction-to-sales-navigator",
+                    "buttonUrl": "https://business.linkedin.com/talent-solutions/product-update",
                     "links": [
                         {
-                            "text": "How does AI-Assisted Messages work",
+                            "text": "How to best leverage InMail reporting",
                             "action": "viewSpeakers"
                         },
                         {
-                            "text": "What languages can I send a message in",
+                            "text": "How to set up Job Wrapping",
                             "action": "viewWebinars"
                         }
                     ],
@@ -188,19 +188,19 @@ async function loadConfiguration() {
             resources: { title: "Resources", links: [] },
             responses: {
                 "salesAssistant": {
-                    "question": "How does Hiring Assistant work",
-                    "answer": "The LinkedIn Hiring Assistant is an AI-powered feature within LinkedIn Recruiter that helps streamline the hiring process. Here's an overview of its key functionalities:\n\nProject Creation:\nHiring Assistant allows you to create projects to find qualified candidates efficiently. You can start a project by providing details like job descriptions, ideal candidate profiles, or LinkedIn job post URLs.\n\nCandidate Sourcing:\nOnce a project is created, Hiring Assistant sources candidates based on the information provided. It recommends required and nice-to-have qualifications and can help you prescreen candidates.\n\nChat Experience:\nYou can interact with Hiring Assistant through a chat interface, where it helps refine your hiring criteria and suggests improvements to candidate quality.\n\nAI-Generated Messaging:\nHiring Assistant can send AI-generated messages to up to 25 candidates at once, enhancing your outreach efforts.\n\nFeedback Loop:\nThe system learns from your feedback on candidates, helping to improve future recommendations.\n\nCompliance and Security:\nLinkedIn ensures that Hiring Assistant adheres to responsible AI principles and complies with applicable laws and privacy regulations.\n\nIf you have any specific questions or need assistance with a particular feature, feel free to ask!"
+                    "question": "How does AI-Assisted Messages work",
+                    "answer": "AI-Assisted Messages in LinkedIn Recruiter allow you to compose and send personalized messages to candidates with the help of artificial intelligence. Here's how it works:\n\n1. **Personalization:** The AI uses information from the candidate's profile, your job requirements, and your details (like your name and company) to create a tailored message.\n\n2. **Drafting Messages:** You can initiate this by clicking the \"Compose\" icon on a candidate's profile and selecting \"Draft with AI.\" The AI will generate a message based on the available data.\n\n3. **Customization:** You can adjust the message's language, tone, and length through the Draft settings. You can also add custom content that is unique to your needs.\n\n4. **Bulk Messaging:** You can send AI-assisted messages to up to 25 candidates at once, with each message being personalized based on the recipient's profile.\n\n5. **Feedback:** You can provide feedback on the AI-generated messages to help improve future drafts.\n\n6. **Performance Tracking:** You can check the effectiveness of your AI-Assisted Messages through the InMail report available in your Recruiter dashboard.\n\nIf you have any specific questions or need further assistance, feel free to ask!"
                 },
                 "salesAssistantLeads": {
-                    "question": "How to post a job with Hiring Assistant",
+                    "question": "What languages can I send a message in",
                     "answer": "To access candidates from Hiring Assistant in LinkedIn Recruiter, follow these steps:\\n\\n1. **Navigate to Your Projects:**\\n· Access your Hiring Assistant projects from the main dashboard in LinkedIn Recruiter.\\n\\n2. **Review Recommended Candidates:**\\n· In your project, the candidate pipeline will display profiles recommended by Hiring Assistant.\\n· Each recommended candidate includes details on why they were selected, such as alignment with your job requirements, skills match, and experience level.\\n\\n3. **Evaluate Candidates:**\\n· Select a specific candidate to view their full profile and assessment.\\n· To provide feedback on candidate fit:\\n  · Mark as \\\"Great fit\\\" to move them forward in your pipeline.\\n  · Mark as \\\"Not suitable\\\" to decline and help refine future recommendations.\\n\\n4. **Candidate Outreach:**\\n· For candidates you approve, Hiring Assistant can draft personalized InMail messages. You can:\\n  · Review and edit the draft before sending.\\n  · Send directly through LinkedIn Recruiter.\\n  · Save templates for future use.\\n\\n5. **Generate Additional Candidates:**\\n· To expand your candidate pool:\\n  · Use the \\\"Find more candidates\\\" option within your project.\\n  · Hiring Assistant will source additional profiles based on your feedback and criteria.\\n  · Daily sourcing limits may apply depending on your LinkedIn Recruiter plan.\\n\\nBy following these steps, you can efficiently manage candidates sourced by Hiring Assistant and optimize your recruiting workflow."
                 },
                 "webinarSpeakers": {
-                    "question": "How does AI-Assisted Messages work",
+                    "question": "How to best leverage InMail reporting",
                     "answer": "The LinkedIn Recruiter Mastery webinar will cover the following recruiting tools, designed to enhance talent acquisition and candidate sourcing.\\n\\n· **Advanced candidate search:** Quickly find qualified candidates with detailed search capabilities, including skills, experience, and location filters.\\n\\n· **Hiring Assistant:** Get AI-powered candidate recommendations and automated sourcing based on your job requirements and hiring patterns.\\n\\n· **InMail optimization:** Access insights and templates for crafting effective candidate outreach messages.\\n\\n· **Pipeline management:** Learn to organize and track candidates through your hiring process effectively.\\n\\nRegister for the webinar to learn how top recruiters are using these tools for smarter hiring."
                 },
                 "augustWebinars": {
-                    "question": "What languages can I send a message in",
+                    "question": "How to set up Job Wrapping",
                     "answer": "**August 2024 LinkedIn Recruiter Training Series**\n\n**📅 August 8, 2:00 PM PST**\n**\"Advanced Talent Sourcing Strategies\"**\n• Focus on passive candidate engagement\n• Multi-channel recruitment approaches\n• Building diverse talent pipelines\n\n**📅 August 15, 11:00 AM PST**\n**\"Recruiter Success Stories\"**\n• Real hiring case studies and results\n• Time-to-hire optimization metrics\n• Best practices from top talent teams\n\n**📅 August 22, 1:00 PM PST**\n**\"AI-Powered Recruiting Workshop\"**\n• Hands-on training with Hiring Assistant\n• InMail optimization techniques\n• Advanced search and Boolean strategies\n\n**🎁 Exclusive Benefits:**\n• All attendees receive 30-day Recruiter trial extension\n• Access to exclusive recruiting resource library\n• Priority beta access to new recruiting features"
                 },
                 "messageAssistReplies": {
@@ -234,7 +234,7 @@ function generateHelpContent() {
     
     if (greetingElement && currentConfig.greeting) {
         console.log('Updating greeting with:', currentConfig.greeting.text);
-        greetingElement.textContent = currentConfig.greeting.text;
+        greetingElement.innerHTML = currentConfig.greeting.text;
         console.log('After update, greeting element text:', greetingElement.textContent);
     } else {
         console.error('Greeting element not found or greeting data missing', {
@@ -309,9 +309,9 @@ function generateRecommendationCards() {
                 clickAction = 'showDetailPage(); return false;';
             } else if (link.text === 'Where to see leads from Sales Assistant') {
                 clickAction = 'showDetailPageForSalesAssistantLeads(); return false;';
-            } else if (link.text === 'How does AI-Assisted Messages work') {
+            } else if (link.text === 'How to best leverage InMail reporting') {
                 clickAction = 'return false;';
-            } else if (link.text === 'What languages can I send a message in') {
+            } else if (link.text === 'How to set up Job Wrapping') {
                 clickAction = 'return false;';
             } else if (link.text === 'Does Message Assist boost replies') {
                 clickAction = 'showDetailPageForMessageAssist(); return false;';
@@ -490,7 +490,7 @@ function openHelpPanel() {
             links.forEach((link, index) => {
                 console.log(`Link ${index}:`, link.textContent.trim());
                 
-                if (link.textContent.includes('How does Hiring Assistant work')) {
+                if (link.textContent.includes('How does AI-Assisted Messages work')) {
                     console.log('Adding direct click handler to Sales Assistant link');
                     
                     // Remove existing listeners
@@ -532,7 +532,7 @@ function openHelpPanel() {
                     });
                 }
                 
-                if (link.textContent.includes('How does AI-Assisted Messages work')) {
+                if (link.textContent.includes('How to best leverage InMail reporting')) {
                     console.log('Disabling click handler for Webinar Tools link');
                     
                     // Remove existing listeners
@@ -546,7 +546,7 @@ function openHelpPanel() {
                     });
                 }
                 
-                if (link.textContent.includes('What languages can I send a message in')) {
+                if (link.textContent.includes('How to set up Job Wrapping')) {
                     console.log('Disabling click handler for August Webinars link');
                     
                     // Remove existing listeners
@@ -876,7 +876,7 @@ function typeWebinarToolsResponse() {
     const responseContent = document.getElementById('webinarToolsResponseContent');
     if (!responseContent) return;
     
-    const answerText = findConfigResponse('How does AI-Assisted Messages work');
+    const answerText = findConfigResponse('How to best leverage InMail reporting');
     if (!answerText) return;
     
     const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
@@ -934,7 +934,7 @@ function typeAugustWebinarsResponse() {
     const responseContent = document.getElementById('augustWebinarsResponseContent');
     if (!responseContent) return;
     
-    const answerText = findConfigResponse('What languages can I send a message in');
+    const answerText = findConfigResponse('How to set up Job Wrapping');
     if (!answerText) return;
     
     const fullText = answerText.replace(/\*\*(.*?)\*\*/g, '$1');
@@ -1348,13 +1348,8 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
         // Get recommendation data
         const rec = helpWidgetConfig?.recommendations?.find(r => r.id === recommendationId);
         if (rec) {
-            // Generate links HTML
-            const linksHTML = rec.links.map(link => 
-                `<div class="link-item-static">
-                    <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
-                    ${link.text}
-                </div>`
-            ).join('');
+            // Generate links HTML - REMOVED
+            const linksHTML = '';
             
             // Create chat content with the exact same structure as Sales Assistant
             chatContainer.innerHTML = `
@@ -1364,9 +1359,7 @@ function showDetailPageWithQuestion(questionText, questionType, recommendationId
                     <div class="button-container">
                         <button class="btn-primary">${rec.buttonText}</button>
                     </div>
-                    <div class="recommendation-links">
-                        ${linksHTML}
-                    </div>
+                    <!-- Recommendation links removed -->
                 </div>
                 <div class="user-message-container">
                     <div class="user-message">
@@ -1584,25 +1577,16 @@ window.showDetailPageForSalesAssistant = function() {
         // Clear previous chat and add Sales Assistant-specific content card (matching static chat)
         salesAssistantIconChat.innerHTML = `
             <div class="recommendation-card">
-                <h3>Streamline Your Hiring Process</h3>
-                <p>Connect with top talent more efficiently using the AI-powered LinkedIn <span class="sales-assistant">Hiring Assistant</span> for smarter recruiting</p>
+                <h3>Leverage AI-Assisted Messages</h3>
+                <p>Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate</p>
                 <div class="button-container">
-                    <button class="btn-primary" onclick="return false;">Try Hiring Assistant</button>
+                    <button class="btn-primary" onclick="return false;">Try AI-Assisted Messages</button>
                 </div>
-                <div class="recommendation-links">
-                    <div class="link-item-static">
-                        <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
-                        How does Hiring Assistant work
-                    </div>
-                    <div class="link-item-static">
-                        <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
-                        How to post a job with Hiring Assistant
-                    </div>
-                </div>
+                <!-- Recommendation links removed -->
             </div>
             <div class="user-message-container grey-message-container">
                 <div class="grey-message">
-                    <p>Any follow-up questions about Hiring Assistant I can help with?</p>
+                    <p>Any follow-up questions about AI-Assisted Messages I can help with?</p>
                 </div>
             </div>
         `;
@@ -1651,13 +1635,8 @@ window.showDetailPageForStrategies = function() {
             return;
         }
         
-        // Generate links HTML
-        const linksHTML = strategiesRec.links.map(link => 
-            `<div class="link-item-static">
-                <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
-                ${link.text}
-            </div>`
-        ).join('');
+        // Generate links HTML - REMOVED
+        const linksHTML = '';
         
         // Clear previous chat and add strategies-specific content card
         strategiesIconChat.innerHTML = `
@@ -1667,9 +1646,7 @@ window.showDetailPageForStrategies = function() {
                 <div class="button-container">
                     <button class="btn-primary" onclick="window.open('${strategiesRec.buttonUrl}', '_blank'); return false;">${strategiesRec.buttonText}</button>
                 </div>
-                <div class="recommendation-links">
-                    ${linksHTML}
-                </div>
+                <!-- Recommendation links removed -->
             </div>
             <div class="user-message-container grey-message-container">
                 <div class="grey-message">
@@ -1713,13 +1690,8 @@ window.showDetailPageForInnovations = function() {
             return;
         }
         
-        // Generate links HTML
-        const linksHTML = innovationsRec.links.map(link => 
-            `<div class="link-item-static">
-                <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
-                ${link.text}
-            </div>`
-        ).join('');
+        // Generate links HTML - REMOVED
+        const linksHTML = '';
         
         // Clear previous chat and add innovations-specific content card
         innovationsIconChat.innerHTML = `
@@ -1729,9 +1701,7 @@ window.showDetailPageForInnovations = function() {
                 <div class="button-container">
                     <button class="btn-primary" onclick="window.open('${innovationsRec.buttonUrl}', '_blank'); return false;">${innovationsRec.buttonText}</button>
                 </div>
-                <div class="recommendation-links">
-                    ${linksHTML}
-                </div>
+                <!-- Recommendation links removed -->
             </div>
             <div class="user-message-container grey-message-container">
                 <div class="grey-message">
@@ -1806,7 +1776,7 @@ function restoreOriginalUserMessage() {
         // Restore the original user message
         userMessageContainer.innerHTML = `
             <div class="user-message">
-                <p>How does Hiring Assistant work</p>
+                <p>How does AI-Assisted Messages work</p>
             </div>
         `;
         
@@ -2665,44 +2635,44 @@ function getHelpConfiguration() {
 
 function getDefaultHelpConfig() {
     return {
-        greeting: { text: "Hi Alice, you sent 15 InMails last week. Here are 2 recommendations to boost productivity" },
+        greeting: { text: "Hi Alice, you sent 15 InMails last week.<br>Here are 2 suggestions to boost productivity." },
         recommendations: [
             {
                 "id": "rec1",
-                "title": "Streamline Your Hiring Process",
-                "description": "Connect with top talent more efficiently using<br>the AI-powered <span class=\"sales-assistant\">LinkedIn Hiring Assistant</span> for smarter recruiting",
-                "buttonText": "Try Hiring Assistant",
+                "title": "Leverage AI-Assisted Messages",
+                "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
+                "buttonText": "Try AI-Assisted Messages",
                 "buttonAction": "",
                 "buttonUrl": "",
                 "links": [
-                    {
-                        "text": "How does Hiring Assistant work",
-                        "action": "showDetailPage"
-                    },
-                    {
-                        "text": "How to post a job with Hiring Assistant",
-                        "action": "viewLeads"
-                    }
+                                    {
+                    "text": "How does AI-Assisted Messages work",
+                    "action": "showDetailPage"
+                },
+                {
+                    "text": "What languages can I send a message in",
+                    "action": "viewLeads"
+                }
                 ],
                 "expanded": true,
                 "chatFunction": "showDetailPageForSalesAssistant"
             },
             {
                 "id": "rec2", 
-                "title": "Leverage AI-Assisted Messages",
-                "description": "Save time and increase engagement with personalized AI-Assisted Messages tailored to each candidate",
-                "buttonText": "Try AI-Assisted Messages",
+                "title": "Check out Q3 product updates",
+                "description": "Help you gain deeper insights with InMail reporting enhancements, save time with ATS<br>and Job Wrapping synergies, and more",
+                "buttonText": "View product updates",
                 "buttonAction": "reserveSpot",
-                "buttonUrl": "https://training.sales.linkedin.com/live-introduction-to-sales-navigator",
+                "buttonUrl": "https://business.linkedin.com/talent-solutions/product-update",
                 "links": [
-                    {
-                        "text": "How does AI-Assisted Messages work",
-                        "action": "viewSpeakers"
-                    },
-                    {
-                        "text": "What languages can I send a message in",
-                        "action": "viewWebinars"
-                    }
+                                    {
+                    "text": "How to best leverage InMail reporting",
+                    "action": "viewSpeakers"
+                },
+                {
+                    "text": "How to set up Job Wrapping",
+                    "action": "viewWebinars"
+                }
                 ],
                 "expanded": false,
                 "chatFunction": "showDetailPageForStrategies"
