@@ -1239,17 +1239,12 @@ body {
 
 .help-search-icon {
     position: absolute;
-    right: 16px;
+    right: 24px;
     top: 50%;
     transform: translateY(-50%);
     color: rgba(0, 0, 0, 0.6);
     font-size: 16px;
     cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.help-search-icon:hover {
-    color: #0A66C2;
 }
 
 .help-search-input:focus {
