@@ -974,7 +974,7 @@ body {
 }
 
 .checklist-item.completed .checklist-item-check i {
-    color: #9DA09C;
+    color: white;
 }
 
 .checklist-item.completed .checklist-item-title {
