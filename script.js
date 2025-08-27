@@ -157,7 +157,7 @@ async function loadConfiguration() {
                             "action": "showDetailPage"
                         },
                         {
-                            "text": "Where to see leads from Hiring Assistant",
+                            "text": "How to post a job with Hiring Assistant",
                             "action": "viewLeads"
                         }
                     ],
@@ -192,7 +192,7 @@ async function loadConfiguration() {
                     "answer": "The LinkedIn Hiring Assistant is an AI-powered feature within LinkedIn Recruiter that helps streamline the hiring process. Here's an overview of its key functionalities:\n\nProject Creation:\nHiring Assistant allows you to create projects to find qualified candidates efficiently. You can start a project by providing details like job descriptions, ideal candidate profiles, or LinkedIn job post URLs.\n\nCandidate Sourcing:\nOnce a project is created, Hiring Assistant sources candidates based on the information provided. It recommends required and nice-to-have qualifications and can help you prescreen candidates.\n\nChat Experience:\nYou can interact with Hiring Assistant through a chat interface, where it helps refine your hiring criteria and suggests improvements to candidate quality.\n\nAI-Generated Messaging:\nHiring Assistant can send AI-generated messages to up to 25 candidates at once, enhancing your outreach efforts.\n\nFeedback Loop:\nThe system learns from your feedback on candidates, helping to improve future recommendations.\n\nCompliance and Security:\nLinkedIn ensures that Hiring Assistant adheres to responsible AI principles and complies with applicable laws and privacy regulations.\n\nIf you have any specific questions or need assistance with a particular feature, feel free to ask!"
                 },
                 "salesAssistantLeads": {
-                    "question": "Where to see leads from Hiring Assistant",
+                    "question": "How to post a job with Hiring Assistant",
                     "answer": "To access candidates from Hiring Assistant in LinkedIn Recruiter, follow these steps:\\n\\n1. **Navigate to Your Projects:**\\n· Access your Hiring Assistant projects from the main dashboard in LinkedIn Recruiter.\\n\\n2. **Review Recommended Candidates:**\\n· In your project, the candidate pipeline will display profiles recommended by Hiring Assistant.\\n· Each recommended candidate includes details on why they were selected, such as alignment with your job requirements, skills match, and experience level.\\n\\n3. **Evaluate Candidates:**\\n· Select a specific candidate to view their full profile and assessment.\\n· To provide feedback on candidate fit:\\n  · Mark as \\\"Great fit\\\" to move them forward in your pipeline.\\n  · Mark as \\\"Not suitable\\\" to decline and help refine future recommendations.\\n\\n4. **Candidate Outreach:**\\n· For candidates you approve, Hiring Assistant can draft personalized InMail messages. You can:\\n  · Review and edit the draft before sending.\\n  · Send directly through LinkedIn Recruiter.\\n  · Save templates for future use.\\n\\n5. **Generate Additional Candidates:**\\n· To expand your candidate pool:\\n  · Use the \\\"Find more candidates\\\" option within your project.\\n  · Hiring Assistant will source additional profiles based on your feedback and criteria.\\n  · Daily sourcing limits may apply depending on your LinkedIn Recruiter plan.\\n\\nBy following these steps, you can efficiently manage candidates sourced by Hiring Assistant and optimize your recruiting workflow."
                 },
                 "webinarSpeakers": {
@@ -1591,7 +1591,7 @@ window.showDetailPageForSalesAssistant = function() {
                     </div>
                     <div class="link-item-static">
                         <img src="sparkle.svg" alt="Sparkle" class="sparkle-icon">
-                        Where to see leads from Hiring Assistant
+                        How to post a job with Hiring Assistant
                     </div>
                 </div>
             </div>
@@ -2675,7 +2675,7 @@ function getDefaultHelpConfig() {
                         "action": "showDetailPage"
                     },
                     {
-                        "text": "Where to see leads from Hiring Assistant",
+                        "text": "How to post a job with Hiring Assistant",
                         "action": "viewLeads"
                     }
                 ],
