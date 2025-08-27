@@ -193,7 +193,7 @@ async function loadConfiguration() {
                 },
                 "salesAssistantLeads": {
                     "question": "What languages can I send a message in",
-                    "answer": "To access candidates from Hiring Assistant in LinkedIn Recruiter, follow these steps:\\n\\n1. **Navigate to Your Projects:**\\n· Access your Hiring Assistant projects from the main dashboard in LinkedIn Recruiter.\\n\\n2. **Review Recommended Candidates:**\\n· In your project, the candidate pipeline will display profiles recommended by Hiring Assistant.\\n· Each recommended candidate includes details on why they were selected, such as alignment with your job requirements, skills match, and experience level.\\n\\n3. **Evaluate Candidates:**\\n· Select a specific candidate to view their full profile and assessment.\\n· To provide feedback on candidate fit:\\n  · Mark as \\\"Great fit\\\" to move them forward in your pipeline.\\n  · Mark as \\\"Not suitable\\\" to decline and help refine future recommendations.\\n\\n4. **Candidate Outreach:**\\n· For candidates you approve, Hiring Assistant can draft personalized InMail messages. You can:\\n  · Review and edit the draft before sending.\\n  · Send directly through LinkedIn Recruiter.\\n  · Save templates for future use.\\n\\n5. **Generate Additional Candidates:**\\n· To expand your candidate pool:\\n  · Use the \\\"Find more candidates\\\" option within your project.\\n  · Hiring Assistant will source additional profiles based on your feedback and criteria.\\n  · Daily sourcing limits may apply depending on your LinkedIn Recruiter plan.\\n\\nBy following these steps, you can efficiently manage candidates sourced by Hiring Assistant and optimize your recruiting workflow."
+                    "answer": "AI-Assisted Messages in LinkedIn Recruiter currently support multiple languages to help you connect with global talent effectively. Here are the supported languages:\\n\\n**Primary Languages:**\\n• **English** - Full AI assistance with advanced personalization\\n• **Spanish** - Comprehensive message drafting and tone adjustment\\n• **French** - Complete AI-powered message generation\\n• **German** - Advanced messaging capabilities\\n• **Portuguese** - Full language support for messaging\\n\\n**Additional Language Features:**\\n• **Language Detection** - AI automatically detects the candidate's preferred language based on their profile\\n• **Cultural Adaptation** - Messages are adapted to local business communication styles\\n• **Tone Adjustment** - Professional, friendly, or formal tones available in each language\\n• **Custom Templates** - Save language-specific message templates for efficiency\\n\\n**Best Practices:**\\n• Always verify the candidate's preferred language before sending\\n• Use culturally appropriate greetings and sign-offs\\n• Consider time zones when scheduling follow-ups\\n• Leverage LinkedIn's translation features for initial profile review\\n\\nFor the most current list of supported languages, check your LinkedIn Recruiter settings under Message Preferences."
                 },
                 "webinarSpeakers": {
                     "question": "How to best leverage InMail reporting",
@@ -2026,7 +2026,7 @@ async function generateAIResponse(userMessage, chatContainer) {
     // Fallback if response is empty
     if (!response || response.trim() === '') {
         console.log('Empty response, using fallback');
-        response = "I'd be happy to help you with that! Could you provide a bit more detail about what you're looking for with LinkedIn Recruiter?";
+        response = "I'd be happy to help you with that! Could you provide a bit more detail about what you're looking for with AI-Assisted Messages?";
     }
     
     // Create unique IDs for this response
@@ -2205,8 +2205,8 @@ function findConfigResponse(question) {
         console.log(`Question lowercase: "${questionLower}"`);
         
         const categoryKeywords = {
-            'salesAssistant': ['sales assistant', 'lead delivery', 'how does sales assistant work', 'assistant'],
-            'salesAssistantLeads': ['where to see leads', 'find leads', 'leads from sales assistant', 'locate leads', 'view leads'],
+            'salesAssistant': ['ai-assisted messages', 'ai assisted messages', 'how does ai-assisted messages work', 'messages work', 'assisted messages'],
+            'salesAssistantLeads': ['what languages', 'languages can i send', 'send a message in', 'message languages', 'language support'],
             'strategies': ['strategy', 'webinar', 'speakers', 'sales strategies', 'training'],
             'webinarSpeakers': ['what tools will be featured', 'tools', 'featured tools', 'webinar tools'],
             'augustWebinars': ['august webinars', 'other webinars', 'more webinars', 'upcoming webinars'],
@@ -2290,30 +2290,26 @@ function analyzeQuestionType(message) {
 }
 
 function extractKeywords(message) {
-    const salesNavKeywords = {
-        'leads': ['lead', 'prospect', 'target', 'candidate', 'potential', 'qualified', 'unqualified', 'scoring'],
-        'search': ['search', 'filter', 'find', 'discover', 'locate', 'query', 'boolean', 'advanced search', 'saved search'],
-        'messaging': ['message', 'inmail', 'outreach', 'contact', 'reach out', 'communicate', 'email', 'follow up', 'response', 'reply'],
-        'networking': ['connect', 'network', 'relationship', 'introduction', 'teamlink', 'mutual', 'warm', 'referral'],
-        'accounts': ['account', 'company', 'organization', 'business', 'enterprise', 'corporation', 'firm'],
-        'sales': ['sell', 'sales', 'deal', 'close', 'revenue', 'pipeline', 'quota', 'conversion', 'roi'],
-        'data': ['analytics', 'metrics', 'performance', 'tracking', 'insights', 'reporting', 'dashboard', 'stats'],
-        'features': ['premium', 'subscription', 'features', 'tools', 'functionality', 'capabilities'],
-        'integration': ['crm', 'integrate', 'sync', 'export', 'import', 'salesforce', 'hubspot', 'dynamics'],
-        'strategy': ['strategy', 'approach', 'plan', 'technique', 'method', 'best practice', 'tips', 'advice'],
-        'sales assistant': ['sales assistant', 'ai', 'artificial intelligence', 'automation', 'smart'],
-        'inmail': ['inmail', 'credits', 'premium messaging', 'direct message'],
-        'teamlink': ['teamlink', 'team link', 'colleague', 'coworker', 'team member'],
-        'boolean': ['boolean', 'and', 'or', 'not', 'operators', 'advanced query'],
-        'personalization': ['personalize', 'customize', 'tailor', 'specific', 'individual'],
-        'conversion': ['convert', 'conversion', 'success rate', 'effectiveness', 'results'],
-        'troubleshooting': ['problem', 'issue', 'error', 'bug', 'not working', 'broken', 'fix'],
-        'webinar': ['webinar', 'seminar', 'training', 'workshop', 'presentation', 'session']
+    const aiMessagesKeywords = {
+        'messages': ['message', 'messaging', 'ai-assisted', 'assisted messages', 'compose', 'draft', 'inmail'],
+        'personalization': ['personalize', 'customize', 'tailor', 'specific', 'individual', 'candidate profile'],
+        'languages': ['language', 'languages', 'multilingual', 'translation', 'localization', 'global'],
+        'candidates': ['candidate', 'prospect', 'talent', 'applicant', 'recipient', 'target'],
+        'ai': ['ai', 'artificial intelligence', 'automation', 'smart', 'intelligent', 'machine learning'],
+        'tone': ['tone', 'style', 'formal', 'friendly', 'professional', 'casual', 'voice'],
+        'feedback': ['feedback', 'improve', 'rating', 'quality', 'learn', 'training'],
+        'bulk': ['bulk', 'multiple', 'batch', 'many', 'several', '25 candidates'],
+        'performance': ['performance', 'tracking', 'effectiveness', 'analytics', 'metrics', 'success'],
+        'features': ['features', 'functionality', 'capabilities', 'tools', 'options'],
+        'customization': ['customize', 'custom', 'settings', 'preferences', 'configuration'],
+        'templates': ['template', 'templates', 'saved', 'reuse', 'library'],
+        'troubleshooting': ['problem', 'issue', 'error', 'not working', 'broken', 'fix'],
+        'tips': ['tips', 'best practice', 'advice', 'recommendations', 'guide']
     };
     
     let detectedCategories = [];
-    for (let category in salesNavKeywords) {
-        if (salesNavKeywords[category].some(keyword => message.includes(keyword))) {
+    for (let category in aiMessagesKeywords) {
+        if (aiMessagesKeywords[category].some(keyword => message.includes(keyword))) {
             detectedCategories.push(category);
         }
     }
@@ -2410,52 +2406,52 @@ function getRandomResponse(responses) {
 }
 
 function generateDefinitionResponse(keywords, message) {
-    if (keywords.includes('leads')) {
+    if (keywords.includes('candidates')) {
         const responses = [
-            "In Sales Navigator, leads are potential customers identified through targeted searches who match your ideal customer profile. Sales Navigator's AI recommends leads based on your saved searches, account preferences, and engagement patterns to help you find the most relevant prospects.",
-            "Leads represent qualified prospects discovered through Sales Navigator's advanced search capabilities. They're individuals within your target market who show potential for your products or services, prioritized by relevance based on your activity and preferences.",
-            "Sales Navigator leads are pre-qualified prospects generated through intelligent filtering and AI recommendations. These are potential customers who match your specified criteria for industry, role, company size, and other relevant factors that indicate sales opportunity."
+            "AI-Assisted Messages help you connect with candidates more effectively by personalizing each message based on their profile information, skills, and experience to increase engagement and response rates.",
+            "Candidates receive more relevant and engaging messages when you use AI-Assisted Messages, as the AI analyzes their background and creates tailored content that speaks to their interests and career goals.",
+            "With AI-Assisted Messages, you can reach quality candidates through personalized outreach that considers their industry experience, skills, and career progression to create meaningful connections."
         ];
         return getRandomResponse(responses);
     }
     
-    if (keywords.includes('accounts')) {
+    if (keywords.includes('personalization')) {
         const responses = [
-            "Accounts represent target companies or organizations in your sales territory. Sales Navigator provides comprehensive account insights including employee count, recent news, growth signals, decision-maker identification, and relationship mapping to help you understand and engage entire organizations.",
-            "Sales Navigator accounts are companies you're actively targeting or monitoring. They offer detailed organizational insights, key personnel identification, company news and updates, growth indicators, and tools for coordinated team-based selling approaches.",
-            "Accounts in Sales Navigator encompass your target organizations with rich company data, employee insights, recent developments, and strategic information. You can track account changes, set up alerts for important updates, and collaborate with team members on account strategies."
+            "AI-Assisted Messages personalization uses candidate profile data, job requirements, and your company information to create uniquely tailored messages that resonate with each individual's background and interests.",
+            "Personalization in AI-Assisted Messages analyzes factors like candidate skills, experience level, current role, and industry to craft messages that feel relevant and engaging rather than generic.",
+            "The AI personalization engine considers multiple data points including candidate achievements, career progression, and interests to create messages that establish meaningful connections."
         ];
         return getRandomResponse(responses);
     }
     
-    if (keywords.includes('inmail')) {
-        return "InMail is Sales Navigator's premium messaging feature that allows you to contact LinkedIn members outside your network. Unlike regular LinkedIn messages, InMail reaches prospects directly regardless of connection status, with higher deliverability rates and read receipts for tracking engagement.";
+    if (keywords.includes('messages')) {
+        return "AI-Assisted Messages in LinkedIn Recruiter use artificial intelligence to help you compose personalized, engaging outreach to candidates. The AI analyzes candidate profiles and job requirements to create tailored messages that improve response rates and save time.";
     }
     
-    if (keywords.includes('teamlink')) {
-        return "TeamLink shows you warm introduction paths to prospects through your company colleagues' networks. It reveals which team members are connected to your targets, enabling leveraged introductions and higher response rates through trusted referrals.";
+    if (keywords.includes('languages')) {
+        return "AI-Assisted Messages support multiple languages including English, Spanish, French, German, and Portuguese, with AI automatically detecting candidate language preferences and adapting message tone and style for cultural relevance.";
     }
     
-    if (keywords.includes('sales assistant')) {
-        return "Sales Assistant is Sales Navigator's AI-powered prospecting tool that automatically delivers pre-screened leads, identifies optimal connection paths, and drafts personalized outreach messages. It learns from your preferences and feedback to continuously improve lead recommendations.";
+    if (keywords.includes('ai')) {
+        return "AI-Assisted Messages leverage artificial intelligence to analyze candidate profiles, job requirements, and your company details to generate personalized outreach that resonates with each individual candidate's background and interests.";
     }
     
-    if (keywords.includes('features') && message.includes('premium')) {
-        return "Sales Navigator Premium includes unlimited people searches, advanced lead and company search filters, InMail messaging credits, real-time sales updates, CRM integration, team collaboration tools, enhanced visibility into extended networks, and AI-powered lead recommendations.";
+    if (keywords.includes('features')) {
+        return "AI-Assisted Messages features include personalization based on candidate profiles, support for multiple languages, tone adjustment options, bulk messaging to up to 25 candidates, feedback learning, and performance tracking through InMail reports.";
     }
     
-    if (keywords.includes('boolean')) {
-        return "Boolean search in Sales Navigator uses logical operators (AND, OR, NOT) to create precise search queries. This advanced technique helps you combine multiple keywords and criteria to find highly specific prospects that match complex requirements.";
+    if (keywords.includes('tone')) {
+        return "AI-Assisted Messages allow you to adjust tone and style through Draft settings, choosing from professional, friendly, or formal approaches based on your company culture and the specific role you're recruiting for.";
     }
     
-    if (keywords.includes('webinar')) {
-        return "A webinar is an online seminar or educational presentation that participants can join remotely. In the context of Sales Navigator, LinkedIn regularly hosts webinars to teach sales professionals best practices, new feature updates, advanced prospecting techniques, and strategic sales methodologies. These training sessions help users maximize their Sales Navigator effectiveness and stay current with platform capabilities.";
+    if (keywords.includes('bulk')) {
+        return "With AI-Assisted Messages, you can send personalized messages to up to 25 candidates simultaneously, with each message individually tailored based on the recipient's profile information and your job requirements.";
     }
     
     const generalResponses = [
-        "Sales Navigator is LinkedIn's advanced sales prospecting platform that helps sales professionals find, understand, and engage with prospects and accounts more effectively than standard LinkedIn.",
-        "Sales Navigator provides sales teams with advanced tools for lead generation, account research, relationship mapping, and personalized outreach to accelerate the sales process.",
-        "LinkedIn Sales Navigator is a premium prospecting solution offering enhanced search capabilities, detailed prospect insights, team collaboration features, and AI-powered recommendations for sales professionals."
+        "AI-Assisted Messages in LinkedIn Recruiter help you compose personalized, engaging messages to candidates using artificial intelligence to improve response rates and save time.",
+        "AI-Assisted Messages leverage candidate profile data, job requirements, and your company information to create tailored outreach that resonates with each individual candidate.",
+        "With AI-Assisted Messages, you can send personalized messages to up to 25 candidates at once, with each message customized based on the recipient's background and your hiring needs."
     ];
     return getRandomResponse(generalResponses);
 }
@@ -2591,7 +2587,7 @@ const onboardingHelpConfig = {
             },
             {
                 id: "item4",
-                title: "<a href='https://training.talent.linkedin.com/hiring-product-updates-achieve-talent-success-with-ai-driven-discover-connect-and-attract-features' target='_blank' class='checklist-link'>Register for webinars</a> on latest best practices",
+                title: "<a href='https://training.talent.linkedin.com/hiring-product-updates-achieve-talent-success-with-ai-driven-discover-connect-and-attract-features' target='_blank' class='checklist-link'>Register for webinars</a> on latest<br>best practices",
                 subtitle: "Sep 2025: Achieve Talent Success with AI-Driven Discover, Connect and Attract", 
                 completed: false
             },
