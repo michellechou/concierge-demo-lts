@@ -1019,6 +1019,7 @@ body {
 .checklist-link {
     color: #0A66C2;
     text-decoration: underline;
+    font-weight: bold;
 }
 
 .checklist-link:hover {

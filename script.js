@@ -353,8 +353,8 @@ function generateRecommendationCards() {
 function generateChecklistContent(container, checklistData) {
     console.log('Generating checklist content:', checklistData);
     
-    // Filter out item 5 and only show first 4 items
-    const filteredItems = checklistData.items.filter(item => item.id !== 'item5');
+    // Show all 5 items
+    const filteredItems = checklistData.items;
     const filteredCompletedItems = filteredItems.filter(item => item.completed).length;
     const filteredTotalItems = filteredItems.length;
     
@@ -2575,25 +2575,25 @@ const onboardingHelpConfig = {
             },
             {
                 id: "item2", 
-                title: "<a href='https://training.talent.linkedin.com/' target='_blank' class='checklist-link'>Explore on-demand and live training</a>  by talent goals or product features",
+                title: "<a href='https://business.linkedin.com/talent-solutions/hiring-assistant' target='_blank' class='checklist-link'>Watch a video guide</a> on maximizing the benefits of using Hiring Assistant",
                 subtitle: "Item 2 subtitle",
                 completed: false
             },
             {
                 id: "item3",
-                title: "<a href='https://tcommunity.linkedin.com/p/home' target='_blank' class='checklist-link'>Join the Talent Community</a> to learn  with industry leaders and peers", 
+                title: "<a href='https://training.talent.linkedin.com/writing-compelling-job-descriptions' target='_blank' class='checklist-link'>Review best practices</a> for creating Hiring Requirements", 
                 subtitle: "Item 3 subtitle",
                 completed: false
             },
             {
                 id: "item4",
-                title: "<a href='https://training.talent.linkedin.com/hiring-product-updates-achieve-talent-success-with-ai-driven-discover-connect-and-attract-features' target='_blank' class='checklist-link'>Register for webinars</a> on the latest<br>best practices in recruiting",
+                title: "<span class='checklist-link'>Review best practices</span> for providing feedback on candidates",
                 subtitle: "Sep 2025: Achieve Talent Success with AI-Driven Discover, Connect and Attract", 
                 completed: false
             },
             {
                 id: "item5",
-                title: "Item 5 title",
+                title: "<a href='https://tcommunity.linkedin.com/p/home' target='_blank' class='checklist-link'>Join the Talent Community</a> to learn with industry leaders and peers",
                 subtitle: "Item 5 subtitle",
                 completed: false
             }
