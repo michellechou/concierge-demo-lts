@@ -167,7 +167,7 @@ async function loadConfiguration() {
                 {
                     "id": "rec2", 
                     "title": "Check out Q3 product updates",
-                    "description": "Help you gain deeper insights with InMail reporting enhancements, save time with ATS<br>and Job Wrapping synergies, and more",
+                    "description": "Gain deeper insights with InMail reporting enhancements, save time with ATS<br>and Job Wrapping synergies, and more",
                     "buttonText": "View product updates",
                     "buttonAction": "reserveSpot",
                     "buttonUrl": "https://business.linkedin.com/talent-solutions/product-update",
@@ -2656,7 +2656,7 @@ function getDefaultHelpConfig() {
             {
                 "id": "rec2", 
                 "title": "Check out Q3 product updates",
-                "description": "Help you gain deeper insights with InMail reporting enhancements, save time with ATS<br>and Job Wrapping synergies, and more",
+                "description": "Gain deeper insights with InMail reporting enhancements, save time with ATS<br>and Job Wrapping synergies, and more",
                 "buttonText": "View product updates",
                 "buttonAction": "reserveSpot",
                 "buttonUrl": "https://business.linkedin.com/talent-solutions/product-update",
