@@ -2587,7 +2587,7 @@ const onboardingHelpConfig = {
             },
             {
                 id: "item4",
-                title: "<a href='https://training.talent.linkedin.com/hiring-product-updates-achieve-talent-success-with-ai-driven-discover-connect-and-attract-features' target='_blank' class='checklist-link'>Register for webinars</a> on latest<br>best practices",
+                title: "<a href='https://training.talent.linkedin.com/hiring-product-updates-achieve-talent-success-with-ai-driven-discover-connect-and-attract-features' target='_blank' class='checklist-link'>Register for webinars</a> on the latest<br>best practices in recruiting",
                 subtitle: "Sep 2025: Achieve Talent Success with AI-Driven Discover, Connect and Attract", 
                 completed: false
             },
