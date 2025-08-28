@@ -1035,9 +1035,9 @@ body {
     display: none;
 }
 
-/* Show subtitle only for item 4 */
+/* Hide subtitle for item 4 */
 .checklist-item[data-item-id="item4"] .checklist-item-subtitle {
-    display: block;
+    display: none;
 }
 
 /* Align checkmark with center of 2-line title for item 4 */
