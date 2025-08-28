@@ -893,7 +893,7 @@ body {
 }
 
 .checklist-header {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .checklist-title {
@@ -1037,6 +1037,16 @@ body {
 /* Show subtitle only for item 4 */
 .checklist-item[data-item-id="item4"] .checklist-item-subtitle {
     display: block;
+}
+
+/* Align checkmark with center of 2-line title for item 4 */
+.checklist-item[data-item-id="item4"] {
+    align-items: flex-start;
+    margin-top: 4px;
+}
+
+.checklist-item[data-item-id="item4"] .checklist-item-check {
+    margin-top: 8px;
 }
 
 /* Open Cases Section */
