@@ -2575,7 +2575,7 @@ const onboardingHelpConfig = {
             },
             {
                 id: "item2", 
-                title: "<a href='https://business.linkedin.com/talent-solutions/hiring-assistant' target='_blank' class='checklist-link'>Watch a video guide</a> on maximizing the benefits of using Hiring Assistant",
+                title: "<a href='https://business.linkedin.com/talent-solutions/hiring-assistant' target='_blank' class='checklist-link'>Watch a video guide</a> on maximizing the benefits of Hiring Assistant",
                 subtitle: "Item 2 subtitle",
                 completed: false
             },
